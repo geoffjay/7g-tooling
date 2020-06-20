@@ -1,0 +1,7 @@
+*~
+*.sw[op]
+tags
+
+.env
+
+.idea/
