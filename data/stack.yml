@@ -1,0 +1,54 @@
+---
+version: '3.7'
+
+services:
+
+  mysql:
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    image: mysql:5.6
+    environment:
+      MYSQL_PASSWORD: wiked
+      MYSQL_ROOT_PASSWORD: wiked
+      MYSQL_DATABASE: 7geese_dev
+      MYSQL_USER: sevengeese
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker_data/mysql:/var/lib/mysql
+
+  riak:
+    image: lapax/riak
+    hostname: riak
+    ports:
+      - "8087:8087"
+    volumes:
+      - ./docker_data/riak:/var/lib/riak
+
+  redis:
+    command: redis-server --appendonly yes
+    image: redis
+    volumes:
+      - ./docker_data/redis:/data
+    ports:
+      - "6379:6379"
+
+  maildump:
+    image: ball6847/maildump
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+
+  backend:
+    image: 7geese-backend:latest
+    depends_on:
+      - mysql
+      - riak
+      - redis
+      - maildump
+
+  frontend:
+    image: 7geese-frontend:latest
+    depends_on:
+      - backend
+    ports:
+    - "8000:8000"
