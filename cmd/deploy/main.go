@@ -2,7 +2,6 @@ package deploy
 
 import (
 	"github.com/sirupsen/logrus"
-
 	"github.com/spf13/cobra"
 )
 

@@ -3,6 +3,7 @@ package cmd
 import (
 	"log"
 
+	"github.com/geoffjay/7g-tooling/cmd/daemon"
 	"github.com/geoffjay/7g-tooling/cmd/deploy"
 
 	"github.com/sirupsen/logrus"
@@ -38,6 +39,7 @@ func init() {
 
 func addCommands() {
 	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(daemon.Command)
 	rootCmd.AddCommand(deploy.Command)
 }
 
@@ -45,6 +47,4 @@ func setup() {
 	if viper.GetBool("verbose") {
 		logrus.SetLevel(logrus.DebugLevel)
 	}
-
-	logrus.Debug("load config")
 }
