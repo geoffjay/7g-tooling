@@ -5,6 +5,5 @@ uri-schema: "http://"
 version: "v1"
 
 log:
-  debug: false
   formatter: "text"
-  level: "debug"
+  level: "info"

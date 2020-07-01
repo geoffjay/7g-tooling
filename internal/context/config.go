@@ -12,7 +12,6 @@ import (
 )
 
 type logging struct {
-	Debug     bool   `mapstructure:"debug"`
 	Formatter string `mapstructure:"formatter"`
 	Level     string `mapstructure:"level"`
 }
