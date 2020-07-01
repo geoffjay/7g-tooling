@@ -1,7 +1,7 @@
 package git
 
 import (
-	gg "github.com/go-git/go-git"
+	gg "github.com/go-git/go-git/v5"
 	"github.com/sirupsen/logrus"
 )
 

@@ -4,14 +4,13 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/geoffjay/7g-cli/internal/git"
-	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
-
-	"github.com/geoffjay/7g-cli/internal/docker"
+	"github.com/geoffjay/7g-tooling/internal/docker"
+	"github.com/geoffjay/7g-tooling/internal/git"
 
 	"github.com/docker/docker/client"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var (

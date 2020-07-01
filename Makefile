@@ -1,4 +1,4 @@
-PROJECT := "7g-cli"
+PROJECT := "7g-tooling"
 
 M = $(shell printf "\033[34;1m▶\033[0m")
 TAG := $(shell git describe --all | sed -e's/.*\///g')

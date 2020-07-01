@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/geoffjay/7g-cli/cmd"
+	"github.com/geoffjay/7g-tooling/cmd"
 )
 
 func main() {

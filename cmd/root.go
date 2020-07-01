@@ -3,10 +3,9 @@ package cmd
 import (
 	"log"
 
+	"github.com/geoffjay/7g-tooling/cmd/deploy"
+
 	"github.com/sirupsen/logrus"
-
-	"github.com/geoffjay/7g-cli/cmd/deploy"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
