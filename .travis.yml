@@ -7,11 +7,11 @@ go:
   - 1.13.x
 
 env:
-  - GO111MODULE=on
-  - SG_CONFIG=configs/config.yml
+  - GO111MODULE=on SG_CONFIG=configs/config.yml
 
 before_install:
   - go get -v golang.org/x/lint/golint
+  - make
 
 script:
   - go test -cpu=1,2 -v -tags integration ./...
