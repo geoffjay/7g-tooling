@@ -33,3 +33,13 @@
 ## API
 
 ### Deployment
+
+## Contributing
+
+To contribute to development ...
+
+```shell
+python3 -m venv .venv
+pip install pre-commit
+pre-commit install
+```
