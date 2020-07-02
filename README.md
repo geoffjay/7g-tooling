@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/geoffjay/7g-tooling.svg?branch=master)](https://travis-ci.org/geoffjay/7g-tooling)
+[![CircleCI](https://circleci.com/gh/geoffjay/7g-tooling.svg?style=shield)](https://app.circleci.com/pipelines/github/geoffjay/7g-tooling)
 
 ---
 
