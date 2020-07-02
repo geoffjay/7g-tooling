@@ -12,6 +12,7 @@ jobs:
             - go-mod-v1-{{ checksum "go.sum" }}
 
       - run: go get -v -t -d ./...
+      - run: go test -v -tags integration ./...
       - run: make
 
       - save_cache:
