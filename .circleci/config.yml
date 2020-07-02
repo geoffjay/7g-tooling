@@ -6,15 +6,25 @@ jobs:
       - image: circleci/golang:1.14
         environment:
           GO111MODULE: "on"
+          TEST_RESULTS: /tmp/test-results
 
     steps:
       - checkout
+      - run: mkdir -p $TEST_RESULTS
+
       - restore_cache:
           keys:
             - go-mod-v1-{{ checksum "go.sum" }}
 
+      - run: go get github.com/jstemmer/go-junit-report
       - run: go get -v -d ./...
-      - run: go test -v -tags integration ./...
+
+      - run:
+          name: Run unit tests
+          command: |
+            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
+            go test -v -tags integration ./... | tee ${TEST_RESULTS}/go-test.out
+
       - run: make
 
       - save_cache:
@@ -24,3 +34,12 @@ jobs:
 
       - store_artifacts:
           path: ./target/
+          destination: build
+
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test
+
+      - store_test_results:
+          path: /tmp/test-results
+          destination: test
