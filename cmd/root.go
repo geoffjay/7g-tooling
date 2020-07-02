@@ -38,6 +38,7 @@ func init() {
 }
 
 func addCommands() {
+	rootCmd.AddCommand(completionCmd)
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.AddCommand(daemon.Command)
 	rootCmd.AddCommand(deploy.Command)
