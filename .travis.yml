@@ -7,7 +7,7 @@ go:
   - 1.14.x
 
 env:
-  - GO111MODULE=on SG_CONFIG=configs/config.yml
+  - GO111MODULE=on
 
 before_install:
   - go get -v golang.org/x/lint/golint
