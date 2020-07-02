@@ -16,11 +16,11 @@ var (
 )
 
 func init() {
-	//Command.AddCommand(startCmd)
-	//Command.AddCommand(stopCmd)
-	//Command.AddCommand(statusCmd)
-	//Command.AddCommand(enableCmd)
-	//Command.AddCommand(disableCmd)
+	Command.AddCommand(startCmd)
+	Command.AddCommand(stopCmd)
+	Command.AddCommand(statusCmd)
+	Command.AddCommand(enableCmd)
+	Command.AddCommand(disableCmd)
 }
 
 func daemon(cmd *cobra.Command, args []string) {

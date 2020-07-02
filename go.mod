@@ -3,14 +3,12 @@ module github.com/geoffjay/7g-tooling
 go 1.14
 
 require (
-	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/docker v1.13.1
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-contrib/logger v0.0.2
-	github.com/gin-gonic/contrib v0.0.0-20191209060500-d6e26eeaa607 // indirect
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-git/go-git/v5 v5.1.0
 	github.com/jhoonb/archivex v0.0.0-20180718040744-0488e4ce1681
