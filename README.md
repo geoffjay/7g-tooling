@@ -30,9 +30,77 @@
 7g deploy destroy
 ```
 
+## Service
+
+Building and running the web service during development is done using:
+
+```shell
+make
+SG_CONFIG=configs/config.yml ./target/7g daemon
+```
+
 ## API
 
+### Ping
+
+http://localhost:3000/v1/ping
+
 ### Deployment
+
+#### Initialize
+
+[priority]: 3
+
+http://localhost:3000/v1/deploy/initialize
+
+#### Branch
+
+[priority]: 3
+
+http://localhost:3000/v1/deploy/branch/<branch_name>
+
+#### Network
+
+[priority]: 1
+
+http://localhost:3000/v1/deploy/network
+
+_should there be something for domain specification_ /<domain_name> (? or id)
+
+GET
+
+returns?
+
+POST
+
+takes xlsx file?
+
+### Automate
+
+[priority]: 2
+
+http://localhost:3000/v1/automate/network
+
+GET
+
+returns?
+
+POST
+
+takes xlsx file?
+
+#### Configuration
+
+[priority]: 2
+
+- API key
+- server settings?
+
+http://localhost:3000/v1/config/apikey/
+
+GET
+
+POST
 
 ## Contributing
 
