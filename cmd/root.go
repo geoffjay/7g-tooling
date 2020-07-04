@@ -6,6 +6,7 @@ import (
 	"github.com/geoffjay/7g-tooling/cmd/daemon"
 	"github.com/geoffjay/7g-tooling/cmd/deploy"
 
+	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -29,6 +30,12 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(setup)
+
+	// Load environment
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
 	addCommands()
 
