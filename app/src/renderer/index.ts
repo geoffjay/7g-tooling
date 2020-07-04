@@ -27,7 +27,7 @@ styles.innerText = `
 
 document.head.appendChild(styles);
 
-const App = React.createElement('div',{ id: 'app-container' }, '7g-tooling baybay');
-const root = document.getElementById('app');
+const App = React.createElement("div",{ id: "app-container" }, "7g-tooling baybay");
+const root = document.getElementById("app");
 
 ReactDOM.render(App, root);
