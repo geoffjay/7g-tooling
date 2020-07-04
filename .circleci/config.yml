@@ -19,6 +19,7 @@ jobs:
       - run: go get github.com/go-bindata/go-bindata/...
       - run: go get github.com/jstemmer/go-junit-report
       - run: go get -v -d ./...
+      - run: make setup
 
       - run:
           name: Run unit tests

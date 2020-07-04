@@ -1,3 +1,4 @@
+![Go](https://github.com/geoffjay/7g-tooling/workflows/Go/badge.svg)
 [![CircleCI](https://circleci.com/gh/geoffjay/7g-tooling.svg?style=shield)](https://app.circleci.com/pipelines/github/geoffjay/7g-tooling)
 [![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat-square)](https://pkg.go.dev/github.com/geoffjay/7g-tooling)
 [![Go Report Card](https://goreportcard.com/badge/github.com/geoffjay/7g-tooling)](https://goreportcard.com/report/github.com/geoffjay/7g-tooling)
