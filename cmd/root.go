@@ -3,6 +3,8 @@ package cmd
 import (
 	"log"
 
+	"github.com/geoffjay/7g-tooling/cmd/gql"
+
 	"github.com/geoffjay/7g-tooling/cmd/daemon"
 	"github.com/geoffjay/7g-tooling/cmd/deploy"
 
@@ -49,6 +51,7 @@ func addCommands() {
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.AddCommand(daemon.Command)
 	rootCmd.AddCommand(deploy.Command)
+	rootCmd.AddCommand(gql.Command)
 }
 
 func setup() {

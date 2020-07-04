@@ -12,13 +12,15 @@ require (
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-contrib/logger v0.0.2
 	github.com/gin-gonic/gin v1.6.3
-	github.com/go-bindata/go-bindata v3.1.2+incompatible // indirect
 	github.com/go-git/go-git/v5 v5.1.0
 	github.com/go-openapi/spec v0.19.8 // indirect
 	github.com/go-openapi/swag v0.19.9 // indirect
+	github.com/gojektech/heimdall/v6 v6.1.0
 	github.com/jhoonb/archivex v0.0.0-20180718040744-0488e4ce1681
 	github.com/joho/godotenv v1.3.0
+	github.com/machinebox/graphql v0.2.2
 	github.com/mailru/easyjson v0.7.1 // indirect
+	github.com/matryer/is v1.4.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/rs/zerolog v1.16.0

@@ -1,6 +1,7 @@
-query GetObjective($pk: Int!) {
+query ($pk: Int!) {
 	objective(pk: $pk) {
 		pk
 		private
+		weight
 	}
 }
