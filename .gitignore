@@ -6,3 +6,9 @@ tags
 
 target/
 .idea/
+app/thumbs.db
+app/.DS_Store
+app/.yarnclean
+app/dist/
+app/node_modules/
+app/.idea/
