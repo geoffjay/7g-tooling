@@ -4,7 +4,8 @@ tags
 
 .env
 
-docs/
+docs/docs.go
+docs/swagger*
 
 target/
 .idea/
