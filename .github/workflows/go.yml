@@ -28,7 +28,12 @@ jobs:
         go get -v -d ./...
 
     - name: Build
-      run: make
+      run: |
+        make setup
+        make
 
     - name: Test
-      run: go test -v .
+      run: |
+        make setup
+        make bindata
+        go test -v .
