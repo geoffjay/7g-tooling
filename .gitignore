@@ -4,6 +4,10 @@ tags
 
 .env
 
+# generated static resources
+data/gql/bindata.go
+
+# generated documentation files
 docs/docs.go
 docs/swagger*
 

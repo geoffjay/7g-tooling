@@ -35,6 +35,7 @@
 Building and running the web service during development is done using:
 
 ```shell
+make setup
 make
 SG_CONFIG=configs/config.yml ./target/7g daemon
 ```

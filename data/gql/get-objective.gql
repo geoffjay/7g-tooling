@@ -1,0 +1,6 @@
+query GetObjective($pk: Int!) {
+	objective(pk: $pk) {
+		pk
+		private
+	}
+}
