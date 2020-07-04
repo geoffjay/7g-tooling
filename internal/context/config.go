@@ -22,6 +22,7 @@ type Config struct {
 	Port      int     `mapstructure:"port"`
 	URISchema string  `mapstructure:"uri-schema"`
 	Version   string  `mapstructure:"version"`
+	APIKey    string  `mapstructure:"api-key"`
 	Log       logging `mapstructure:"log"`
 }
 
