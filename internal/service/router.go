@@ -11,8 +11,12 @@ import (
 func RegisterRoutes(config *gcontext.Config, r *gin.Engine) (err error) {
 	// Miscellaneous routes
 	if err = route.Ping(config, r); err != nil {
-		return err
+		return
 	}
 
-	return err
+	if err = route.Docs(r); err != nil {
+		return
+	}
+
+	return nil
 }

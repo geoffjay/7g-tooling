@@ -41,6 +41,23 @@ SG_CONFIG=configs/config.yml ./target/7g daemon
 
 ## API
 
+### Swagger
+
+Install the `swag` utility.
+
+```shell
+go get -u github.com/swaggo/swag/cmd/swag
+```
+
+To build Swagger documentation for the REST API.
+
+```shell
+make docs
+make
+```
+
+Now when running the documentation should be available at http://localhost:3000/swagger/index.html.
+
 ### Ping
 
 http://localhost:3000/v1/ping

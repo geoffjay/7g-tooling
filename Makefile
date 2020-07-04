@@ -13,7 +13,10 @@ build-static: ; $(info $(M) Building static binary...)
 		-a -tags netgo -ldflags '-w -extldflags "-static"' \
 		-o target/7g-static
 
+docs: ; $(info $(M) Building Swagger documentation...)
+	swag init -g internal/service/main.go --parseInternal
+
 clean: ; $(info $(M) Removing generated files... )
 	@rm -rf target/
 
-.PHONY: all build build-static clean
+.PHONY: all build build-static clean docs

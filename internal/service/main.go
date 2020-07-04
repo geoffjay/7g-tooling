@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 
+	_ "github.com/geoffjay/7g-tooling/docs"
 	gcontext "github.com/geoffjay/7g-tooling/internal/context"
 	"github.com/geoffjay/7g-tooling/internal/middleware"
 
@@ -15,6 +16,16 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/sirupsen/logrus"
 )
+
+// @title 7Geese Tooling Service API
+// @version 1.0
+// @description This is the 7Geese utility server.
+
+// @host localhost:3000
+// @BasePath /v1
+// @query.collection.format multi
+
+// @x-extension-openapi {"example": "value on a json format"}
 
 // Run launches the server
 func Run(config *gcontext.Config) {

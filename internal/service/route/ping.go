@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Ping routes
+// Ping route
 func Ping(config *gcontext.Config, r *gin.Engine) error {
 	// Simple keep-alive/ping handler
 	r.GET(config.VersionedEndpoint("/ping"), handler.Ping())
