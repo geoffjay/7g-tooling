@@ -4,6 +4,10 @@ tags
 
 .env
 
+# front-end
+app/dist/
+app/node_modules/
+
 # generated static resources
 data/gql/bindata.go
 

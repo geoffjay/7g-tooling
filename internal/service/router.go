@@ -9,6 +9,11 @@ import (
 
 // RegisterRoutes register the routes for the server
 func RegisterRoutes(config *gcontext.Config, r *gin.Engine) (err error) {
+	// 7Geese routes
+	if err = route.Network(config, r); err != nil {
+		return
+	}
+
 	// Miscellaneous routes
 	if err = route.Ping(config, r); err != nil {
 		return
