@@ -6,19 +6,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ReadNetwork() gin.HandlerFunc {
+func ReadConfig() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.String(http.StatusOK, "OK")
 	}
 }
 
-func PopulateNetwork() gin.HandlerFunc {
+func UpdateConfig() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.String(http.StatusOK, "OK")
 	}
 }
 
-func AutomateNetwork() gin.HandlerFunc {
+func ReadProperty() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.String(http.StatusOK, "OK")
+	}
+}
+
+func UpdateProperty() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.String(http.StatusOK, "OK")
 	}

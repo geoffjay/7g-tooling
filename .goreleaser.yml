@@ -25,14 +25,14 @@ archives:
     replacements:
       darwin: Darwin
       amd64: x86_64
-brews:
-  - tap:
-      owner: geoffjay
-      name: homebrew-tap
-    folder: Formula
-    homepage:  https://github.com/geoffjay/7g-tooling
-    description: Developer tooling
-    test: |
-      system "#{bin}/goreleaser -v"
-    dependencies:
-    - name: go
+#brews:
+#  - tap:
+#      owner: geoffjay
+#      name: homebrew-tap
+#    folder: Formula
+#    homepage:  https://github.com/geoffjay/7g-tooling
+#    description: Developer tooling
+#    test: |
+#      system "#{bin}/goreleaser -v"
+#    dependencies:
+#    - name: go
