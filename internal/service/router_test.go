@@ -1,6 +1,8 @@
 package service
 
 import (
+	"io"
+	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
@@ -11,6 +13,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
+	"gopkg.in/yaml.v3"
 )
 
 func TestRouter(t *testing.T) {
@@ -34,6 +37,7 @@ func TestRouter(t *testing.T) {
 		req, _ := http.NewRequest("GET", url, nil)
 		router.ServeHTTP(w, req)
 
+		t.Log("It should respond with an HTTP status code of 200")
 		assert.Equal(t, 200, w.Code)
 		assert.Equal(t, "OK", w.Body.String())
 	})
@@ -45,28 +49,63 @@ func TestRouter(t *testing.T) {
 		req, _ := http.NewRequest("GET", url, nil)
 		router.ServeHTTP(w, req)
 
+		t.Log("It should respond with an HTTP status code of 200")
 		assert.Equal(t, 200, w.Code)
 		assert.Equal(t, "OK", w.Body.String())
 	})
 
 	t.Run("network/populate [POST]", func(t *testing.T) {
+		pr, pw := io.Pipe()
+		writer := multipart.NewWriter(pw)
+
+		go func() {
+			defer writer.Close()
+			part, err := writer.CreateFormFile("file", "populate.yml")
+			if err != nil {
+				t.Error(err)
+			}
+
+			enc := yaml.NewEncoder(part)
+			err = enc.Encode(map[string]string{"a": "b"})
+			assert.Equal(t, err, nil)
+		}()
+
 		w := httptest.NewRecorder()
 		url := config.SchemaVersionedEndpoint("/network/populate")
-		req, _ := http.NewRequest("POST", url, nil)
+		req, _ := http.NewRequest("POST", url, pr)
+		req.Header.Add("Content-Type", writer.FormDataContentType())
 		router.ServeHTTP(w, req)
 
+		t.Log("It should respond with an HTTP status code of 200")
 		assert.Equal(t, 200, w.Code)
-		assert.Equal(t, "OK", w.Body.String())
+		assert.Equal(t, "{\"received\":\"populate.yml\"}", w.Body.String())
 	})
 
 	t.Run("network/automate [POST]", func(t *testing.T) {
+		pr, pw := io.Pipe()
+		writer := multipart.NewWriter(pw)
+
+		go func() {
+			defer writer.Close()
+			part, err := writer.CreateFormFile("file", "automate.yml")
+			if err != nil {
+				t.Error(err)
+			}
+
+			enc := yaml.NewEncoder(part)
+			err = enc.Encode(map[string]string{"a": "b"})
+			assert.Equal(t, err, nil)
+		}()
+
 		w := httptest.NewRecorder()
 		url := config.SchemaVersionedEndpoint("/network/automate")
-		req, _ := http.NewRequest("POST", url, nil)
+		req, _ := http.NewRequest("POST", url, pr)
+		req.Header.Add("Content-Type", writer.FormDataContentType())
 		router.ServeHTTP(w, req)
 
+		t.Log("It should respond with an HTTP status code of 200")
 		assert.Equal(t, 200, w.Code)
-		assert.Equal(t, "OK", w.Body.String())
+		assert.Equal(t, "{\"received\":\"automate.yml\"}", w.Body.String())
 	})
 
 	// Config routes
@@ -76,6 +115,7 @@ func TestRouter(t *testing.T) {
 		req, _ := http.NewRequest("GET", url, nil)
 		router.ServeHTTP(w, req)
 
+		t.Log("It should respond with an HTTP status code of 200")
 		assert.Equal(t, 200, w.Code)
 		assert.Equal(t, "OK", w.Body.String())
 	})
@@ -86,6 +126,7 @@ func TestRouter(t *testing.T) {
 		req, _ := http.NewRequest("POST", url, nil)
 		router.ServeHTTP(w, req)
 
+		t.Log("It should respond with an HTTP status code of 200")
 		assert.Equal(t, 200, w.Code)
 		assert.Equal(t, "OK", w.Body.String())
 	})
@@ -96,6 +137,7 @@ func TestRouter(t *testing.T) {
 		req, _ := http.NewRequest("GET", url, nil)
 		router.ServeHTTP(w, req)
 
+		t.Log("It should respond with an HTTP status code of 200")
 		assert.Equal(t, 200, w.Code)
 		assert.Equal(t, "OK", w.Body.String())
 	})
@@ -106,6 +148,7 @@ func TestRouter(t *testing.T) {
 		req, _ := http.NewRequest("POST", url, nil)
 		router.ServeHTTP(w, req)
 
+		t.Log("It should respond with an HTTP status code of 200")
 		assert.Equal(t, 200, w.Code)
 		assert.Equal(t, "OK", w.Body.String())
 	})
