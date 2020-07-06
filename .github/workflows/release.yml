@@ -1,8 +1,12 @@
-name: goreleaser
+name: release
 
 on:
-  pull_request:
   push:
+    branches:
+      - 'master'
+    tags:
+      - 'v*'
+    pull_request:
 
 jobs:
   goreleaser:
@@ -18,6 +22,18 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.14
+      -
+        name: Cache Go modules
+        uses: actions/cache@v2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      -
+        name: Make Setup
+        run: |
+          make setup
       -
         name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
