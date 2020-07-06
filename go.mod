@@ -15,7 +15,7 @@ require (
 	github.com/go-git/go-git/v5 v5.1.0
 	github.com/go-openapi/spec v0.19.8 // indirect
 	github.com/go-openapi/swag v0.19.9 // indirect
-	github.com/gojektech/heimdall/v6 v6.1.0
+	github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect
 	github.com/jhoonb/archivex v0.0.0-20180718040744-0488e4ce1681
 	github.com/joho/godotenv v1.3.0
 	github.com/machinebox/graphql v0.2.2
