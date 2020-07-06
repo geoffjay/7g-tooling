@@ -28,7 +28,7 @@ archives:
 brews:
   - tap:
       owner: geoffjay
-      name: homebrew-7g-tooling
+      name: homebrew-tap
     folder: Formula
     homepage:  https://github.com/geoffjay/7g-tooling
     description: Developer tooling
