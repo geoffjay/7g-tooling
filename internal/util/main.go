@@ -3,11 +3,13 @@ package util
 import (
 	"context"
 	"fmt"
+	"os"
 	"path"
 	"path/filepath"
 	"runtime"
 
 	"github.com/gin-gonic/gin"
+	"github.com/mitchellh/go-homedir"
 	"github.com/sirupsen/logrus"
 )
 
@@ -15,13 +17,47 @@ func HasAppEnv() bool {
 	// TODO: check if
 	//  - $SG_PATH exists
 	//  - config file exists
-	return false
+	home, err := homedir.Dir()
+	if err != nil {
+		return false
+	}
+
+	configDir := fmt.Sprintf("%s/.config/7g", home)
+	if _, err := os.Stat(configDir); os.IsNotExist(err) {
+		return false
+	}
+
+	tmpDir := fmt.Sprintf("%s/.config/7g/tmp", home)
+	if _, err := os.Stat(tmpDir); os.IsNotExist(err) {
+		return false
+	}
+
+	return true
 }
 
 func SetupAppEnv() {
 	// TODO:
 	//  - create $SG_PATH
 	//  - create base config
+	if !HasAppEnv() {
+		home, err := homedir.Dir()
+		if err != nil {
+			logrus.Error(err)
+			return
+		}
+
+		configDir := fmt.Sprintf("%s/.config/7g", home)
+		if err := os.Mkdir(configDir, 0755); err != nil {
+			logrus.Error(err)
+			return
+		}
+
+		tmpDir := fmt.Sprintf("%s/.config/7g/tmp", home)
+		if err := os.Mkdir(tmpDir, 0755); err != nil {
+			logrus.Error(err)
+			return
+		}
+	}
 }
 
 // RootDir returns the root path of the project.

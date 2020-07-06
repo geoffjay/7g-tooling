@@ -2,8 +2,9 @@ package handler
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+
+	"github.com/geoffjay/7g-tooling/internal/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mitchellh/go-homedir"
@@ -25,8 +26,9 @@ func ReadNetwork() gin.HandlerFunc {
 //  -H "Content-Type: multipart/form-data"
 func PopulateNetwork() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		// the application environment needs to exist
+		util.SetupAppEnv()
 		file, _ := c.FormFile("file")
-		log.Println(file.Filename)
 
 		// TODO: this should be in home when run as a user, or /etc when run as privileged service
 		home, err := homedir.Dir()
@@ -46,10 +48,18 @@ func PopulateNetwork() gin.HandlerFunc {
 	}
 }
 
+// AutomateNetwork receives a network automation profile file in yaml(?) format and initializes the job
+//
+// Testing with curl:
+//
+// curl -X POST http://localhost:3000/v1/network/populate \
+//  -F "file=@/tmp/test.yaml" \
+//  -H "Content-Type: multipart/form-data"
 func AutomateNetwork() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		// the application environment needs to exist
+		util.SetupAppEnv()
 		file, _ := c.FormFile("file")
-		log.Println(file.Filename)
 
 		// TODO: this should be in home when run as a user, or /etc when run as privileged service
 		home, err := homedir.Dir()
