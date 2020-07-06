@@ -1,10 +1,11 @@
-"use strict";
+'use strict';
 
-import React from "react";
+import ReactDOM from 'react-dom';
 
-import ReactDOM from "react-dom";
+import App from './App';
 
-const styles = document.createElement("style");
+
+const styles = document.createElement('style');
 styles.innerText = `
     body {
         margin: 0;
@@ -22,12 +23,10 @@ styles.innerText = `
         align-items: center;
         justify-content: center;
     }
-
 `;
 
 document.head.appendChild(styles);
 
-const App = React.createElement("div",{ id: "app-container" }, "7g-tooling baybay");
-const root = document.getElementById("app");
+const root = document.getElementById('app');
 
 ReactDOM.render(App, root);
