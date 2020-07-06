@@ -5,6 +5,9 @@ uri-schema: "http://"
 version: "v1"
 api-key: "test"
 
+remote:
+  address: "http://localhost:8000"
+
 log:
   formatter: "text"
   level: "debug"

@@ -12,8 +12,8 @@ func Network(config *gcontext.Config, r *gin.Engine) error {
 	network := r.Group(config.VersionedEndpoint("/network"))
 	{
 		network.GET("", handler.ReadNetwork())
-		network.POST("/prepare", handler.PrepareNetwork())
-		network.POST("/schedule", handler.ScheduleNetwork())
+		network.POST("/populate", handler.PopulateNetwork())
+		network.POST("/automate", handler.AutomateNetwork())
 	}
 	return nil
 }
