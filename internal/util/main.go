@@ -52,7 +52,7 @@ func EnsureAppEnv() {
 
 	configDir := fmt.Sprintf("%s/.config/7g", home)
 	if _, err := os.Stat(configDir); os.IsNotExist(err) {
-		if err := os.Mkdir(configDir, 0755); err != nil {
+		if err := os.MkdirAll(configDir, 0755); err != nil {
 			logrus.Error(err)
 			return
 		}
