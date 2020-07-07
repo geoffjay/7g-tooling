@@ -34,7 +34,7 @@ endif
 
 # `dotenv` is installed with `pip install "python-dotenv[cli]"`
 release: ; $(info $(M) Create release...)
-	@dotenv -f $(USER)/.env.gh goreleaser --rm-dist
+	@dotenv -f $(HOME)/.env.gh run goreleaser --rm-dist
 
 test: bindata; $(info $(M) Running tests...)
 	@go test -v -tags integration ./...
