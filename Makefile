@@ -2,6 +2,8 @@ PROJECT := "7g-tooling"
 
 M = $(shell printf "\033[34;1m▶\033[0m")
 TAG := $(shell git describe --all | sed -e's/.*\///g')
+GBD := $(shell command -v go-bindata 2> /dev/null)
+AIR := $(shell command -v air 2> /dev/null)
 
 all: build
 
@@ -9,9 +11,11 @@ docs: ; $(info $(M) Building Swagger documentation...)
 	@swag init -g internal/service/main.go --parseInternal
 
 setup: ; $(info $(M) Fetching golang build dependencies...)
+ifndef GBD
 	@go get -u github.com/go-bindata/go-bindata/...
+endif
 
-bindata: ; $(info $(M) Generating binary data to package...)
+bindata: setup; $(info $(M) Generating binary data to package...)
 	@go generate ./data/gql
 
 build: bindata; $(info $(M) Building $(PROJECT)...)
@@ -22,7 +26,16 @@ build-static: ; $(info $(M) Building static binary...)
 		-a -tags netgo -ldflags '-w -extldflags "-static"' \
 		-o target/7g-static
 
+server: ; $(info $(Make) Run service using hot-reloading...)
+ifndef AIR
+	@go get github.com/cosmtrek/air
+endif
+	@air
+
+test: bindata; $(info $(M) Running tests...)
+	@go test -v -tags integration ./...
+
 clean: ; $(info $(M) Removing generated files... )
 	@rm -rf target/
 
-.PHONY: all build build-static clean docs
+.PHONY: all docs build build-static test clean

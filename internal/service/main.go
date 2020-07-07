@@ -82,6 +82,9 @@ func initRouter() *gin.Engine {
 		},
 	)
 
+	// Set an 8 MiB memory limit for multipart forms
+	router.MaxMultipartMemory = 8 << 20
+
 	// Add middleware
 	router.Use(logger.SetLogger())
 	router.Use(middleware.Context())

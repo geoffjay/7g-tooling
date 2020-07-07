@@ -15,7 +15,7 @@ require (
 	github.com/go-git/go-git/v5 v5.1.0
 	github.com/go-openapi/spec v0.19.8 // indirect
 	github.com/go-openapi/swag v0.19.9 // indirect
-	github.com/gojektech/heimdall/v6 v6.1.0
+	github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect
 	github.com/jhoonb/archivex v0.0.0-20180718040744-0488e4ce1681
 	github.com/joho/godotenv v1.3.0
 	github.com/machinebox/graphql v0.2.2
@@ -23,16 +23,16 @@ require (
 	github.com/matryer/is v1.4.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/opencontainers/go-digest v1.0.0 // indirect
-	github.com/rs/zerolog v1.16.0
-	github.com/sirupsen/logrus v1.4.1
+	github.com/rs/zerolog v1.19.0
+	github.com/sirupsen/logrus v1.6.0
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.0
-	github.com/stretchr/testify v1.4.0
+	github.com/stretchr/testify v1.6.1
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.7
 	golang.org/x/net v0.0.0-20200625001655-4c5254603344 // indirect
 	golang.org/x/text v0.3.3 // indirect
 	golang.org/x/tools v0.0.0-20200702044944-0cc1aa72b347 // indirect
-	gopkg.in/yaml.v2 v2.3.0 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
 )

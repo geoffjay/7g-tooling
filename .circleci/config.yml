@@ -24,14 +24,11 @@ jobs:
           name: Run unit tests
           command: |
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
-            make setup
-            make bindata
-            go test -v -tags integration ./... | tee ${TEST_RESULTS}/go-test.out
+            make test | tee ${TEST_RESULTS}/go-test.out
 
       - run:
           name: Build application
           command: |
-            make setup
             make
 
       - save_cache:

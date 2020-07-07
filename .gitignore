@@ -4,6 +4,10 @@ tags
 
 .env
 
+# front-end
+app/dist/
+app/node_modules/
+
 # generated static resources
 data/gql/bindata.go
 
@@ -11,6 +15,7 @@ data/gql/bindata.go
 docs/docs.go
 docs/swagger*
 
+dist/
 target/
 .idea/
 app/thumbs.db

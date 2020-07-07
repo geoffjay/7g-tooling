@@ -1,0 +1,49 @@
+env:
+  - GO111MODULE=on
+
+before:
+  hooks:
+    - go mod download
+    - make bindata
+
+builds:
+  -
+    binary: 7g
+    targets:
+      - "darwin_amd64"
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+    goarch:
+      - amd64
+
+checksum:
+  name_template: '{{ .ProjectName }}_checksums.txt'
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+    - Merge pull request
+    - Merge branch
+
+archives:
+  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    replacements:
+      darwin: Darwin
+      amd64: x86_64
+
+brews:
+  - tap:
+      owner: geoffjay
+      name: homebrew-tap
+    folder: Formula
+    homepage:  https://github.com/geoffjay/7g-tooling
+    description: Developer tooling
+    test: |
+      system "#{bin}/7g version"
+    dependencies:
+    - name: go

@@ -16,6 +16,11 @@ type logging struct {
 	Level     string `mapstructure:"level"`
 }
 
+// Configuration for the remote application host
+type remote struct {
+	Address string `mapstructure:"address"`
+}
+
 // Config defines the application configuration
 type Config struct {
 	Host      string  `mapstructure:"host"`
@@ -23,6 +28,7 @@ type Config struct {
 	URISchema string  `mapstructure:"uri-schema"`
 	Version   string  `mapstructure:"version"`
 	APIKey    string  `mapstructure:"api-key"`
+	Remote    remote  `mapstructure:"remote"`
 	Log       logging `mapstructure:"log"`
 }
 
