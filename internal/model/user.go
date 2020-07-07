@@ -13,7 +13,7 @@ type User struct {
 	Phone             *string
 	ManagerID         int
 	ManagerName       *string
-	State             bool
+	State             *string
 	Title             *string
 	DepartmentsJoined *string
 	LocationsJoined   *string

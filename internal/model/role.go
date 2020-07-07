@@ -7,6 +7,7 @@ import (
 
 type Role struct {
 	BaseModelSeq
+	Name string
 }
 
 type RoleStore struct {
@@ -15,7 +16,7 @@ type RoleStore struct {
 
 type RoleTemplate struct {
 	BaseModelSeq
-	//Name
+	Name string
 	//Description
 	//Responsibility 1 Title
 	//Responsibility 1 Description

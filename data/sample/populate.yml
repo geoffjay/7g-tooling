@@ -1,87 +1,96 @@
-jobs:
-  populate:
-    locations:
-      - East
-      - West
+locations:
+  -
+    id: 1
+    name: East
+  -
+    id: 2
+    name: West
 
+departments:
+  -
+    name: Team A
+    lead: CEO
+  -
+    name: Team B
+    lead: CTO
+
+users:
+  -
+    first-name: Bob
+    last-name: Ross
+    email: bob@ross.com
+    phone: 555-123-4567
+    manager: Happy Trees
+    state: active
+    title: Developer
     departments:
-      -
-        name: Team A
-        lead: CEO
-      -
-        name: Team B
-        lead: CTO
-
-    users:
-      -
-        first-name: Bob
-        last-name: Ross
-        email: bob@ross.com
-        phone: 555-123-4567
-        manager: Happy Trees
-        state: active
-        title: Developer
-        departments:
-          - Team A
-          - Team B
-        locations:
-          - East
-          - West
-        roles:
-          - Admin
-          - Manager
-
-    # TODO: create IDs for internal references that isn't the Django ID
-    objectives:
-      -
-        name: Be better
-        type: Department
-        description:
-        due-date: EOC # special name for end of cycle?
-        status: Open  # Open/Closed
-        privacy: Public
-        department: Team A
-        labels:
-          - foo
-          - bar
-        # TODO: move set parents and children to different job
-        parents:
-          - id: 1
-        children:
-          -
-            id: 3
-            weight: 10
-        creator: Bob Ross
-        # TODO: move set owners/stakeholders/followers to different job
-        owners:
-          - Bob Ross
-        stakeholders:
-          -
-        followers:
-          -
-        key-results:
-          -
-            name: Stuff
-            unit: Percent
-            target-value: 100
-            start-value: 0
-          -
-            name: Things
-            unit: Numeric
-            target-value: 10
-            start-value: 1
-
-    oneonones:
-
-    recognition-badges:
-      -
-        name: Foo
-        description: Does all the foo
-      -
-        name: Bar
-        description: Helps with all the bar
-
-    compentencies:
-
+      - name: Team A
+      - name: Team B
+    locations:
+      - name: East
+      - name: West
     roles:
-      templates:
+      - name: Admin
+      - name: Manager
+
+# TODO: create IDs for internal references that isn't the Django ID
+objectives:
+  -
+    name: Be better
+    type: Department
+    description:
+    due-date: EOC # special name for end of cycle?
+    status: Open  # Open/Closed
+    privacy: Public
+    department: Team A
+    labels:
+      - foo
+      - bar
+    # TODO: move set parents and children to different job
+    parents:
+      - id: 1
+    children:
+      -
+        id: 3
+        weight: 10
+    creator: Bob Ross
+    # TODO: move set owners/stakeholders/followers to different job
+    owners:
+      - Bob Ross
+    stakeholders:
+      -
+    followers:
+      -
+    key-results:
+      -
+        name: Stuff
+        unit: Percent
+        target-value: 100
+        start-value: 0
+      -
+        name: Things
+        unit: Numeric
+        target-value: 10
+        start-value: 1
+
+one-on-ones:
+
+one-on-one-templates:
+
+recognition-badges:
+  -
+    name: Foo
+    description: Does all the foo
+  -
+    name: Bar
+    description: Helps with all the bar
+
+recognitions:
+
+competency-levels:
+
+compentencies:
+
+roles:
+
+role-templates:

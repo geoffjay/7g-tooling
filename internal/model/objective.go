@@ -8,7 +8,7 @@ import (
 type Objective struct {
 	BaseModelSeq
 	Name        *string `gorm:"not null"`
-	Type        int
+	Type        *string
 	Description *string `gorm:"size:1024"`
 	//Due Date
 	//Creation Date
