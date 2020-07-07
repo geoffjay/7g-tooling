@@ -41,7 +41,7 @@ func init() {
 		log.Fatal("Error loading .env file")
 	}
 
-	// the application environment needs to exist
+	// The application environment needs to exist
 	util.EnsureAppEnv()
 
 	addCommands()
