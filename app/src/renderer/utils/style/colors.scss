@@ -11,7 +11,7 @@ $slate10: #E9EBEE;
 $slate7: $slate10;
 $slate5: #F3F3F4;
 
-$slateDisabledBackground: fade($slate80, 10%);
+$slateDisabledBackground: rgba($slate80, 10%);
 
 $blue: #0f76ac;
 $blue60: #43ace4;
@@ -20,8 +20,8 @@ $blue10: #e7f4fb;
 $blue7: #f6fafc;
 $blueText: #0b5278;
 
-$blueFade5: fade($blue, 5%);
-$blueFade10: fade($blue, 10%);
+$blueFade5: rgba($blue, 5%);
+$blueFade10: rgba($blue, 10%);
 $blueDarken10: darken($blue, 10%);
 
 $green: #65b922;
@@ -34,7 +34,7 @@ $red30: #ffc9c9;
 $red10: #ffeded;
 $redText: #6e0a0a;
 $redDarken10: darken($colorRed, 10%);
-$redFade5: fade($colorRed, 5%);
+$redFade5: rgba($colorRed, 5%);
 
 $yellow: #fabc29;
 $yellow30: #fdeabe;
@@ -61,12 +61,12 @@ $blizzard: #F5F8FB;
 
 // Blue-grey
 $graphite: #465F6E;
-$porcelain: fade($graphite, 7%);
-$graphite75: fade($graphite, 75%);
-$graphite50: fade($graphite, 50%);
-$graphite40: fade($graphite, 40%);
-$graphite25: fade($graphite, 25%);
-$graphite10: fade($graphite, 10%);
+$porcelain: rgba($graphite, 7%);
+$graphite75: rgba($graphite, 75%);
+$graphite50: rgba($graphite, 50%);
+$graphite40: rgba($graphite, 40%);
+$graphite25: rgba($graphite, 25%);
+$graphite10: rgba($graphite, 10%);
 
 // Sortable container used in agenda & survey builder
 $sortableContainerLineColour: $slate30;
@@ -85,7 +85,7 @@ $crimson: darken($red, 20%);                        // #b11b1b
 // colorPurple
 $purple: #440480;
 $lightPurple: #f7edfc;
-$purple15: fade($purple, 15);
+$purple15: rgba($purple, 15);
 $purple15Flat: tint($purple, 85%);                  // #e4d9eb;
 
 // Orange
@@ -101,13 +101,13 @@ $yellowText: #7a5c14;
 $black: #000;
 $white: #fff;
 
-$grey85: fade($black, 85%);
-$grey75: fade($black, 75%);
-$grey60: fade($black, 60%);
-$grey40: fade($black, 40%);
-$grey25: fade($black, 25%);
-$grey10: fade($black, 10%);
-$grey3: fade($black, 3%);
+$grey85: rgba($black, 85%);
+$grey75: rgba($black, 75%);
+$grey60: rgba($black, 60%);
+$grey40: rgba($black, 40%);
+$grey25: rgba($black, 25%);
+$grey10: rgba($black, 10%);
+$grey3: rgba($black, 3%);
 
 // Non-alpha greys
 $greyFlat: #808080;
@@ -180,8 +180,8 @@ $highlightBackground:     #f6fbfd;
 $highlightBorder:         #b0d4f0;
 
 // Context chooser
-$contextChooserBackground: fade($skyBlue, 20%);
-$contextChooserBackgroundHover: fade($skyBlue, 30%);
+$contextChooserBackground: rgba($skyBlue, 20%);
+$contextChooserBackgroundHover: rgba($skyBlue, 30%);
 
 // Password strength meter
 $passwordStrongColour: $lime;
@@ -220,6 +220,6 @@ $graph3Highlight: #fde1ba;
 $graph4Highlight: #fcbac9;
 $graph5Highlight: #cbe8fe;
 
-$dropdownButtonDivider: fade($white, 25%);
+$dropdownButtonDivider: rgba($white, 25%);
 
-$focusedOutlineColor: fade($blue60, 55%);
+$focusedOutlineColor: rgba($blue60, 55%);

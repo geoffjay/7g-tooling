@@ -8,11 +8,13 @@ import './app.scss';
 
 const App: React.FC = () : JSX.Element=> {
     return (
-        <Router>
-            <Switch>
-                <Route path="/" component={Network} />
-            </Switch>
-        </Router>
+        <div className="main-content">
+            <Router>
+                <Switch>
+                    <Route path="/" component={Network} />
+                </Switch>
+            </Router>
+        </div>
     );
 };
 
