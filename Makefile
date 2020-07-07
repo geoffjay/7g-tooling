@@ -3,6 +3,7 @@ PROJECT := "7g-tooling"
 M = $(shell printf "\033[34;1m▶\033[0m")
 TAG := $(shell git describe --all | sed -e's/.*\///g')
 GBD := $(shell command -v go-bindata 2> /dev/null)
+AIR := $(shell command -v air 2> /dev/null)
 
 all: build
 
@@ -24,6 +25,12 @@ build-static: ; $(info $(M) Building static binary...)
 	@CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
 		-a -tags netgo -ldflags '-w -extldflags "-static"' \
 		-o target/7g-static
+
+server: ; $(info $(Make) Run service using hot-reloading...)
+ifndef AIR
+	@go get github.com/cosmtrek/air
+endif
+	@air
 
 test: bindata; $(info $(M) Running tests...)
 	@go test -v -tags integration ./...
