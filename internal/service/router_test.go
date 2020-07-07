@@ -19,6 +19,9 @@ import (
 func TestRouter(t *testing.T) {
 	router := gin.Default()
 
+	// The application environment needs to exist
+	util.EnsureAppEnv()
+
 	// Load configuration file
 	configDir := filepath.Join(util.RootDir(), "configs")
 	config, err := gcontext.LoadConfig(configDir)

@@ -8,7 +8,7 @@ before:
 
 builds:
   -
-    binary: target/7g
+    binary: 7g
     targets:
       - "darwin_amd64"
     env:
@@ -36,14 +36,14 @@ archives:
       darwin: Darwin
       amd64: x86_64
 
-#brews:
-#  - tap:
-#      owner: geoffjay
-#      name: homebrew-tap
-#    folder: Formula
-#    homepage:  https://github.com/geoffjay/7g-tooling
-#    description: Developer tooling
-#    test: |
-#      system "#{bin}/goreleaser -v"
-#    dependencies:
-#    - name: go
+brews:
+  - tap:
+      owner: geoffjay
+      name: homebrew-tap
+    folder: Formula
+    homepage:  https://github.com/geoffjay/7g-tooling
+    description: Developer tooling
+    test: |
+      system "#{bin}/7g version"
+    dependencies:
+    - name: go

@@ -15,5 +15,6 @@ data/gql/bindata.go
 docs/docs.go
 docs/swagger*
 
+dist/
 target/
 .idea/
