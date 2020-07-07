@@ -27,6 +27,11 @@ func HasAppEnv() bool {
 		return false
 	}
 
+	configFile := fmt.Sprintf("%s/config.yaml", configDir)
+	if _, err := os.Stat(configFile); os.IsNotExist(err) {
+		return false
+	}
+
 	tmpDir := fmt.Sprintf("%s/.config/7g/tmp", home)
 	if _, err := os.Stat(tmpDir); os.IsNotExist(err) {
 		return false
@@ -35,24 +40,26 @@ func HasAppEnv() bool {
 	return true
 }
 
-func SetupAppEnv() {
+func EnsureAppEnv() {
 	// TODO:
 	//  - create $SG_PATH
 	//  - create base config
-	if !HasAppEnv() {
-		home, err := homedir.Dir()
-		if err != nil {
-			logrus.Error(err)
-			return
-		}
+	home, err := homedir.Dir()
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
 
-		configDir := fmt.Sprintf("%s/.config/7g", home)
+	configDir := fmt.Sprintf("%s/.config/7g", home)
+	if _, err := os.Stat(configDir); os.IsNotExist(err) {
 		if err := os.Mkdir(configDir, 0755); err != nil {
 			logrus.Error(err)
 			return
 		}
+	}
 
-		tmpDir := fmt.Sprintf("%s/.config/7g/tmp", home)
+	tmpDir := fmt.Sprintf("%s/.config/7g/tmp", home)
+	if _, err := os.Stat(tmpDir); os.IsNotExist(err) {
 		if err := os.Mkdir(tmpDir, 0755); err != nil {
 			logrus.Error(err)
 			return

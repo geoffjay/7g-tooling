@@ -27,7 +27,7 @@ func ReadNetwork() gin.HandlerFunc {
 func PopulateNetwork() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// the application environment needs to exist
-		util.SetupAppEnv()
+		util.EnsureAppEnv()
 		file, _ := c.FormFile("file")
 
 		// TODO: this should be in home when run as a user, or /etc when run as privileged service
@@ -58,7 +58,7 @@ func PopulateNetwork() gin.HandlerFunc {
 func AutomateNetwork() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// the application environment needs to exist
-		util.SetupAppEnv()
+		util.EnsureAppEnv()
 		file, _ := c.FormFile("file")
 
 		// TODO: this should be in home when run as a user, or /etc when run as privileged service
