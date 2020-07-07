@@ -1,9 +1,20 @@
 package model
 
+import (
+	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
+)
+
 type Role struct {
+	BaseModelSeq
+}
+
+type RoleStore struct {
+	db *gorm.DB
 }
 
 type RoleTemplate struct {
+	BaseModelSeq
 	//Name
 	//Description
 	//Responsibility 1 Title
@@ -28,4 +39,34 @@ type RoleTemplate struct {
 	//Responsibility 10 Description
 	//Responsibility 11 Title
 	//Responsibility 11 Description
+}
+
+type RoleTemplateStore struct {
+	db *gorm.DB
+}
+
+func NewRoleStore(db *gorm.DB) *RoleStore {
+	return &RoleStore{
+		db: db,
+	}
+}
+
+func (store *RoleStore) Save(role *Role) (err error) {
+	if err = store.db.Create(role).Error; err != nil {
+		logrus.Panic(err)
+	}
+	return
+}
+
+func NewRoleTemplateStore(db *gorm.DB) *RoleTemplateStore {
+	return &RoleTemplateStore{
+		db: db,
+	}
+}
+
+func (store *RoleTemplateStore) Save(template *RoleTemplate) (err error) {
+	if err = store.db.Create(template).Error; err != nil {
+		logrus.Panic(err)
+	}
+	return
 }

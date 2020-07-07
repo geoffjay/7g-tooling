@@ -1,6 +1,11 @@
 package model
 
-import "database/sql/driver"
+import (
+	"database/sql/driver"
+
+	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
+)
 
 type TaskType int64
 
@@ -31,4 +36,21 @@ func (taskType TaskType) Value() (driver.Value, error) { return int64(taskType),
 type Task struct {
 	BaseModelSeq
 	Type TaskType `gorm:"type:integer"`
+}
+
+type TaskStore struct {
+	db *gorm.DB
+}
+
+func NewTaskStore(db *gorm.DB) *TaskStore {
+	return &TaskStore{
+		db: db,
+	}
+}
+
+func (store *TaskStore) Save(task *Task) (err error) {
+	if err = store.db.Create(task).Error; err != nil {
+		logrus.Panic(err)
+	}
+	return
 }

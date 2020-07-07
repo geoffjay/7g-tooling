@@ -37,7 +37,7 @@ func Run(config *gcontext.Config) {
 		maxHeaderBytes    = http.DefaultMaxHeaderBytes
 	)
 
-	db, err := gcontext.Connect()
+	db, err := gcontext.Connect(config)
 	if err != nil {
 		logrus.Fatal("Failed to connect to database:", err)
 	}

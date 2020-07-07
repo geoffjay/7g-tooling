@@ -37,7 +37,9 @@ archives:
       amd64: x86_64
 
 brews:
-  - tap:
+  -
+    name: sg-tooling
+    tap:
       owner: geoffjay
       name: homebrew-tap
     folder: Formula

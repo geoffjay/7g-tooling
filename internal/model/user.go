@@ -1,5 +1,10 @@
 package model
 
+import (
+	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
+)
+
 type User struct {
 	BaseModelSeq
 	FirstName         *string
@@ -17,4 +22,21 @@ type User struct {
 	Departments []Department `gorm:"many2many:user_departments;association_autoupdate:false;association_autocreate:false"`
 	Locations   []Location   `gorm:"many2many:user_locations;association_autoupdate:false;association_autocreate:false"`
 	Roles       []Role       `gorm:"many2many:user_roles;association_autoupdate:false;association_autocreate:false"`
+}
+
+type UserStore struct {
+	db *gorm.DB
+}
+
+func NewUserStore(db *gorm.DB) *UserStore {
+	return &UserStore{
+		db: db,
+	}
+}
+
+func (store *UserStore) Save(user *User) (err error) {
+	if err = store.db.Create(user).Error; err != nil {
+		logrus.Panic(err)
+	}
+	return
 }

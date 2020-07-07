@@ -1,5 +1,10 @@
 package model
 
+import (
+	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
+)
+
 type OneOnOne struct {
 	BaseModelSeq
 	//1-on-1 Template Name
@@ -26,6 +31,10 @@ type OneOnOne struct {
 	//Team Member Notes
 }
 
+type OneOnOneStore struct {
+	db *gorm.DB
+}
+
 type OneOnOneTemplate struct {
 	BaseModelSeq
 	Name        *string `gorm:"not null"`
@@ -33,4 +42,34 @@ type OneOnOneTemplate struct {
 	//1on1 Frequency
 	//Question Name
 	//Question Description `gorm:"size:1024"`
+}
+
+type OneOnOneTemplateStore struct {
+	db *gorm.DB
+}
+
+func NewOneOnOneStore(db *gorm.DB) *OneOnOneStore {
+	return &OneOnOneStore{
+		db: db,
+	}
+}
+
+func (store *OneOnOneStore) Save(oneonone *OneOnOne) (err error) {
+	if err = store.db.Create(oneonone).Error; err != nil {
+		logrus.Panic(err)
+	}
+	return
+}
+
+func NewOneOnOneTemplateStore(db *gorm.DB) *OneOnOneTemplateStore {
+	return &OneOnOneTemplateStore{
+		db: db,
+	}
+}
+
+func (store *OneOnOneTemplateStore) Save(template *OneOnOneTemplate) (err error) {
+	if err = store.db.Create(template).Error; err != nil {
+		logrus.Panic(err)
+	}
+	return
 }
