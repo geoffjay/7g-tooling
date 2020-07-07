@@ -29,7 +29,12 @@ func TestRouter(t *testing.T) {
 		t.Fatalf("Unable to load configuration: %s\n", err)
 	}
 
-	if err := RegisterRoutes(config, router); err != nil {
+	db, err := gcontext.Connect(config)
+	if err != nil {
+		t.Fatal("Failed to connect to database:", err)
+	}
+
+	if err := RegisterRoutes(config, db, router); err != nil {
 		t.Fatal(err)
 	}
 
