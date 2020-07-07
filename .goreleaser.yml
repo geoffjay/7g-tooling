@@ -1,11 +1,6 @@
 env:
   - GO111MODULE=on
 
-before:
-  hooks:
-    - go mod download
-    - make bindata
-
 builds:
   -
     binary: target/7g
