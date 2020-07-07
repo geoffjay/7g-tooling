@@ -8,7 +8,7 @@ before:
 
 builds:
   -
-    binary: target/7g
+    binary: 7g
     targets:
       - "darwin_amd64"
     env:

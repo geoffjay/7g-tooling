@@ -3,6 +3,8 @@ package cmd
 import (
 	"log"
 
+	"github.com/geoffjay/7g-tooling/internal/util"
+
 	"github.com/geoffjay/7g-tooling/cmd/gql"
 
 	"github.com/geoffjay/7g-tooling/cmd/daemon"
@@ -38,6 +40,9 @@ func init() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
+	// the application environment needs to exist
+	util.EnsureAppEnv()
 
 	addCommands()
 

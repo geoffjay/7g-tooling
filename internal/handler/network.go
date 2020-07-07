@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/geoffjay/7g-tooling/internal/util"
-
 	"github.com/gin-gonic/gin"
 	"github.com/mitchellh/go-homedir"
 	"github.com/sirupsen/logrus"
@@ -26,8 +24,6 @@ func ReadNetwork() gin.HandlerFunc {
 //  -H "Content-Type: multipart/form-data"
 func PopulateNetwork() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// the application environment needs to exist
-		util.EnsureAppEnv()
 		file, _ := c.FormFile("file")
 
 		// TODO: this should be in home when run as a user, or /etc when run as privileged service
@@ -57,8 +53,6 @@ func PopulateNetwork() gin.HandlerFunc {
 //  -H "Content-Type: multipart/form-data"
 func AutomateNetwork() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// the application environment needs to exist
-		util.EnsureAppEnv()
 		file, _ := c.FormFile("file")
 
 		// TODO: this should be in home when run as a user, or /etc when run as privileged service
