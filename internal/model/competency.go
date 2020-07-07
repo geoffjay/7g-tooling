@@ -1,15 +1,54 @@
 package model
 
+import (
+	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
+)
+
 type Competency struct {
-	//Title
-	//Description
+	BaseModelSeq
+	Title       *string
+	Description *string `gorm:"size:1024"`
 	//Core Competency
-	//Level 1 name
-	//Level 1 description
-	//Level 2 name
-	//Level 2 description
-	//Level 3 name
-	//Level 3 description
-	//Level 4 name
-	//Level 4 description
+	Levels []Level `gorm:"many2many:competency_levels;association_autoupdate:false;association_autocreate:false"`
+}
+
+type CompetencyStore struct {
+	db *gorm.DB
+}
+
+type Level struct {
+	BaseModelSeq
+	Name        *string
+	Description *string `gorm:"size:1024"`
+}
+
+type LevelStore struct {
+	db *gorm.DB
+}
+
+func NewCompetencyStore(db *gorm.DB) *CompetencyStore {
+	return &CompetencyStore{
+		db: db,
+	}
+}
+
+func (store *CompetencyStore) Save(competency *Competency) (err error) {
+	if err = store.db.Create(competency).Error; err != nil {
+		logrus.Panic(err)
+	}
+	return
+}
+
+func NewLevelStore(db *gorm.DB) *LevelStore {
+	return &LevelStore{
+		db: db,
+	}
+}
+
+func (store *LevelStore) Save(level *Level) (err error) {
+	if err = store.db.Create(level).Error; err != nil {
+		logrus.Panic(err)
+	}
+	return
 }

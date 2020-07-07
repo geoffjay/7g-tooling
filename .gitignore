@@ -15,8 +15,12 @@ data/gql/bindata.go
 docs/docs.go
 docs/swagger*
 
+# build
 dist/
 target/
+tmp/
+
+# configuration
 .idea/
 app/thumbs.db
 app/.DS_Store

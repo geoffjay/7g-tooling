@@ -11,6 +11,11 @@ import (
 	"github.com/spf13/viper"
 )
 
+type database struct {
+	File        string `mapstructure:"file"`
+	AutoMigrate bool   `mapstructure:"auto-migrate"`
+}
+
 type logging struct {
 	Formatter string `mapstructure:"formatter"`
 	Level     string `mapstructure:"level"`
@@ -23,13 +28,14 @@ type remote struct {
 
 // Config defines the application configuration
 type Config struct {
-	Host      string  `mapstructure:"host"`
-	Port      int     `mapstructure:"port"`
-	URISchema string  `mapstructure:"uri-schema"`
-	Version   string  `mapstructure:"version"`
-	APIKey    string  `mapstructure:"api-key"`
-	Remote    remote  `mapstructure:"remote"`
-	Log       logging `mapstructure:"log"`
+	Host      string   `mapstructure:"host"`
+	Port      int      `mapstructure:"port"`
+	URISchema string   `mapstructure:"uri-schema"`
+	Version   string   `mapstructure:"version"`
+	APIKey    string   `mapstructure:"api-key"`
+	Database  database `mapstructure:"database"`
+	Remote    remote   `mapstructure:"remote"`
+	Log       logging  `mapstructure:"log"`
 }
 
 // LoadConfig loads a configuration file from disk

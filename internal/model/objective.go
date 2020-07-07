@@ -1,10 +1,15 @@
 package model
 
+import (
+	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
+)
+
 type Objective struct {
-	//Objective ID
-	//Objective name
-	//Objective Type
-	//Objective Description
+	BaseModelSeq
+	Name        *string `gorm:"not null"`
+	Type        int
+	Description *string `gorm:"size:1024"`
 	//Due Date
 	//Creation Date
 	//Open/Closed
@@ -27,4 +32,21 @@ type Objective struct {
 	//KR Weight(s)
 	//KR Target Value(s)
 	//KR Start Value(s)
+}
+
+type ObjectiveStore struct {
+	db *gorm.DB
+}
+
+func NewObjectiveStore(db *gorm.DB) *ObjectiveStore {
+	return &ObjectiveStore{
+		db: db,
+	}
+}
+
+func (store *ObjectiveStore) Save(objective *Objective) (err error) {
+	if err = store.db.Create(objective).Error; err != nil {
+		logrus.Panic(err)
+	}
+	return
 }
