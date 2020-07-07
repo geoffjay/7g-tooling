@@ -26,11 +26,15 @@ build-static: ; $(info $(M) Building static binary...)
 		-a -tags netgo -ldflags '-w -extldflags "-static"' \
 		-o target/7g-static
 
-server: ; $(info $(Make) Run service using hot-reloading...)
+server: ; $(info $(M) Run service using hot-reloading...)
 ifndef AIR
 	@go get github.com/cosmtrek/air
 endif
 	@air
+
+# `dotenv` is installed with `pip install "python-dotenv[cli]"`
+release: ; $(info $(M) Create release...)
+	@dotenv -f $(USER)/.env.gh goreleaser --rm-dist
 
 test: bindata; $(info $(M) Running tests...)
 	@go test -v -tags integration ./...
@@ -38,4 +42,4 @@ test: bindata; $(info $(M) Running tests...)
 clean: ; $(info $(M) Removing generated files... )
 	@rm -rf target/
 
-.PHONY: all docs build build-static test clean
+.PHONY: all docs build build-static server test clean

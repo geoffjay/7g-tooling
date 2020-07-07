@@ -5,8 +5,12 @@ uri-schema: "http://"
 version: "v1"
 api-key: "test"
 
+database:
+  file: "data.db"
+  auto-migrate: true
+
 remote:
-  address: "http://localhost:8000"
+  address: "http://localhost:8000/graphql"
 
 log:
   formatter: "text"

@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
 	"github.com/mitchellh/go-homedir"
 	"github.com/sirupsen/logrus"
 )
@@ -22,7 +23,7 @@ func ReadNetwork() gin.HandlerFunc {
 // curl -X POST http://localhost:3000/v1/network/populate \
 //  -F "file=@/tmp/test.yaml" \
 //  -H "Content-Type: multipart/form-data"
-func PopulateNetwork() gin.HandlerFunc {
+func PopulateNetwork(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		file, _ := c.FormFile("file")
 
@@ -51,7 +52,7 @@ func PopulateNetwork() gin.HandlerFunc {
 // curl -X POST http://localhost:3000/v1/network/populate \
 //  -F "file=@/tmp/test.yaml" \
 //  -H "Content-Type: multipart/form-data"
-func AutomateNetwork() gin.HandlerFunc {
+func AutomateNetwork(db *gorm.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		file, _ := c.FormFile("file")
 
