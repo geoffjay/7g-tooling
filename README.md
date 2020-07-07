@@ -10,6 +10,28 @@
 
 [WIP] pre-alpha, doesn't do anything, might burn your house down.
 
+## Install
+
+### Homebrew
+
+For macOS only, this is the quickest way to get going. This may not be the most up-to-date version.
+
+```shell
+brew install geoffjay/tap/sg-tooling
+```
+
+### Build
+
+Building from source will be the most up-to-date, but is more likely to have errors.
+
+```shell
+git clone <this repo>
+cd 7g-tooling
+make
+```
+
+The resulting binary will be at `target/7g`, at this time there is no make target to install.
+
 ## CLI
 
 ### `deploy`
@@ -31,6 +53,34 @@
 ```shell
 7g deploy destroy
 ```
+
+### `network`
+
+[TODO]
+
+#### `populate`
+
+#### `automate`
+
+### `daemon`
+
+[TODO]
+
+#### `enable`
+
+#### `disable`
+
+#### `start`
+
+#### `stop`
+
+#### `status`
+
+### `gql`
+
+#### `get-objective`
+
+[TODO]
 
 ## Service
 
@@ -79,27 +129,27 @@ http://localhost:3000/v1/deploy/initialize
 
 http://localhost:3000/v1/deploy/branch/<branch_name>
 
-#### Network
+### Network
+
+#### Populate
 
 [priority]: 1
 
-http://localhost:3000/v1/deploy/network
+http://localhost:3000/v1/network/populate
 
-_should there be something for domain specification_ /<domain_name> (? or id)
-
-GET
+POST
 
 returns?
 
 POST
 
-takes xlsx file?
+takes yaml file
 
 ### Automate
 
 [priority]: 2
 
-http://localhost:3000/v1/automate/network
+http://localhost:3000/v1/network/automate
 
 GET
 
@@ -116,7 +166,7 @@ takes xlsx file?
 - API key
 - server settings?
 
-http://localhost:3000/v1/config/apikey/
+http://localhost:3000/v1/config/:key/
 
 GET
 
@@ -131,3 +181,7 @@ python3 -m venv .venv
 pip install pre-commit
 pre-commit install
 ```
+
+### Running
+
+During development the server can be run using `air` for hot-reloading with `make server`.
