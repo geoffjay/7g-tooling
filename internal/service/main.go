@@ -37,10 +37,15 @@ func Run(config *gcontext.Config) {
 		maxHeaderBytes    = http.DefaultMaxHeaderBytes
 	)
 
+	db, err := gcontext.Connect()
+	if err != nil {
+		logrus.Fatal("Failed to connect to database:", err)
+	}
+
 	router := initRouter()
 
 	// Routes and Handlers
-	if err := RegisterRoutes(config, router); err != nil {
+	if err := RegisterRoutes(config, db, router); err != nil {
 		logrus.Fatal("Failed to register routes:", err)
 	}
 

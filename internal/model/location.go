@@ -1,6 +1,6 @@
 package model
 
 type Location struct {
-	ID   string
+	BaseModelSeq
 	Name string
 }

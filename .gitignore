@@ -15,6 +15,10 @@ data/gql/bindata.go
 docs/docs.go
 docs/swagger*
 
+# build
 dist/
 target/
+tmp/
+
+# configuration
 .idea/

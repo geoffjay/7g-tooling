@@ -1,15 +1,15 @@
 package model
 
 type Competency struct {
-	//Title
-	//Description
+	BaseModelSeq
+	Title       *string
+	Description *string `gorm:"size:1024"`
 	//Core Competency
-	//Level 1 name
-	//Level 1 description
-	//Level 2 name
-	//Level 2 description
-	//Level 3 name
-	//Level 3 description
-	//Level 4 name
-	//Level 4 description
+	Levels []Level `gorm:"many2many:competency_levels;association_autoupdate:false;association_autocreate:false"`
+}
+
+type Level struct {
+	BaseModelSeq
+	Name        *string
+	Description *string `gorm:"size:1024"`
 }

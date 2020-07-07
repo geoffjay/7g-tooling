@@ -1,10 +1,10 @@
 package model
 
 type Objective struct {
-	//Objective ID
-	//Objective name
-	//Objective Type
-	//Objective Description
+	BaseModelSeq
+	Name        *string `gorm:"not null"`
+	Type        int
+	Description *string `gorm:"size:1024"`
 	//Due Date
 	//Creation Date
 	//Open/Closed

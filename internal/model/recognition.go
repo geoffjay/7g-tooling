@@ -1,20 +1,15 @@
 package model
 
 type Recognition struct {
-	//Recognition ID
-	//Recipient ID
-	//Recipient Name
-	//Recipient Department
-	//Recipient Location
-	//Provider ID
-	//Provider Name
-	//Provider Department
-	//Provider Location
-	//Badge Name
-	//Recognition Message
+	BaseModelSeq
+	Recipient User
+	Provider  User
+	Badge     RecognitionBadge
+	Message   *string `gorm:"size:1024"`
 }
 
 type RecognitionBadge struct {
-	Name        string `xlsx:"0"`
-	Description string `xlsx:"1"`
+	BaseModelSeq
+	Name        *string
+	Description *string `gorm:"size:1024"`
 }
