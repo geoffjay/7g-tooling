@@ -1,13 +1,11 @@
 'use strict';
 
-const path = require('path');
-
 module.exports = {
     resolve: {
         alias: {
-            '7g-utils': path.resolve(__dirname, '/src/renderer/utils'),
-            '7g-components': path.resolve(__dirname, '/src/renderer/components'),
-            '7g-pages': path.resolve(__dirname, '/src/renderer/pages')
+            '7g-utils': __dirname +  '/src/renderer/utils',
+            '7g-components': __dirname + '/src/renderer/components',
+            '7g-pages': __dirname + '/src/renderer/pages'
         },
         extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
