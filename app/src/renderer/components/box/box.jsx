@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import defaultTo from 'lodash/defaultTo';
+import omit from 'lodash/omit';
 
 import colors from '../../utils/colors';
 
@@ -102,7 +103,7 @@ class Box extends Component {
 
     render() {
         const { remainingProps } = splitBoxProps(this.props);
-        const { style = {}, children, testId: _, inline, is, ...rest } = remainingProps;
+        const { style = {}, children, inline, is, ...rest } = remainingProps;
 
         const boxStyle = {
             ...this.getMarginStyles(),
@@ -116,7 +117,7 @@ class Box extends Component {
         return React.createElement(
             this.getElement(inline, is), // handles is and inline
             {
-                ...rest,
+                ...omit(rest, ['testId']),
                 className: this.className,
                 style: boxStyle,
             },

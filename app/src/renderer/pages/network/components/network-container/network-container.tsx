@@ -27,11 +27,11 @@ const NetworkContainer: FunctionComponent<NetworkContainerProps> = (): JSX.Eleme
             <Box marginY="16px">
                 <FilePicker onSelectFile={handleSelectFile} selectedFilePath={selectedFilePath}/>
             </Box>
-            <Box flex={1}>
+            <Box flex="1">
                 <table/>
             </Box>
             <Box justifyContent="flex-end">
-                <Button.Filled onClick={handleDeployFile}>Deploy file</Button.Filled>
+                <Button.Filled onClick={handleDeployFile} text="Deploy file" />
             </Box>
         </Box>
     );

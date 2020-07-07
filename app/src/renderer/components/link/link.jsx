@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import omit from 'lodash/omit';
 
 import { getBoxComponent, marginPropTypes, marginPropKeys, flexPropKeys, flexPropTypes } from '../box';
 
 
 const Box = getBoxComponent([ ...marginPropKeys, ...flexPropKeys ]);
 
-const Link = ({ children, openInNewTab, href, text, isDisabled, className, ...props }) => {
+const Link = ({ children, openInNewTab, href, text, className, ...props }) => {
     const linkClassNames = classnames(
         className,
         { 'js-prevent-router': openInNewTab },
@@ -20,7 +21,7 @@ const Link = ({ children, openInNewTab, href, text, isDisabled, className, ...pr
             rel={openInNewTab ? 'noreferrer noopener' : null}
             href={href}
             className={linkClassNames}
-            {...props}
+            {...omit(props, ['isDisabled'])}
         >
             {children || (text ? text : href)}
         </Box>

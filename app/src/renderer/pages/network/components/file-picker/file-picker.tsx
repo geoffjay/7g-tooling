@@ -21,7 +21,7 @@ const FilePicker: React.FC<FilePickerProps> = ({ onSelectFile, selectedFilePath 
             {/* @ts-ignore */}
             <Input placeholder="No file chosen" value={selectedFilePath} onChange={handleChangeFilePath} />
             <div style={{marginLeft: '8px'}}>
-                <Button onClick={openFileSelector}>Browse</Button>
+                <Button onClick={openFileSelector} text="Browse" />
             </div>
         </div>
     );
