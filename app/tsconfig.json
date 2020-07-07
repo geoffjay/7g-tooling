@@ -9,9 +9,9 @@
         "paths": {
             "7g-utils/*": ["/src/renderer/utils/*"],
             "7g-components/*": ["/src/renderer/components/*"],
-            "7g-pages/*": ["/src/renderer/pages/*"],
-        },
+            "7g-pages/*": ["/src/renderer/pages/*"]
+        }
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist", "./webpack.config.js"],
+    "exclude": ["node_modules", "dist"]
 }

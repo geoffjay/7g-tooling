@@ -12,6 +12,14 @@
     "globals": {
         "__static": true
     },
+    "overrides": [
+        {
+            "files": ["**/*.js", "**/*.jsx"],
+            "rules": {
+                "@typescript-eslint/explicit-module-boundary-types": "off"
+            }
+        }
+    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
@@ -81,5 +89,10 @@
         "jsx-a11y/label-has-for": "off",
         "jsx-a11y/no-noninteractive-element-to-interactive-role": "off",
         "jsx-a11y/control-has-associated-label": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "999.999.999"
+        }
     }
 }
