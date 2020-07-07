@@ -24,7 +24,8 @@
     "rules": {
         "indent": ["error", 4],
         "linebreak-style": ["error", "unix"],
-        "quotes": ["error", "single"],
+        "jsx-quotes": ["error", "prefer-double"],
+        "quotes": ["error", "single", { "allowTemplateLiterals": true }],
         "semi": ["error", "always"],
 
         //  rules/eslint/es6/

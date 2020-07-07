@@ -1,0 +1,225 @@
+// *** Base colour definitions ******************************** //
+// ************************************************************ //
+
+// NEW COLORS
+
+$slate: #15171a;
+$slate80: #696E76;
+$slate60: #ABAEB5;
+$slate30: #D4D6D9;
+$slate10: #E9EBEE;
+$slate7: $slate10;
+$slate5: #F3F3F4;
+
+$slateDisabledBackground: fade($slate80, 10%);
+
+$blue: #0f76ac;
+$blue60: #43ace4;
+$blue30: #b8dff5;
+$blue10: #e7f4fb;
+$blue7: #f6fafc;
+$blueText: #0b5278;
+
+$blueFade5: fade($blue, 5%);
+$blueFade10: fade($blue, 10%);
+$blueDarken10: darken($blue, 10%);
+
+$green: #65b922;
+$green30: #d9f9bf;
+$green10: #f2fde9;
+$greenText: #3d8704;
+
+$colorRed: #e44444; // This will be renamed to red when the colors get changed
+$red30: #ffc9c9;
+$red10: #ffeded;
+$redText: #6e0a0a;
+$redDarken10: darken($colorRed, 10%);
+$redFade5: fade($colorRed, 5%);
+
+$yellow: #fabc29;
+$yellow30: #fdeabe;
+$yellow10: #fef8e9;
+$yellowText: #7a5c14;
+
+$colorPurple: #463cb2; // This will be renamed to purple when the colors get changed
+$purple30: #cccaf6;
+$purple10: #eeedfc;
+$purpleText: #322b80;
+
+$teal: #48c4bb;
+$teal30: #cdfcf9;
+$teal10: #e6faf9;
+$tealText: #36918b;
+
+// Blue
+$skyBlue: #4EB4E2;
+$denim: #0F76AC;
+$dusk: #00507A;
+$midnightBlue: darken($dusk, 10%);                  // #002f47
+$polar: #E4F2F9;
+$blizzard: #F5F8FB;
+
+// Blue-grey
+$graphite: #465F6E;
+$porcelain: fade($graphite, 7%);
+$graphite75: fade($graphite, 75%);
+$graphite50: fade($graphite, 50%);
+$graphite40: fade($graphite, 40%);
+$graphite25: fade($graphite, 25%);
+$graphite10: fade($graphite, 10%);
+
+// Sortable container used in agenda & survey builder
+$sortableContainerLineColour: $slate30;
+
+// Green
+$lime: #65B922;
+$grass: darken($lime, 8);                          // #52971c
+$peppermint: desaturate(lighten($lime, 44), 20);   // #dceecd                    // #f7fdf2
+$dark-green: #003100;
+$grey-green: #d8d8d8;
+
+// Red
+$red: #E44E4E;
+$crimson: darken($red, 20%);                        // #b11b1b
+
+// colorPurple
+$purple: #440480;
+$lightPurple: #f7edfc;
+$purple15: fade($purple, 15);
+$purple15Flat: tint($purple, 85%);                  // #e4d9eb;
+
+// Orange
+$orange: #f6a623;
+
+// Yellow
+$gold: #E2AB19;
+$caution: #FFD339;
+$yellow10: #fef8e9;
+$yellowText: #7a5c14;
+
+// Grey
+$black: #000;
+$white: #fff;
+
+$grey85: fade($black, 85%);
+$grey75: fade($black, 75%);
+$grey60: fade($black, 60%);
+$grey40: fade($black, 40%);
+$grey25: fade($black, 25%);
+$grey10: fade($black, 10%);
+$grey3: fade($black, 3%);
+
+// Non-alpha greys
+$greyFlat: #808080;
+$grey85Flat: #222;
+$grey75Flat: #404040;
+$grey60Flat: #666;
+$grey40Flat: #999;
+$grey25Flat: #bfbfbf;
+$grey10Flat: #e6e6e6;
+$grey3Flat: #f9f9f9;
+
+// *** Theme + UI element definitions ************************* //
+// ************************************************************ //
+
+// General app colours
+$appBackgroundColor: #fafafa;
+
+// Content containers
+$primaryBackground: $white;                             // #ffffff
+$primaryBorder: $slate10;      // #d1e3ec
+$primaryBorderLight: $slate7;          // #e1edf3
+$secondaryBackground: $appBackgroundColor;                           // #f5f8fb
+$secondaryBorder: $primaryBorder;                       // #d1e3ec
+$secondaryBorderLight: $primaryBorderLight;      // #e1edf3
+$accentBackground: $polar;                              // #e4f2f9
+$accentBorder: darken($primaryBorder, 3);               // #c7dde7
+
+// Text and Links
+$slateText: $slate;                     // $kf probably kill this, replace with $textColor
+$slateTextSecondary: $slate80;          // $kf and this too, use $secondaryTextColor
+
+$textColor: $slate;
+$secondaryTextColor: $slate80;
+$disabledTextColor: $slate60;
+$linkColor: $blue;
+$linkColorHover: $blue;
+$placeholderColor: $slate60;
+
+// Objective types
+$personalObjectiveColor: $denim;
+$deptObjectiveColor: $grass;
+$orgObjectiveColor: $purple;
+
+// Objective Status
+$assessmentOnColor: $lime;
+$assessmentOffColor: $red;
+$assessmentNoneColor: $grey25;
+
+// Border
+$avatarBorderColor: $white;
+
+// Alerts (updated user profile, etc)
+$warningText:             darken($gold, 25%);
+$warningBackground:       tint($gold, 90%);
+// $warningBorder:           darken(adjust($warningBackground, -10), 3%);
+
+$errorText:               $red;
+$errorBackground:         tint($red, 90%);
+// $errorBorder:             darken(adjust($errorBackground, -10), 3%);
+
+$successText:             $grass;
+$successBackground:       $peppermint;
+// $successBorder:           darken(adjust($successBackground, -10), 5%);
+
+$infoText:                $dusk;
+$infoBackground:          $polar;
+// $infoBorder:              darken(adjust($infoBackground, -10), 7%);
+
+$highlightBackground:     #f6fbfd;
+$highlightBorder:         #b0d4f0;
+
+// Context chooser
+$contextChooserBackground: fade($skyBlue, 20%);
+$contextChooserBackgroundHover: fade($skyBlue, 30%);
+
+// Password strength meter
+$passwordStrongColour: $lime;
+$passwordMediumColour: $gold;
+$passwordWeakColour: $red;
+$passwordStrongFill: $passwordStrongColour;
+$passwordStrongOutline: $passwordStrongColour;
+$passwordMediumStrongFill: tint($passwordStrongColour, 80%);
+$passwordMediumStrongOutline: tint($passwordStrongColour, 40%);
+$passwordMediumFill: tint($passwordMediumColour, 80%);
+$passwordMediumOutline: tint($passwordMediumColour, 40%);
+$passwordWeakFill: tint($passwordWeakColour, 80%);
+$passwordWeakOutline: tint($passwordWeakColour, 40%);
+
+// sequential colours
+$sequential1: #f6fcf9;
+$sequential2: #e1f5f1;
+$sequential3: #bfe6e1;
+$sequential4: #9edad2;
+$sequential5: #8ebbc8;
+$sequential6: #6775b1;
+$sequential7: #300e80;
+$sequential8: #2f0e80;
+$sequential9: #1b054d;
+
+// graphs
+$graph1: #1abdb2;
+$graph2: #5055a6;
+$graph3: #fbc475;
+$graph4: #fa7594;
+$graph5: #98d2fe;
+
+$graph1Highlight: #8cded8;
+$graph2Highlight: #a7aad2;
+$graph3Highlight: #fde1ba;
+$graph4Highlight: #fcbac9;
+$graph5Highlight: #cbe8fe;
+
+$dropdownButtonDivider: fade($white, 25%);
+
+$focusedOutlineColor: fade($blue60, 55%);

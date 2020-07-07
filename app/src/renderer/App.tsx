@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Network from './pages/network';
 
+import './app.scss';
+
 
 const App: React.FC = () : JSX.Element=> {
     return (

@@ -1,0 +1,27 @@
+@import '/src/renderer/utils/style';
+
+// To allow for less mixin use
+@mixin text {
+    text-transform: none;
+    margin: 0;
+    line-height: $lineHeightBase;
+    @include open-sans;
+    color: $slateText;
+    font-size: $fontSizeBase;
+    word-break: break-word;
+}
+
+.text--large {
+    @include text;
+    font-size: $fontSizeLarge;
+}
+.text--small {
+    @include text;
+    line-height: $lineHeightSmall;
+    font-size: $fontSizeSmall;
+}
+.text--micro {
+    @include text;
+    line-height: $lineHeightMicro;
+    font-size: $fontSizeMicro;
+}

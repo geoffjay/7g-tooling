@@ -1,7 +1,17 @@
 {
     "extends": "./node_modules/electron-webpack/tsconfig-base.json",
     "compilerOptions": {
-        "jsx": "react"
+        "allowJs": true,
+        "baseUrl": "./",
+        "jsx": "react",
+        "noImplicitAny": false,
+        "outDir": "dist",
+        "paths": {
+            "7g-utils/*": ["/src/renderer/utils/*"],
+            "7g-components/*": ["/src/renderer/components/*"],
+            "7g-pages/*": ["/src/renderer/pages/*"],
+        },
     },
-    "exclude": ["./node_modules", "./dist"],
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist", "./webpack.config.js"],
 }
