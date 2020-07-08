@@ -27,15 +27,6 @@ func init() {
 	Command.PersistentFlags().IntVarP(&id, "id", "", 0, "objective ID")
 }
 
-type response interface {
-}
-
-//type response struct {
-//	pk      int
-//	private bool
-//	weight  int
-//}
-
 func getObjective(cmd *cobra.Command, args []string) {
 	logrus.Debug("gql > get-objective")
 	logrus.Debugf("gql > get-objective > %d", id)

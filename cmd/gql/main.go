@@ -13,8 +13,11 @@ var (
 	}
 )
 
+type response interface{}
+
 func init() {
 	Command.AddCommand(getObjectiveCmd)
+	Command.AddCommand(createObjectiveCmd)
 }
 
 func gql(cmd *cobra.Command, args []string) {
