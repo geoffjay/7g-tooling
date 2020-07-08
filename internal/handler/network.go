@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/geoffjay/7g-tooling/internal/proc"
+
 	"github.com/geoffjay/7g-tooling/pkg/config"
 
 	"github.com/gin-gonic/gin"
@@ -44,6 +46,12 @@ func PopulateNetwork(db *gorm.DB) gin.HandlerFunc {
 
 		populate, err := config.LoadPopulate()
 		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		processor := proc.NewPopulateProcessor(db)
+		if err = processor.ProcessConfig(populate); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}

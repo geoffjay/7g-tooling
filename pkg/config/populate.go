@@ -12,18 +12,18 @@ import (
 )
 
 type Populate struct {
-	Locations         []model.Location         `mapstructure:"locations"`
-	Departments       []model.Department       `mapstructure:"departments"`
-	Users             []model.User             `mapstructure:"users"`
-	Objectives        []model.Objective        `mapstructure:"objectives"`
-	OneOnOnes         []model.OneOnOne         `mapstructure:"one-on-ones"`
-	OneOnOneTemplates []model.OneOnOneTemplate `mapstructure:"one-on-one-templates"`
-	RecognitionBadges []model.RecognitionBadge `mapstructure:"recognition-badges"`
-	Recognitions      []model.Recognition      `mapstructure:"recognitions"`
-	CompetencyLevels  []model.Level            `mapstructure:"competency-levels"`
-	Competencies      []model.Competency       `mapstructure:"competencies"`
-	Roles             []model.Role             `mapstructure:"roles"`
-	RoleTemplates     []model.RoleTemplate     `mapstructure:"role-templates"`
+	Locations         []*model.Location         `mapstructure:"locations"`
+	Departments       []*model.Department       `mapstructure:"departments"`
+	Users             []*model.User             `mapstructure:"users"`
+	Objectives        []*model.Objective        `mapstructure:"objectives"`
+	OneOnOnes         []*model.OneOnOne         `mapstructure:"one-on-ones"`
+	OneOnOneTemplates []*model.OneOnOneTemplate `mapstructure:"one-on-one-templates"`
+	RecognitionBadges []*model.RecognitionBadge `mapstructure:"recognition-badges"`
+	Recognitions      []*model.Recognition      `mapstructure:"recognitions"`
+	CompetencyLevels  []*model.Level            `mapstructure:"competency-levels"`
+	Competencies      []*model.Competency       `mapstructure:"competencies"`
+	Roles             []*model.Role             `mapstructure:"roles"`
+	RoleTemplates     []*model.RoleTemplate     `mapstructure:"role-templates"`
 }
 
 func LoadPopulate() (*Populate, error) {
@@ -64,6 +64,6 @@ func (p *Populate) Summary() map[string]int {
 		"competency-levels":    len(p.CompetencyLevels),
 		"competencies":         len(p.Competencies),
 		"roles":                len(p.Roles),
-		"templates":            len(p.RoleTemplates),
+		"role-templates":       len(p.RoleTemplates),
 	}
 }
