@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import colors from '7g-utils/colors.js';
-import { getBoxComponent, marginPropTypes, marginPropKeys } from '../box';
+import { getBoxComponent, marginPropTypes, marginPropKeys } from '7g-components/box';
 
 
 const Box = getBoxComponent(marginPropKeys);
