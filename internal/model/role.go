@@ -59,6 +59,10 @@ func (store *RoleStore) Save(role *Role) (err error) {
 	return
 }
 
+func (store *RoleStore) Flush() (err error) {
+	return store.db.Model(&Role{}).Delete(&Role{}).Error
+}
+
 func NewRoleTemplateStore(db *gorm.DB) *RoleTemplateStore {
 	return &RoleTemplateStore{
 		db: db,
@@ -70,4 +74,8 @@ func (store *RoleTemplateStore) Save(template *RoleTemplate) (err error) {
 		logrus.Panic(err)
 	}
 	return
+}
+
+func (store *RoleTemplateStore) Flush() (err error) {
+	return store.db.Model(&RoleTemplate{}).Delete(&RoleTemplate{}).Error
 }

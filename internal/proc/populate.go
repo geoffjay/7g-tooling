@@ -25,8 +25,9 @@ func NewPopulateProcessor(db *gorm.DB) *populateProcessor {
 			"recognitions":         model.NewRecognitionStore(db),
 			"competency-level":     model.NewLevelStore(db),
 			"competencies":         model.NewCompetencyStore(db),
-			"roles":                model.NewRoleStore(db),
-			"role-templates":       model.NewRoleTemplateStore(db),
+			//"reviews":              model.NewReviewStore(db),
+			"roles":          model.NewRoleStore(db),
+			"role-templates": model.NewRoleTemplateStore(db),
 		},
 	}
 }
@@ -53,10 +54,12 @@ func (p *populateProcessor) ProcessConfig(c *config.Populate) (err error) {
 			err = p.populateRecognitionBadges(c.RecognitionBadges)
 		case "recognitions":
 			err = p.populateRecognitions(c.Recognitions)
-		case "compentency-levels":
+		case "competency-levels":
 			err = p.populateLevels(c.CompetencyLevels)
 		case "competencies":
 			err = p.populateCompetencies(c.Competencies)
+		//case "reviews":
+		//	err = p.populateReviews(c.Reviews)
 		case "roles":
 			err = p.populateRoles(c.Roles)
 		case "role-templates":
@@ -176,8 +179,19 @@ func (p *populateProcessor) populateCompetencies(competencies []*model.Competenc
 	return nil
 }
 
+func (p *populateProcessor) populateReviews(reviews []*model.Review) error {
+	logrus.Debugf("process %d reviews", len(reviews))
+	store := p.stores["reviews"].(*model.ReviewStore)
+	for _, review := range reviews {
+		if err := store.Save(review); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (p *populateProcessor) populateRoles(roles []*model.Role) error {
-	logrus.Debugf("process %d %s", len(roles))
+	logrus.Debugf("process %d roles", len(roles))
 	store := p.stores["roles"].(*model.RoleStore)
 	for _, role := range roles {
 		if err := store.Save(role); err != nil {

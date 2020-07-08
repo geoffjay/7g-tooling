@@ -40,3 +40,7 @@ func (store *UserStore) Save(user *User) (err error) {
 	}
 	return
 }
+
+func (store *UserStore) Flush() (err error) {
+	return store.db.Model(&User{}).Delete(&User{}).Error
+}

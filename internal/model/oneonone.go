@@ -61,6 +61,10 @@ func (store *OneOnOneStore) Save(oneonone *OneOnOne) (err error) {
 	return
 }
 
+func (store *OneOnOneStore) Flush() (err error) {
+	return store.db.Model(&OneOnOne{}).Delete(&OneOnOne{}).Error
+}
+
 func NewOneOnOneTemplateStore(db *gorm.DB) *OneOnOneTemplateStore {
 	return &OneOnOneTemplateStore{
 		db: db,
@@ -72,4 +76,8 @@ func (store *OneOnOneTemplateStore) Save(template *OneOnOneTemplate) (err error)
 		logrus.Panic(err)
 	}
 	return
+}
+
+func (store *OneOnOneTemplateStore) Flush() (err error) {
+	return store.db.Model(&OneOnOneTemplate{}).Delete(&OneOnOneTemplate{}).Error
 }

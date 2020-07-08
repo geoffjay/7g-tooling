@@ -50,3 +50,7 @@ func (store *ObjectiveStore) Save(objective *Objective) (err error) {
 	}
 	return
 }
+
+func (store *ObjectiveStore) Flush() (err error) {
+	return store.db.Model(&Objective{}).Delete(&Objective{}).Error
+}
