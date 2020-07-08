@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Network from './pages/network';
+import Network from '7g-pages/network';
 
 import './app.scss';
 

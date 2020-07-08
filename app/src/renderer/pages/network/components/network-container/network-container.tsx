@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
 
-import axios from '../../../../utils/axios';
+import axios from '7g-utils/axios';
+import Title from '7g-components/title/title';
+import Text from '7g-components/text/text';
+import Box from '7g-components/box/box';
+import Button from '7g-components/button/button';
+
 import FilePicker from '../file-picker/';
-import Title from '../../../../components/title/title';
-import Text from '../../../../components/text/text';
-import Box from '../../../../components/box/box';
-import Button from '../../../../components/button/button';
 
 
 const NetworkContainer: FunctionComponent<NetworkContainerProps> = (): JSX.Element => {

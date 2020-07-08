@@ -5,7 +5,6 @@
         [
             "module-resolver",
             {
-                "root": ["./"],
                 "alias": {
                     "7g-utils": "/src/renderer/utils",
                     "7g-components": "/src/renderer/components",

@@ -7,7 +7,7 @@ module.exports = {
             '7g-components': __dirname + '/src/renderer/components',
             '7g-pages': __dirname + '/src/renderer/pages'
         },
-        extensions: [ '.js', '.jsx', '.ts', '.tsx']
+        extensions: ['.ts', '.tsx', '.js', '.jsx']
     },
     module: {
         rules: [

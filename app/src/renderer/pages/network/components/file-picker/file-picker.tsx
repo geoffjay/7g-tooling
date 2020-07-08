@@ -1,8 +1,8 @@
 import React from 'react';
 import { remote } from 'electron';
 
-import Input from '../../../../components/input/input';
-import Button from '../../../../components/button/button';
+import Input from '7g-components/input/input';
+import Button from '7g-components/button/button';
 
 const FilePicker: React.FC<FilePickerProps> = ({ onSelectFile, selectedFilePath }: FilePickerProps) => {
     const openFileSelector = (): void => {
