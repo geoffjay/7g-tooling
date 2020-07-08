@@ -23,7 +23,7 @@ func NewPopulateProcessor(db *gorm.DB) *populateProcessor {
 			"one-on-one-templates": model.NewOneOnOneTemplateStore(db),
 			"recognition-badges":   model.NewRecognitionBadgeStore(db),
 			"recognitions":         model.NewRecognitionStore(db),
-			"competency-level":     model.NewLevelStore(db),
+			"competency-levels":    model.NewLevelStore(db),
 			"competencies":         model.NewCompetencyStore(db),
 			//"reviews":              model.NewReviewStore(db),
 			"roles":          model.NewRoleStore(db),
@@ -159,7 +159,7 @@ func (p *populateProcessor) populateRecognitions(recognitions []*model.Recogniti
 
 func (p *populateProcessor) populateLevels(levels []*model.Level) error {
 	logrus.Debugf("process %d levels", len(levels))
-	store := p.stores["levels"].(*model.LevelStore)
+	store := p.stores["competency-levels"].(*model.LevelStore)
 	for _, level := range levels {
 		if err := store.Save(level); err != nil {
 			return err
