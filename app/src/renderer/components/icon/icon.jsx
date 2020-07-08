@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import colors from '../../utils/colors.js';
+import colors from '7g-utils/colors.js';
 import { getBoxComponent, marginPropTypes, marginPropKeys } from '../box';
 
 

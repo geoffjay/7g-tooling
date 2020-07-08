@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import Icon from '../icon/icon.jsx';
+import Icon from '7g-components/icon/icon.jsx';
 
 
 const ButtonIcon = ({ icon, hasText }) => {

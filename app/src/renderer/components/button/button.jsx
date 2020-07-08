@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import _omit from 'lodash/omit';
 
-import Link from '../link/link.jsx';
-import DotLoader from '../dot-loader/dot-loader.jsx';
-import { marginPropTypes } from '../box';
+import Link from '7g-components/link/link.jsx';
+import DotLoader from '7g-components/dot-loader/dot-loader.jsx';
+import { marginPropTypes } from '7g-components/box';
 
 import ButtonIcon from './button-icon.jsx';
 import ButtonBase, { buttonBaseClassName } from './button-base.jsx';

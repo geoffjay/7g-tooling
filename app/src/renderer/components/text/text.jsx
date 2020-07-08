@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 
-import colors from '../../utils/colors.js';
+import colors from '7g-utils/colors.js';
 
 import { propTypes, defaultProps } from './text-proptypes.js';
 

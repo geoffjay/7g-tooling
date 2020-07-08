@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { getBoxComponent, marginPropTypes, marginPropKeys } from '../box';
+import { getBoxComponent, marginPropTypes, marginPropKeys } from '7g-components/box';
 
 import { propTypes as buttonPropTypes, defaultProps } from './button-prop-types.js';
 

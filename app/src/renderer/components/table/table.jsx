@@ -3,7 +3,7 @@ import _isString from 'lodash/isString';
 import _range from 'lodash/range';
 import classNames from 'classnames';
 
-import Icon from '../icon/icon.jsx';
+import Icon from '7g-components/icon/icon.jsx';
 // TODO: skeleton stuff
 // import Skeleton from '7g-components/skeleton/skeleton.jsx';
 

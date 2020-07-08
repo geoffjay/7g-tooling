@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import defaultTo from 'lodash/defaultTo';
 import omit from 'lodash/omit';
 
-import colors from '../../utils/colors';
+import colors from '7g-utils/colors';
 
 import { propTypes, defaultProps } from './prop-types.js';
 import { splitBoxProps } from './utils';

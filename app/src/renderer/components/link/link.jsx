@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import omit from 'lodash/omit';
 
-import { getBoxComponent, marginPropTypes, marginPropKeys, flexPropKeys, flexPropTypes } from '../box';
+import { getBoxComponent, marginPropTypes, marginPropKeys, flexPropKeys, flexPropTypes } from '7g-components/box';
 
 
 const Box = getBoxComponent([ ...marginPropKeys, ...flexPropKeys ]);

@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import utils from '../../utils/utils';
+import utils from '7g-utils/utils';
 
 
 class InputBase extends PureComponent {

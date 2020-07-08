@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Box from '../box/box.jsx';
-import Text from '../text/text.jsx';
+import Box from '7g-components/box/box.jsx';
+import Text from '7g-components/text/text.jsx';
 
 
 const TableEmptyMessage = ({ children }) => {
