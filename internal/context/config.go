@@ -23,7 +23,8 @@ type logging struct {
 
 // Configuration for the remote application host
 type remote struct {
-	Address string `mapstructure:"address"`
+	Address   string `mapstructure:"address"`
+	ProfileID int    `mapstructure:"profile-id"`
 }
 
 // Config defines the application configuration
