@@ -4,6 +4,8 @@ tags
 
 .env
 
+data.db
+
 # front-end
 app/dist/
 app/node_modules/

@@ -27,3 +27,7 @@ func (store *DepartmentStore) Save(department *Department) (err error) {
 	}
 	return
 }
+
+func (store *DepartmentStore) Flush() (err error) {
+	return store.db.Model(&Department{}).Delete(&Department{}).Error
+}

@@ -13,7 +13,7 @@ type User struct {
 	Phone             *string
 	ManagerID         int
 	ManagerName       *string
-	State             bool
+	State             *string
 	Title             *string
 	DepartmentsJoined *string
 	LocationsJoined   *string
@@ -39,4 +39,8 @@ func (store *UserStore) Save(user *User) (err error) {
 		logrus.Panic(err)
 	}
 	return
+}
+
+func (store *UserStore) Flush() (err error) {
+	return store.db.Model(&User{}).Delete(&User{}).Error
 }

@@ -27,3 +27,7 @@ func (store *JobStore) Save(job *Job) (err error) {
 	}
 	return
 }
+
+func (store *JobStore) Flush() (err error) {
+	return store.db.Model(&Job{}).Delete(&Job{}).Error
+}

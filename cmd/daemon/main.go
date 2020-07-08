@@ -2,12 +2,15 @@ package daemon
 
 import (
 	"github.com/geoffjay/7g-tooling/internal/service"
+	"github.com/spf13/viper"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
 
 var (
+	flush bool
+
 	Command = &cobra.Command{
 		Use:   "daemon",
 		Short: "Control the 7Geese tooling service",
@@ -16,6 +19,10 @@ var (
 )
 
 func init() {
+	Command.PersistentFlags().BoolVarP(&flush, "flush", "f", false, "flush all database tables")
+	_ = viper.BindPFlag("flush", Command.PersistentFlags().Lookup("flush"))
+	viper.SetDefault("flush", false)
+
 	Command.AddCommand(startCmd)
 	Command.AddCommand(stopCmd)
 	Command.AddCommand(statusCmd)
