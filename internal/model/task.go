@@ -35,7 +35,8 @@ func (taskType TaskType) Value() (driver.Value, error) { return int64(taskType),
 
 type Task struct {
 	BaseModelSeq
-	Type TaskType `gorm:"type:integer"`
+	Type  TaskType `gorm:"type:integer"`
+	JobID int
 }
 
 type TaskStore struct {

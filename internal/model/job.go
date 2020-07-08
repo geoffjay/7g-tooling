@@ -8,7 +8,7 @@ import (
 type Job struct {
 	BaseModelSeq
 	Name  *string
-	Tasks []Task `gorm:"many2many:job_tasks;association_autoupdate:false;association_autocreate:false"`
+	Tasks []Task `gorm:"ForeignKey:JobID"`
 }
 
 type JobStore struct {
