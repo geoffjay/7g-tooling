@@ -3,11 +3,11 @@
 module.exports = {
     resolve: {
         alias: {
-            '7g-utils': __dirname +  '/src/renderer/utils',
+            '7g-utils': __dirname + '/src/renderer/utils',
             '7g-components': __dirname + '/src/renderer/components',
             '7g-pages': __dirname + '/src/renderer/pages'
         },
-        extensions: ['.ts', '.tsx', '.js', '.jsx']
+        extensions: [ '.js', '.jsx', '.ts', '.tsx']
     },
     module: {
         rules: [

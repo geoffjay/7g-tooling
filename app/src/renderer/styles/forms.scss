@@ -640,6 +640,7 @@ textarea[readonly] {
     color: #333333;
     text-align: center;
     vertical-align: middle;
+    // TODO: figure this out
     // #gradient.vertical($primaryBackground, $grey10Flat);
     border-color: $grey10 $grey10 $grey25;
     border: 1px solid #ccc;
@@ -1586,7 +1587,8 @@ label.sg-label {
             display: block;
             height: 100%;
             width: 100%;
-            background: url('../../img/checkbox-checkmark.svg') center center no-repeat;
+            // TODO: fix this
+            // background: url('../../img/checkbox-checkmark.svg') center center no-repeat;
             background-size: contain;
             transform: scale(0);
             transition: 0.2s;

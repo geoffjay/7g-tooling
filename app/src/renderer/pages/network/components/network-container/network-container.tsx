@@ -31,7 +31,7 @@ const NetworkContainer: FunctionComponent<NetworkContainerProps> = (): JSX.Eleme
                 <table/>
             </Box>
             <Box justifyContent="flex-end">
-                <Button.Filled onClick={handleDeployFile} text="Deploy file" />
+                <Button.Filled isDisabled={!selectedFilePath} onClick={handleDeployFile} text="Deploy file" />
             </Box>
         </Box>
     );

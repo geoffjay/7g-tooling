@@ -4,6 +4,7 @@ import _range from 'lodash/range';
 import classNames from 'classnames';
 
 import Icon from '../icon/icon.jsx';
+// TODO: skeleton stuff
 // import Skeleton from '7g-components/skeleton/skeleton.jsx';
 
 import {
