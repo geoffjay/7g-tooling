@@ -16,6 +16,11 @@ var (
 type response interface{}
 
 func init() {
+	// Create and update mutations
+	Command.AddCommand(createUserProfileCmd)
+	Command.AddCommand(createStaticAPITokenCmd)
+
+	// Read queries
 	Command.AddCommand(getObjectiveCmd)
 	Command.AddCommand(createObjectiveCmd)
 }

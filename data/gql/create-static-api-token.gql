@@ -1,0 +1,10 @@
+# add for myself: {"scopes": ["all"]}
+# add for someone else: {"scopes": ["all"], "forProfile": 381}
+
+mutation ($scopes: [String!]!, $forProfile: Int) {
+  createStaticApiToken(scopes: $scopes, forProfile: $forProfile) {
+    token {
+      key
+    }
+  }
+}
