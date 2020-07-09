@@ -1,6 +1,8 @@
 package gql
 
 import (
+	"fmt"
+
 	"github.com/geoffjay/7g-tooling/internal/client"
 	gcontext "github.com/geoffjay/7g-tooling/internal/context"
 
@@ -53,5 +55,10 @@ func createUserProfile(cmd *cobra.Command, args []string) {
 	variables := map[string]interface{}{
 		"userProfile": userProfile,
 	}
-	client.Query("create-user-profile", variables, config)
+	res, err := client.Query("create-user-profile", variables, config)
+	if err != nil {
+		logrus.Error(err)
+	}
+
+	fmt.Print(client.ResponseJSON(res))
 }

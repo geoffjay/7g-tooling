@@ -1,13 +1,11 @@
 package gql
 
 import (
-	"context"
 	"fmt"
 
-	bin "github.com/geoffjay/7g-tooling/data/gql"
+	"github.com/geoffjay/7g-tooling/internal/client"
 	gcontext "github.com/geoffjay/7g-tooling/internal/context"
 
-	"github.com/machinebox/graphql"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
@@ -36,23 +34,17 @@ func createObjective(cmd *cobra.Command, args []string) {
 		logrus.Fatal(err)
 	}
 
-	query := bin.GetQuery("create-objective")
-	logrus.Debugf("Execute query:\n%s", query)
-
 	objectiveInput := map[string]interface{}{
 		"name":          name,
 		"objectiveType": objectiveType,
 	}
-
-	client := graphql.NewClient("http://localhost:8000/graphql")
-	req := graphql.NewRequest(query)
-	req.Var("objective", objectiveInput)
-	bearer := fmt.Sprintf("Bearer %s", config.APIKey)
-	req.Header.Set("Authorization", bearer)
-	ctx := context.Background()
-	var res response
-	if err := client.Run(ctx, req, &res); err != nil {
-		logrus.Fatal(err)
+	variables := map[string]interface{}{
+		"objective": objectiveInput,
 	}
-	logrus.Info(res)
+	res, err := client.Query("create-objective", variables, config)
+	if err != nil {
+		logrus.Error(err)
+	}
+
+	fmt.Print(client.ResponseJSON(res))
 }

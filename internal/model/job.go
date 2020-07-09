@@ -6,7 +6,7 @@ import (
 )
 
 type Job struct {
-	BaseModelSeq
+	gorm.Model
 	Name  *string
 	Tasks []Task `gorm:"ForeignKey:JobID"`
 }

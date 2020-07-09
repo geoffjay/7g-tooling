@@ -34,7 +34,7 @@ func (taskType *TaskType) Scan(value interface{}) error {
 func (taskType TaskType) Value() (driver.Value, error) { return int64(taskType), nil }
 
 type Task struct {
-	BaseModelSeq
+	gorm.Model
 	Type  TaskType `gorm:"type:integer"`
 	JobID int
 }

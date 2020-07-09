@@ -6,7 +6,8 @@ import (
 )
 
 type Department struct {
-	BaseModelSeq
+	gorm.Model
+	SgID int
 	Name *string
 	Lead *string
 }

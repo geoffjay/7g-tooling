@@ -6,7 +6,8 @@ import (
 )
 
 type Competency struct {
-	BaseModelSeq
+	gorm.Model
+	SgID        int
 	Title       *string
 	Description *string `gorm:"size:1024"`
 	//Core Competency
@@ -18,7 +19,8 @@ type CompetencyStore struct {
 }
 
 type Level struct {
-	BaseModelSeq
+	gorm.Model
+	SgID        int
 	Name        *string
 	Description *string `gorm:"size:1024"`
 }
