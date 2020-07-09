@@ -13,6 +13,7 @@ app/.yarnclean
 
 # generated static resources
 data/gql/bindata.go
+data/init/bindata.go
 
 # generated documentation files
 docs/docs.go
