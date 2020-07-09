@@ -73,6 +73,30 @@ objectives:
         start-value: 1
 
 one-on-one-templates:
+  -
+    name: Weekly
+    description: Weekly template
+    frequency: weekly
+    questions:
+      -
+        name: A weekly question
+        description: Something to ask every week
+  -
+    name: Monthly
+    description: Monthly template
+    frequency: monthly
+    questions:
+      -
+        name: A monthly question
+        description: Something to ask every month
+  -
+    name: Yearly
+    description: Yearly template
+    frequency: yearly
+    questions:
+      -
+        name: A yearly question
+        description: Something to ask every year
 
 recognition-badges:
   -
@@ -83,9 +107,50 @@ recognition-badges:
     description: Helps with all the bar
 
 competency-levels:
+  -
+    name: Accountability General
+    description: Listens gud
+  -
+    name: Accountability Operational
+    description: Does gud
+  -
+    name: Accountability Tactical
+    description: Moves gud
+  -
+    name: Accountability Strategic
+    description: Thinks gud
 
 compentencies:
+  -
+    title: Accountability
+    description: Is accountable
+    core-competency: Yes
+    levels:
+      - name: Accountability General
+      - name: Accountability Operational
+      - name: Accountability Tactical
+      - name: Accountability Strategic
 
-roles:
+role-responsibilities:
+  -
+    title: Do things
+    description:
+  -
+    title: Do moar things
+    description:
+  -
+    title: Do all the things
+    description:
+  -
+    title: Tell other people to do things
+    description:
 
 role-templates:
+  -
+    name: Software Devloper
+    description: Makes things
+    responsibilities:
+      - title: Do things
+      - title: Do moar things
+      - title: Do all the things
+      - title: Tell other people to do things
