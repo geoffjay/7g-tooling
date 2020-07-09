@@ -28,9 +28,8 @@ func Query(name string, variables map[string]interface{}, config *gcontext.Confi
 	}
 	bearer := fmt.Sprintf("Bearer %s", apiKey)
 	req.Header.Set("Authorization", bearer)
-	ctx := context.Background()
 	var res Response
-	if err := client.Run(ctx, req, &res); err != nil {
+	if err := client.Run(context.Background(), req, &res); err != nil {
 		return res, err
 	}
 
@@ -79,9 +78,8 @@ func GetLocationIDByName(name string) (int, error) {
 	req := graphql.NewRequest(query)
 	bearer := fmt.Sprintf("Bearer %s", apiKey)
 	req.Header.Set("Authorization", bearer)
-	ctx := context.Background()
 	var res locationResponse
-	err := client.Run(ctx, req, &res)
+	err := client.Run(context.Background(), req, &res)
 	if err != nil {
 		return -1, err
 	}
@@ -106,11 +104,62 @@ func GetDepartmentIDByName(name string) (int, error) {
 	req := graphql.NewRequest(query)
 	bearer := fmt.Sprintf("Bearer %s", apiKey)
 	req.Header.Set("Authorization", bearer)
-	ctx := context.Background()
 	var res departmentResponse
-	err := client.Run(ctx, req, &res)
+	err := client.Run(context.Background(), req, &res)
 	if err != nil {
 		return -1, err
 	}
 	return res.Teams.Edges[0].Node.Pk, nil
+}
+
+type userResponse struct {
+	Profiles struct {
+		Edges []struct {
+			Node struct {
+				Pk int
+			}
+		}
+	}
+}
+
+func GetUserIDByEmail(email string) (int, error) {
+	query := fmt.Sprintf(`query{profiles(first:1, user_Email:"%s"){edges{node{pk}}}}`, email)
+	apiKey, address := getEnv(nil)
+
+	client := graphql.NewClient(address)
+	req := graphql.NewRequest(query)
+	bearer := fmt.Sprintf("Bearer %s", apiKey)
+	req.Header.Set("Authorization", bearer)
+	var res userResponse
+	err := client.Run(context.Background(), req, &res)
+	if err != nil {
+		return -1, err
+	}
+	return res.Profiles.Edges[0].Node.Pk, nil
+}
+
+type objectiveResponse struct {
+	Objectives struct {
+		Edges []struct {
+			Node struct {
+				Pk int
+			}
+		}
+	}
+}
+
+func GetObjectiveIDByName(name string) (int, error) {
+	query := fmt.Sprintf(`query{objectives(last:1, name:"%s"){edges{node{pk}}}}`, name)
+	apiKey, address := getEnv(nil)
+
+	client := graphql.NewClient(address)
+	req := graphql.NewRequest(query)
+	bearer := fmt.Sprintf("Bearer %s", apiKey)
+	req.Header.Set("Authorization", bearer)
+	var res objectiveResponse
+	err := client.Run(context.Background(), req, &res)
+	if err != nil {
+		return -1, err
+	}
+	return res.Objectives.Edges[0].Node.Pk, nil
 }

@@ -8,8 +8,8 @@ import (
 type User struct {
 	gorm.Model
 	SgID              int
-	FirstName         string
-	LastName          string
+	FirstName         string  `mapstructure:"first-name"`
+	LastName          string  `mapstructure:"last-name"`
 	Email             *string `gorm:"unique;not null"`
 	Phone             string
 	ManagerID         int
@@ -36,12 +36,30 @@ func NewUserStore(db *gorm.DB) *UserStore {
 }
 
 func (store *UserStore) Save(user *User) (err error) {
-	if err = store.db.Create(user).Error; err != nil {
-		logrus.Panic(err)
+	if store.HasUserWithEmail(*user.Email) {
+		err = store.db.Save(user).Error
+	} else {
+		if err = store.db.Create(user).Error; err != nil {
+			logrus.Panic(err)
+		}
 	}
 	return
 }
 
 func (store *UserStore) Flush() (err error) {
 	return store.db.Model(&User{}).Delete(&User{}).Error
+}
+
+func (store *UserStore) GetUserByEmail(email string) (user User, err error) {
+	err = store.db.Model(&User{}).Where("email = ?", email).First(&user).Error
+	return
+}
+
+func (store *UserStore) HasUserWithEmail(email string) bool {
+	var users []User
+	err := store.db.Model(&User{}).Where("email LIKE ?", email).Find(&users).Error
+	if gorm.IsRecordNotFoundError(err) {
+		return false
+	}
+	return true
 }
