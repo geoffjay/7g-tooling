@@ -18,6 +18,4 @@ const App: React.FC = () : JSX.Element=> {
     );
 };
 
-// TODO: idk
-// throws overload error if not component not called
-export default <App />;
+export default App;
