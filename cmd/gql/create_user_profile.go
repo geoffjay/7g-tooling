@@ -23,11 +23,11 @@ var (
 )
 
 func init() {
-	createUserProfileCmd.PersistentFlags().StringVarP(&email, "email", "", "", "email address")
-	createUserProfileCmd.PersistentFlags().StringVarP(&firstName, "first-name", "", "", "first name")
-	createUserProfileCmd.PersistentFlags().StringVarP(&lastName, "last-name", "", "", "last name")
-	createUserProfileCmd.PersistentFlags().StringVarP(&position, "position", "", "", "position")
-	createUserProfileCmd.PersistentFlags().StringVarP(&username, "username", "", "", "username")
+	createUserProfileCmd.PersistentFlags().StringVar(&email, "email", "", "email address")
+	createUserProfileCmd.PersistentFlags().StringVar(&firstName, "first-name", "", "first name")
+	createUserProfileCmd.PersistentFlags().StringVar(&lastName, "last-name", "", "last name")
+	createUserProfileCmd.PersistentFlags().StringVar(&position, "position", "", "position")
+	createUserProfileCmd.PersistentFlags().StringVar(&username, "username", "", "username")
 }
 
 func createUserProfile(cmd *cobra.Command, args []string) {
@@ -38,8 +38,11 @@ func createUserProfile(cmd *cobra.Command, args []string) {
 		logrus.Fatal(err)
 	}
 
+	if username == "" {
+		logrus.Panic("A value for `username' is required")
+	}
+
 	// TODO: only add var when != ""
-	// TODO: make username required field
 	userProfile := map[string]interface{}{
 		"email":     email,
 		"firstName": firstName,

@@ -20,8 +20,8 @@ var (
 )
 
 func init() {
-	createStaticAPITokenCmd.PersistentFlags().StringArrayVarP(&scopes, "scopes", "", []string{"all"}, "scopes")
-	createStaticAPITokenCmd.PersistentFlags().IntVarP(&forProfile, "for-profile", "", -1, "create for profile ID")
+	createStaticAPITokenCmd.PersistentFlags().StringArrayVar(&scopes, "scopes", []string{"all"}, "scopes")
+	createStaticAPITokenCmd.PersistentFlags().IntVar(&forProfile, "for-profile", -1, "create for profile ID")
 }
 
 func createStaticAPIToken(cmd *cobra.Command, args []string) {
