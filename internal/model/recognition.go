@@ -6,7 +6,8 @@ import (
 )
 
 type Recognition struct {
-	BaseModelSeq
+	gorm.Model
+	SgID      int
 	Recipient User
 	Provider  User
 	Badge     RecognitionBadge
@@ -18,7 +19,8 @@ type RecognitionStore struct {
 }
 
 type RecognitionBadge struct {
-	BaseModelSeq
+	gorm.Model
+	SgID        int
 	Name        *string
 	Description *string `gorm:"size:1024"`
 }

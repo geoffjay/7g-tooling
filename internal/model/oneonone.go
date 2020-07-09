@@ -6,7 +6,8 @@ import (
 )
 
 type OneOnOne struct {
-	BaseModelSeq
+	gorm.Model
+	SgID int
 	//1-on-1 Template Name
 	//1-on-1 Template ID
 	//1-on-1 Creation Date
@@ -36,7 +37,8 @@ type OneOnOneStore struct {
 }
 
 type OneOnOneTemplate struct {
-	BaseModelSeq
+	gorm.Model
+	SgID        int
 	Name        *string `gorm:"not null"`
 	Description *string `gorm:"size:1024"`
 	//1on1 Frequency

@@ -6,7 +6,8 @@ import (
 )
 
 type Location struct {
-	BaseModelSeq
+	gorm.Model
+	SgID int
 	Name string
 }
 

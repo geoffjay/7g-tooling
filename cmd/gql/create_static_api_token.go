@@ -1,6 +1,8 @@
 package gql
 
 import (
+	"fmt"
+
 	"github.com/geoffjay/7g-tooling/internal/client"
 	gcontext "github.com/geoffjay/7g-tooling/internal/context"
 
@@ -42,5 +44,10 @@ func createStaticAPIToken(cmd *cobra.Command, args []string) {
 	if forProfile != -1 {
 		variables["forProfile"] = forProfile
 	}
-	client.Query("create-static-api-token", variables, config)
+	res, err := client.Query("create-static-api-token", variables, config)
+	if err != nil {
+		logrus.Error(err)
+	}
+
+	fmt.Print(client.ResponseJSON(res))
 }

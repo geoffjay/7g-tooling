@@ -1,6 +1,8 @@
 package gql
 
 import (
+	"fmt"
+
 	"github.com/geoffjay/7g-tooling/internal/client"
 	gcontext "github.com/geoffjay/7g-tooling/internal/context"
 
@@ -19,12 +21,11 @@ var (
 )
 
 func init() {
-	Command.PersistentFlags().IntVarP(&id, "id", "", 0, "objective ID")
+	Command.PersistentFlags().IntVar(&id, "id", 0, "objective ID")
 }
 
 func getObjective(cmd *cobra.Command, args []string) {
 	logrus.Debug("gql > get-objective")
-	logrus.Debugf("gql > get-objective > %d", id)
 
 	config, err := gcontext.LoadConfig(".")
 	if err != nil {
@@ -32,5 +33,10 @@ func getObjective(cmd *cobra.Command, args []string) {
 	}
 
 	variables := map[string]interface{}{"pk": id}
-	client.Query("get-objective", variables, config)
+	res, err := client.Query("get-objective", variables, config)
+	if err != nil {
+		logrus.Error(err)
+	}
+
+	fmt.Print(client.ResponseJSON(res))
 }

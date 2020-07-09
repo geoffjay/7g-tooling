@@ -1,6 +1,8 @@
 package gql
 
 import (
+	"fmt"
+
 	"github.com/geoffjay/7g-tooling/internal/client"
 	gcontext "github.com/geoffjay/7g-tooling/internal/context"
 
@@ -22,7 +24,7 @@ var (
 )
 
 func init() {
-	createOrUpdateTeamCmd.PersistentFlags().IntVar(&teamID, "teamID", 2, "team id")
+	createOrUpdateTeamCmd.PersistentFlags().IntVar(&teamID, "teamID", 1, "team id")
 	createOrUpdateTeamCmd.PersistentFlags().StringVar(&teamName, "name", "Engineering", "team name")
 	createOrUpdateTeamCmd.PersistentFlags().IntSliceVar(&teamProfilesToAdd, "profilesToAdd", []int{1, 2}, "profiles to add in team")
 	createOrUpdateTeamCmd.PersistentFlags().IntVar(&teamParent, "type", 1, "objective type")
@@ -42,5 +44,10 @@ func createOrUpdateTeam(cmd *cobra.Command, args []string) {
 		"profilesToAdd": teamProfilesToAdd,
 		"parent":        teamParent,
 	}
-	client.Query("create-or-update-team", variables, config)
+	res, err := client.Query("create-or-update-team", variables, config)
+	if err != nil {
+		logrus.Error(err)
+	}
+
+	fmt.Print(client.ResponseJSON(res))
 }

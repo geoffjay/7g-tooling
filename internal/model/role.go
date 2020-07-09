@@ -6,7 +6,8 @@ import (
 )
 
 type Role struct {
-	BaseModelSeq
+	gorm.Model
+	SgID int
 	Name string
 }
 
@@ -15,7 +16,8 @@ type RoleStore struct {
 }
 
 type RoleTemplate struct {
-	BaseModelSeq
+	gorm.Model
+	SgID int
 	Name string
 	//Description
 	//Responsibility 1 Title

@@ -1,9 +1,7 @@
 locations:
   -
-    id: 1
     name: East
   -
-    id: 2
     name: West
 
 departments:
@@ -18,7 +16,7 @@ users:
   -
     first-name: Bob
     last-name: Ross
-    email: bob@ross.com
+    email: bob@7geese.com
     phone: 555-123-4567
     manager: Happy Trees
     state: active

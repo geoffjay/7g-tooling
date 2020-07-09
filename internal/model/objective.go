@@ -6,7 +6,8 @@ import (
 )
 
 type Objective struct {
-	BaseModelSeq
+	gorm.Model
+	SgID        int
 	Name        *string `gorm:"not null"`
 	Type        *string
 	Description *string `gorm:"size:1024"`

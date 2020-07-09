@@ -76,7 +76,17 @@ func (p *populateProcessor) populateLocations(locations []*model.Location) error
 	store := p.stores["locations"].(*model.LocationStore)
 	for _, location := range locations {
 		variables := tf.LocationToGraphQLVars(location)
-		client.Query("create-or-update-location", variables, nil)
+		if res, err := client.Query("create-or-update-location", variables, nil); err != nil {
+			if err.Error() == "graphql: A location with this name already exists" {
+				logrus.Debug(res)
+				logrus.Error(err)
+			} else {
+				return err
+			}
+		}
+		// TODO: handle error or invalid response
+		pk, _ := client.GetLocationIDByName(location.Name)
+		location.SgID = pk
 		if err := store.Save(location); err != nil {
 			return err
 		}
@@ -88,6 +98,18 @@ func (p *populateProcessor) populateDepartment(departments []*model.Department) 
 	logrus.Debugf("process %d departments", len(departments))
 	store := p.stores["departments"].(*model.DepartmentStore)
 	for _, department := range departments {
+		variables := tf.DepartmentToGraphQLVars(department)
+		if res, err := client.Query("create-or-update-team", variables, nil); err != nil {
+			if err.Error() == "graphql: Cannot have two departments with the same name and parent" {
+				logrus.Debug(res)
+				logrus.Error(err)
+			} else {
+				return err
+			}
+		}
+		// TODO: handle error or invalid response
+		pk, _ := client.GetDepartmentIDByName(*department.Name)
+		department.SgID = pk
 		if err := store.Save(department); err != nil {
 			return err
 		}
@@ -99,6 +121,12 @@ func (p *populateProcessor) populateUsers(users []*model.User) error {
 	logrus.Debugf("process %d users", len(users))
 	store := p.stores["users"].(*model.UserStore)
 	for _, user := range users {
+		variables := tf.UserToGraphQLVars(user)
+		if res, err := client.Query("create-user-profile", variables, nil); err != nil {
+			logrus.Debug(res)
+			logrus.Error(err)
+			return err
+		}
 		if err := store.Save(user); err != nil {
 			return err
 		}
@@ -111,6 +139,7 @@ func (p *populateProcessor) populateObjectives(objectives []*model.Objective) er
 	store := p.stores["objectives"].(*model.ObjectiveStore)
 	for _, objective := range objectives {
 		if err := store.Save(objective); err != nil {
+			logrus.Error(err)
 			return err
 		}
 	}
@@ -122,6 +151,7 @@ func (p *populateProcessor) populateOneOnOnes(oneOnOnes []*model.OneOnOne) error
 	store := p.stores["one-on-ones"].(*model.OneOnOneStore)
 	for _, oneOnOne := range oneOnOnes {
 		if err := store.Save(oneOnOne); err != nil {
+			logrus.Error(err)
 			return err
 		}
 	}
@@ -133,6 +163,7 @@ func (p *populateProcessor) populateOneOnOneTemplates(templates []*model.OneOnOn
 	store := p.stores["one-on-one-templates"].(*model.OneOnOneTemplateStore)
 	for _, template := range templates {
 		if err := store.Save(template); err != nil {
+			logrus.Error(err)
 			return err
 		}
 	}
@@ -144,6 +175,7 @@ func (p *populateProcessor) populateRecognitionBadges(badges []*model.Recognitio
 	store := p.stores["recognition-badges"].(*model.RecognitionBadgeStore)
 	for _, badge := range badges {
 		if err := store.Save(badge); err != nil {
+			logrus.Error(err)
 			return err
 		}
 	}
@@ -155,6 +187,7 @@ func (p *populateProcessor) populateRecognitions(recognitions []*model.Recogniti
 	store := p.stores["recognitions"].(*model.RecognitionStore)
 	for _, recognition := range recognitions {
 		if err := store.Save(recognition); err != nil {
+			logrus.Error(err)
 			return err
 		}
 	}
@@ -166,6 +199,7 @@ func (p *populateProcessor) populateLevels(levels []*model.Level) error {
 	store := p.stores["competency-levels"].(*model.LevelStore)
 	for _, level := range levels {
 		if err := store.Save(level); err != nil {
+			logrus.Error(err)
 			return err
 		}
 	}
@@ -177,6 +211,7 @@ func (p *populateProcessor) populateCompetencies(competencies []*model.Competenc
 	store := p.stores["competencies"].(*model.CompetencyStore)
 	for _, competency := range competencies {
 		if err := store.Save(competency); err != nil {
+			logrus.Error(err)
 			return err
 		}
 	}
@@ -188,6 +223,7 @@ func (p *populateProcessor) populateReviews(reviews []*model.Review) error {
 	store := p.stores["reviews"].(*model.ReviewStore)
 	for _, review := range reviews {
 		if err := store.Save(review); err != nil {
+			logrus.Error(err)
 			return err
 		}
 	}
@@ -199,6 +235,7 @@ func (p *populateProcessor) populateRoles(roles []*model.Role) error {
 	store := p.stores["roles"].(*model.RoleStore)
 	for _, role := range roles {
 		if err := store.Save(role); err != nil {
+			logrus.Error(err)
 			return err
 		}
 	}
@@ -210,6 +247,7 @@ func (p *populateProcessor) populateRoleTemplates(templates []*model.RoleTemplat
 	store := p.stores["role-templates"].(*model.RoleTemplateStore)
 	for _, template := range templates {
 		if err := store.Save(template); err != nil {
+			logrus.Error(err)
 			return nil
 		}
 	}
