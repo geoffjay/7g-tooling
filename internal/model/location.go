@@ -31,3 +31,8 @@ func (store *LocationStore) Save(location *Location) (err error) {
 func (store *LocationStore) Flush() (err error) {
 	return store.db.Model(&Location{}).Delete(&Location{}).Error
 }
+
+func (store *LocationStore) GetLocationByName(name string) (location Location, err error) {
+	err = store.db.Model(&Location{}).Where("name = ?", name).First(&location).Error
+	return
+}

@@ -8,7 +8,7 @@ import (
 type Job struct {
 	gorm.Model
 	Name  *string
-	Tasks []Task `gorm:"ForeignKey:JobID"`
+	Tasks []Task `gorm:"foreignkey:JobID"`
 }
 
 type JobStore struct {

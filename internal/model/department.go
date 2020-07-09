@@ -32,3 +32,8 @@ func (store *DepartmentStore) Save(department *Department) (err error) {
 func (store *DepartmentStore) Flush() (err error) {
 	return store.db.Model(&Department{}).Delete(&Department{}).Error
 }
+
+func (store *DepartmentStore) GetDepartmentByName(name string) (department Department, err error) {
+	err = store.db.Model(&Department{}).Where("name = ?", name).First(&department).Error
+	return
+}

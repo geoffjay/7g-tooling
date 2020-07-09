@@ -20,6 +20,7 @@ type Populate struct {
 	OneOnOneTemplates []*model.OneOnOneTemplate `mapstructure:"one-on-one-templates"`
 	RecognitionBadges []*model.RecognitionBadge `mapstructure:"recognition-badges"`
 	Recognitions      []*model.Recognition      `mapstructure:"recognitions"`
+	Reviews           []*model.Review           `mapstructure:"reviews"`
 	CompetencyLevels  []*model.Level            `mapstructure:"competency-levels"`
 	Competencies      []*model.Competency       `mapstructure:"competencies"`
 	Roles             []*model.Role             `mapstructure:"roles"`
@@ -61,6 +62,7 @@ func (p *Populate) Summary() map[string]int {
 		"one-on-one-templates": len(p.OneOnOneTemplates),
 		"recognition-badges":   len(p.RecognitionBadges),
 		"recognitions":         len(p.Recognitions),
+		"reviews":              len(p.Reviews),
 		"competency-levels":    len(p.CompetencyLevels),
 		"competencies":         len(p.Competencies),
 		"roles":                len(p.Roles),

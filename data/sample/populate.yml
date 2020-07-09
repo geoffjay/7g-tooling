@@ -36,8 +36,9 @@ objectives:
   -
     name: Be better
     type: Department
-    description:
-    due-date: EOC # special name for end of cycle?
+    description: An objective
+    start-date: 2020-07-01
+    due-date: 2020-12-31 # use EOC as special name for end of cycle?
     status: Open  # Open/Closed
     privacy: Public
     department: Team A
@@ -71,9 +72,31 @@ objectives:
         target-value: 10
         start-value: 1
 
-one-on-ones:
-
 one-on-one-templates:
+  -
+    name: Weekly
+    description: Weekly template
+    frequency: weekly
+    questions:
+      -
+        name: A weekly question
+        description: Something to ask every week
+  -
+    name: Monthly
+    description: Monthly template
+    frequency: monthly
+    questions:
+      -
+        name: A monthly question
+        description: Something to ask every month
+  -
+    name: Yearly
+    description: Yearly template
+    frequency: yearly
+    questions:
+      -
+        name: A yearly question
+        description: Something to ask every year
 
 recognition-badges:
   -
@@ -83,12 +106,51 @@ recognition-badges:
     name: Bar
     description: Helps with all the bar
 
-recognitions:
-
 competency-levels:
+  -
+    name: Accountability General
+    description: Listens gud
+  -
+    name: Accountability Operational
+    description: Does gud
+  -
+    name: Accountability Tactical
+    description: Moves gud
+  -
+    name: Accountability Strategic
+    description: Thinks gud
 
 compentencies:
+  -
+    title: Accountability
+    description: Is accountable
+    core-competency: Yes
+    levels:
+      - name: Accountability General
+      - name: Accountability Operational
+      - name: Accountability Tactical
+      - name: Accountability Strategic
 
-roles:
+role-responsibilities:
+  -
+    title: Do things
+    description: Needs to do things
+  -
+    title: Do moar things
+    description: Needs to do moar of the things
+  -
+    title: Do all the things
+    description: Needs to do all of the things
+  -
+    title: Tell other people to do things
+    description: Needs to tell other people to do the things
 
 role-templates:
+  -
+    name: Software Devloper
+    description: Makes things
+    responsibilities:
+      - title: Do things
+      - title: Do moar things
+      - title: Do all the things
+      - title: Tell other people to do things

@@ -7,9 +7,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/geoffjay/7g-tooling/internal/model"
-	"github.com/spf13/viper"
-
 	_ "github.com/geoffjay/7g-tooling/docs"
 	gcontext "github.com/geoffjay/7g-tooling/internal/context"
 	"github.com/geoffjay/7g-tooling/internal/middleware"
@@ -42,55 +39,24 @@ func Run(config *gcontext.Config) {
 		maxHeaderBytes    = http.DefaultMaxHeaderBytes
 	)
 
-	// Catch shutdown signals
-	sigs := make(chan os.Signal, 1)
-	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
-
-	go func() {
-		<-sigs
-		os.Exit(0)
-	}()
-
 	// Setup database connection
 	db, err := gcontext.Connect(config)
 	if err != nil {
 		logrus.Fatal("Failed to connect to database:", err)
 	}
 
-	// Flush the database tables if requested
-	if viper.GetBool("flush") {
-		logrus.Debug("Flushing all database tables")
-		stores := map[string]interface{}{
-			"locations":            model.NewLocationStore(db),
-			"departments":          model.NewDepartmentStore(db),
-			"users":                model.NewUserStore(db),
-			"objectives":           model.NewObjectiveStore(db),
-			"one-on-ones":          model.NewOneOnOneStore(db),
-			"one-on-one-templates": model.NewOneOnOneTemplateStore(db),
-			"recognition-badges":   model.NewRecognitionBadgeStore(db),
-			"recognitions":         model.NewRecognitionStore(db),
-			"competency-levels":    model.NewLevelStore(db),
-			"competencies":         model.NewCompetencyStore(db),
-			"reviews":              model.NewReviewStore(db),
-			"roles":                model.NewRoleStore(db),
-			"role-templates":       model.NewRoleTemplateStore(db),
+	// Catch shutdown signals
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+
+	go func() {
+		<-sigs
+		if err := gcontext.Disconnect(db); err != nil {
+			logrus.Error(err)
+			os.Exit(-1)
 		}
-		err = stores["locations"].(*model.LocationStore).Flush()
-		err = stores["departments"].(*model.DepartmentStore).Flush()
-		err = stores["users"].(*model.UserStore).Flush()
-		err = stores["objectives"].(*model.ObjectiveStore).Flush()
-		err = stores["one-on-ones"].(*model.OneOnOneStore).Flush()
-		err = stores["one-on-one-templates"].(*model.OneOnOneTemplateStore).Flush()
-		err = stores["recognition-badges"].(*model.RecognitionBadgeStore).Flush()
-		err = stores["recognitions"].(*model.RecognitionStore).Flush()
-		err = stores["competency-levels"].(*model.LevelStore).Flush()
-		err = stores["competencies"].(*model.CompetencyStore).Flush()
-		err = stores["roles"].(*model.RoleStore).Flush()
-		err = stores["role-templates"].(*model.RoleTemplateStore).Flush()
-		if err != nil {
-			logrus.Panic(err)
-		}
-	}
+		os.Exit(0)
+	}()
 
 	router := initRouter()
 
