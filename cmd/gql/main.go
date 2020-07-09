@@ -19,6 +19,7 @@ func init() {
 	// Create and update mutations
 	Command.AddCommand(createObjectiveCmd)
 	Command.AddCommand(createStaticAPITokenCmd)
+	Command.AddCommand(createOrUpdateOneononeTemplateCmd)
 	Command.AddCommand(createOrUpdateTeamCmd)
 	Command.AddCommand(createUserProfileCmd)
 

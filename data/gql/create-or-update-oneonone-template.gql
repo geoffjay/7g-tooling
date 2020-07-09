@@ -1,0 +1,38 @@
+# for the purposes of filling demo network:
+# create:
+# variables: {
+#     "oneononeTemplate": {
+#         "name": String, # only mandatory field technically
+#         "description": String,
+#         "questions": [
+#             {
+#                 "content": String,
+#                 "description": String,
+#             }
+#         ]
+#     }
+# }
+# update:
+# variables: {
+#     "pk": Int! # required, or else it will create a new tempalte
+#     "oneononeTemplate": {
+#         "name": String, # only mandatory field technically
+#         "description": String,
+#         "questions": [
+#             {
+#                 "content": String,
+#                 "description": String,
+#             }
+#         ]
+#     }
+# }
+mutation createOrUpdateOneononeTemplateMutation($pk: Int, $oneononeTemplate: OneononeTemplateInput!) {
+    createOrUpdateOneononeTemplate(pk: $pk, template: $oneononeTemplate) {
+        template {
+            pk
+            questionSet {
+                pk
+            }
+        }
+    }
+}

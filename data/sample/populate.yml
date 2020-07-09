@@ -88,8 +88,17 @@ recognition-badges:
 recognitions:
 
 competency-levels:
+  -
+    name: Foo
+    description: Bar
+  -
+    name: Baz
+    description: Meh
 
 compentencies:
+  levels:
+    - name: Foo
+    - name: Baz
 
 roles:
 
