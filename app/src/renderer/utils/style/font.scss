@@ -1,0 +1,73 @@
+// Apply the .raleway class to styles instead of manually assigning font-fam, etc.
+$fontFamily: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+@mixin raleway {
+        font-family: $fontFamily;
+        font-weight: bold;
+}
+
+// If we need to reset to Open Sans, this will do the trick
+@mixin open-sans {
+    font-family: $fontFamily;
+}
+
+// If you're formatting code or something like that
+@mixin monospace {
+    font-family: 'Monaco', monospace;
+}
+
+@mixin h1 {
+    font-size: 38px;
+    line-height: 56px;
+    font-weight: normal;
+    letter-spacing: -1px;
+    color: $textColor;
+}
+@mixin h2 {
+    font-size: 26px;
+    line-height: 40px;
+    font-weight: normal;
+    letter-spacing: -0.8px;
+    color: $textColor;
+}
+@mixin h3 {
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: normal;
+    letter-spacing: -0.6px;
+    color: $textColor;
+}
+@mixin h4 {
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $textColor;
+}
+@mixin h5 {
+    font-size: 10px;
+    line-height: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $textColor;
+}
+
+@mixin text-large {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: normal;
+}
+@mixin text-normal {
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: normal;
+}
+@mixin text-small {
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: normal;
+}
+@mixin text-micro {
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: normal;
+}

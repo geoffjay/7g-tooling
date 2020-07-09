@@ -1,0 +1,1635 @@
+/* Forms.less
+ * Base styles for various input types, form layouts, and states
+ * TODO: Clean up and improve by borrowing more from Twitter Bootstrap
+ * -------------------------------------------------------------------
+ */
+
+// Inputs, Textareas, Selects
+input,
+textarea,
+select,
+.uneditable-input {
+    display: inline-block;
+    width: 210px;
+    height: $baseline;
+    padding: 4px;
+    line-height: $baseline;
+    border: 1px solid $slate30;
+    font-family: inherit;
+
+    &.small {
+        width: 90px;
+    }
+
+    &.medium {
+        width: 140px;
+    }
+
+    &.large {
+        width: 200px;
+    }
+
+    &.xlarge {
+        width: 250px;
+    }
+
+    &.xxlarge {
+        width: 300px;
+    }
+
+    &.full {
+        width: 500px;
+    }
+}
+
+input {
+    border-radius: $borderRadiusSmall;
+
+    &.big-input {
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        padding: 8px;
+        font-size: 16px;
+    }
+}
+
+label.required:after {
+    content: '*';
+    position: relative;
+    left: 5px;
+    color: $crimson;
+}
+/* mini reset for non-html5 file types */
+input[type=checkbox],
+input[type=radio] {
+    cursor: pointer;
+
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 3px 0;
+
+    line-height: normal;
+    border: none;
+}
+
+input[type=file] {
+    background-color: $primaryBackground;
+    padding: initial;
+    border: initial;
+    line-height: initial;
+    box-shadow: none;
+}
+
+input[type=button],
+input[type=reset],
+input[type=submit] {
+    width: auto;
+    height: auto;
+}
+
+select,
+input[type=file] {
+    height: $baseline * 1.5;
+    line-height: $baseline * 1.5;
+}
+
+// Make multiple select elements height not fixed
+select[multiple] {
+    height: inherit;
+}
+
+textarea {
+    border-radius: $borderRadiusSmall;
+    height: auto;
+    font-family: inherit;
+    resize: vertical;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* styelint-enable */
+
+// For text that needs to appear as an input but should not be an input
+.uneditable-input {
+    background-color: $primaryBackground;
+    display: block;
+    border-color: #eee;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
+    cursor: not-allowed;
+}
+
+// Placeholder text gets special styles; can't be bundled together though for some reason
+:-moz-placeholder {
+    color: $placeholderColor;
+}
+
+::-webkit-input-placeholder {
+    color: $placeholderColor;
+}
+
+input,
+textarea {
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+
+    // Focus states
+    &:focus {
+        outline: 0;
+        border-color: $skyBlue;
+    }
+
+    // Disabled class to make it more obvious
+    &.disabled {
+        background: #f5f5f5;
+        color: $grey60Flat;
+    }
+
+    // Single-field errors
+    &.error {
+        border-color: darken(#ee5f5b, 10%);
+
+        &:focus {
+            box-shadow: 0 0 6px lighten(#ee5f5b, 20%);
+        }
+    }
+}
+
+input[type=file]:focus,
+input[type=checkbox]:focus,
+select:focus {
+    box-shadow: none; // override for file inputs
+    outline: 1px dotted $grey60Flat; // Select elements don't get box-shadow styles, so instead we do outline
+}
+
+// FORM FIELD FEEDBACK STATES
+// --------------------------
+// Mixin for form field states
+/* stylelint-disable */
+@mixin formFieldState($textColor: #555, $borderColor: #ccc, $backgroundColor: #f5f5f5) {
+    // Set the text color
+    > label,
+    .help-block,
+    .help-inline {
+        color: $textColor;
+    }
+    // Style inputs accordingly
+    input,
+    textarea {
+        color: $textColor;
+        border-color: $borderColor;
+
+        &:focus {
+            border-color: darken($borderColor, 10%);
+            box-shadow: 0 0 6px lighten($borderColor, 20%);
+        }
+    }
+    // Give a small background color for input-prepend/-append
+    .input-prepend .add-on,
+    .input-append .add-on {
+        color: $textColor;
+        background-color: $backgroundColor;
+        border-color: $textColor;
+    }
+}
+/* stylelint-enable */
+
+// Error
+form .clearfix.error {
+    @include formFieldState($crimson, #ee5f5b, $errorBackground);
+}
+
+// Warning
+form .clearfix.warning {
+    @include formFieldState(#c09853, #ccae64, lighten(#CCAE64, 5%));
+}
+
+// Success
+form .clearfix.success {
+    @include formFieldState(#468847, #57a957, lighten(#57a957, 30%));
+}
+
+// Help Text
+// TODO: Do we need to set basefont and baseline here?
+.help-inline,
+.help-block {
+    font-size: 11px;
+    line-height: $baseline;
+    color: $grey25;
+}
+
+.help-inline {
+    padding-left: 5px;
+}
+
+.help-inline.error {
+    display: none;
+}
+
+.error .help-inline {
+    display: inline;
+}
+
+// Big blocks of help text
+.help-block {
+    display: block;
+    max-width: 600px;
+}
+
+// Stacked options for forms (radio buttons or checkboxes)
+.inputs-list {
+    margin: 0 0 5px;
+    width: 100%;
+
+    li {
+        display: block;
+        padding: 0;
+        width: 100%;
+
+        .form-hint {
+            margin-left: 20px;
+
+            input {
+                font-size: 13px;
+                margin-top: 6px;
+            }
+        }
+    }
+
+    label {
+        display: block;
+        float: none;
+        width: auto;
+        padding: 0;
+        line-height: $baseline;
+        text-align: left;
+        white-space: normal;
+        color: $black;
+
+        small {
+            font-size: $basefont - 2;
+            font-weight: normal;
+        }
+    }
+
+    .inputs-list {
+        margin-left: 25px;
+        margin-bottom: 10px;
+        padding-top: 0;
+    }
+
+    &:first-child {
+        padding-top: 6px;
+    }
+
+    li + li {
+        padding-top: 2px;
+    }
+
+    input[type=radio],
+    input[type=checkbox] {
+        margin-bottom: 0;
+    }
+}
+
+// FORM STYLES
+// -----------
+// Groups of fields with labels on top (legends)
+fieldset {
+    margin-bottom: $baseline;
+    padding-top: $baseline;
+
+    legend {
+        display: block;
+        padding-left: 150px;
+        font-size: $basefont * 1.5;
+        line-height: 1;
+        color: $grey75;
+    }
+}
+
+// Parent element that clears floats and wraps labels and fields together
+form .clearfix {
+    margin-bottom: $baseline;
+    @include clearfixMixin();
+
+    .hint {
+        clear: both;
+        color: #888;
+        font-size: 0.8em;
+        line-height: $baseline;
+    }
+}
+
+// Float labels left
+label {
+    padding-top: 6px;
+    font-size: $basefont;
+    line-height: $baseline;
+    float: left;
+    width: 130px;
+    text-align: right;
+    color: $grey75;
+}
+
+// Shift over the inside div to align all label's relevant content
+form .input {
+    margin-left: 150px;
+}
+
+h5.legend {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: $baseline;
+    margin-bottom: $baseline/2;
+}
+
+// Actions (the buttons)
+/* stylelint-disable no-duplicate-selectors */
+.actions {
+/* stylelint-enable */
+    @include clearfixMixin();
+
+    margin-top: $baseline;
+    background-color: #F5F5F5;
+    padding: $baseline 0 $baseline 150px;
+    border-top: 1px solid #DDD;
+    line-height: 40px;
+}
+
+/* stylelint-disable no-duplicate-selectors */
+.form {
+/* stylelint-enable */
+    clear: both;
+
+    .row {
+        @include clearfixMixin();
+
+        margin: 5px 0;
+        padding: 0;
+
+        input,
+        textarea {
+            width: 200px;
+        }
+
+        &.l input,
+        &.l textarea {
+            width: 250px;
+        }
+
+        &.xl input,
+        &.xl textarea {
+            width: 300px;
+        }
+
+        .hint {
+            clear: both;
+            padding-left: 160px;
+            color: #888;
+            font-size: 0.8em;
+            line-height: normal;
+        }
+    }
+}
+
+// Disabled and read-only inputs
+
+// removed input[readonly] from the list below so we don't have to use !important
+// with datepickers (i.e. when creating a 1-on-1, and in the 1-on-1 scheduling dialog)
+input[disabled],
+select[disabled],
+textarea[disabled],
+select[readonly],
+textarea[readonly] {
+    cursor: not-allowed;
+    background-color: $slate10;
+}
+
+.input-prepend,
+.input-append {
+    display: inline-block;
+    vertical-align: middle;
+
+    .add-on {
+        position: relative;
+        background: #f5f5f5;
+        border: 1px solid #ccc;
+        z-index: 2;
+        float: left;
+        display: block;
+        width: auto;
+        min-width: 16px;
+        height: 18px;
+        padding: 4px 4px 4px 5px;
+        margin-right: -1px;
+        font-weight: normal;
+        line-height: 18px;
+        color: $grey25;
+        text-align: center;
+        text-shadow: 0 1px 0 $white;
+        border-radius: $borderRadiusSmall 0 0 $borderRadiusSmall;
+    }
+
+    [disabled] ~ .add-on {
+        background: #eee;
+
+        svg {
+            opacity: 0.3;
+        }
+    }
+}
+
+.input-prepend {
+    // Allow us to put symbols and text within the input field for a cleaner look
+    input {
+        /* stylelint-disable declaration-no-important */
+        border-radius: 0 $borderRadiusSmall $borderRadiusSmall 0 !important;
+        /* stylelint-enable declaration-no-important */
+    }
+
+    .add-on {
+        &.error {
+            border-left-color: #E9322D;
+            border-top-color: #E9322D;
+            border-bottom-color: #E9322D;
+        }
+    }
+}
+
+.input-append {
+    input,
+    .btn {
+        /* stylelint-disable declaration-no-important */
+        border-radius: 0 !important;
+        /* stylelint-enable declaration-no-important */
+        margin-left: -1px;
+        vertical-align: top;
+
+        &:first-child {
+            /* stylelint-disable declaration-no-important */
+            border-radius: $borderRadiusSmall 0 0 $borderRadiusSmall !important;
+            /* stylelint-enable declaration-no-important */
+            margin-left: 0;
+        }
+
+        &:last-child {
+            /* stylelint-disable declaration-no-important */
+            border-radius: 0 $borderRadiusSmall $borderRadiusSmall 0 !important;
+            /* stylelint-enable declaration-no-important */
+        }
+    }
+
+    .add-on {
+        border-radius: 0 $borderRadiusSmall $borderRadiusSmall 0;
+        margin-right: 0;
+        margin-left: -1px;
+        display: inline-block;
+        float: none;
+
+        &.error {
+            border-right-color: #E9322D;
+            border-top-color: #E9322D;
+            border-bottom-color: #E9322D;
+        }
+    }
+}
+
+.input-append.input-prepend {
+    input {
+        border-width: 1px 0;
+        /* stylelint-disable declaration-no-important */
+        border-radius: 0 !important;
+        /* stylelint-enable declaration-no-important */
+    }
+
+    .add-on {
+        &:first-of-type {
+            border-radius: $borderRadiusSmall 0 0 $borderRadiusSmall;
+            border-width: 1px 0 1px 1px;
+            float: left;
+            margin-left: 0;
+        }
+
+        &:last-of-type {
+            border-radius: 0 $borderRadiusSmall $borderRadiusSmall 0;
+            border-width: 1px 1px 1px 0;
+            float: right;
+        }
+    }
+}
+
+.errorlist {
+    clear: both;
+    list-style: none;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+
+    li {
+        color: $crimson;
+        line-height: $baseline;
+        font-size: 11px;
+    }
+}
+
+.warninglist {
+    clear: both;
+    list-style: none;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+
+    li {
+        color: $passwordMediumColour;
+        line-height: $baseline;
+        font-size: 11px;
+    }
+}
+
+.successlist {
+    clear: both;
+    list-style: none;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+
+    li {
+        color: $grass;
+        line-height: $baseline;
+    }
+}
+
+.defaultlist {
+    clear: both;
+    list-style: none;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+
+    li {
+        color: $grey40Flat;
+        line-height: $baseline;
+    }
+}
+
+// Stacked forms
+.form-stacked {
+    padding-left: 20px;
+
+    fieldset {
+        padding-top: $baseline / 2;
+    }
+
+    legend {
+        padding-left: 0;
+    }
+
+    label {
+        display: block;
+        float: none;
+        width: auto;
+        font-weight: bold;
+        text-align: left;
+        line-height: 20px;
+        padding-top: 0;
+    }
+
+    .clearfix {
+        margin-bottom: $baseline / 2;
+
+        div.input {
+            margin-left: 0;
+        }
+    }
+
+    .inputs-list {
+        margin-bottom: 0;
+
+        li {
+            padding-top: 0;
+
+            label {
+                font-weight: normal;
+                padding-top: 0;
+            }
+        }
+    }
+
+    div.clearfix.error {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        margin-top: 0;
+        margin-left: -10px;
+    }
+
+    .actions {
+        margin-left: -20px;
+        padding-left: 20px;
+    }
+}
+
+// Button groups
+.btn {
+    display: inline-block;
+    padding: 4px 10px;
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 18px;
+    color: #333333;
+    text-align: center;
+    vertical-align: middle;
+    // TODO: figure this out
+    // #gradient.vertical($primaryBackground, $grey10Flat);
+    border-color: $grey10 $grey10 $grey25;
+    border: 1px solid #ccc;
+    border-bottom-color: $grey25;
+    border-radius: $baseBorderRadius;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: #333333;
+    text-decoration: none;
+    background-color: $grey10Flat;
+    background-position: 0 -15px;
+}
+
+.btn.disabled,
+.btn[disabled] {
+    cursor: default;
+    background-image: none;
+    background-color: $grey10Flat;
+    opacity: 0.65;
+    box-shadow: none;
+}
+
+.btn-large {
+    padding: 9px 14px;
+    font-size: 15px;
+    line-height: normal;
+    border-radius: 5px;
+}
+
+.btn-large [class^='icon-'] {
+    margin-top: 1px;
+}
+
+.btn-small {
+    padding: 4px 9px;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.btn-small [class^='icon-'] {
+    margin-top: -1px;
+}
+
+.btn.btn-mini {
+    padding: 2px 6px;
+    font-size: 11px;
+    line-height: 14px;
+
+    .caret {
+        margin-top: 5px;
+    }
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-warning,
+.btn-warning:hover,
+.btn-danger,
+.btn-danger:hover,
+.btn-success,
+.btn-success:hover,
+.btn-info,
+.btn-info:hover,
+.btn-inverse,
+.btn-inverse:hover {
+    color: $white;
+}
+
+.btn-primary.active,
+.btn-warning.active,
+.btn-danger.active,
+.btn-success.active,
+.btn-info.active,
+.btn-dark.active {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.btn-primary {
+    // #gradient.vertical(lighten($denim, 4%), lighten($dusk, 4%));
+    border-color: lighten($denim, 4%) lighten($denim, 4%) #002a80;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+    background-color: lighten($dusk, 4%);
+}
+
+.btn-warning {
+    // #gradient.vertical(#fbb450, #f89406);
+    border-color: #f89406 #f89406 #ad6704;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-warning:hover,
+.btn-warning:active,
+.btn-warning.active,
+.btn-warning.disabled,
+.btn-warning[disabled] {
+    background-color: #f89406;
+}
+
+.btn-danger {
+    background-color: #da4f49;
+    background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+    background-repeat: repeat-x;
+    border-color: #bd362f #bd362f #802420;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger.active,
+.btn-danger.disabled,
+.btn-danger[disabled] {
+    background-color: #bd362f;
+}
+
+.btn-success {
+    // #gradient.vertical(#62c462, #51a351);
+    border-color: #51a351 #51a351 #387038;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-success:hover,
+.btn-success:active,
+.btn-success.active,
+.btn-success.disabled,
+.btn-success[disabled] {
+    background-color: #51a351;
+}
+
+.btn-info {
+    // #gradient.vertical(#5bc0de, #2f96b4);
+    border-color: #2f96b4 #2f96b4 #1f6377;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-info:hover,
+.btn-info:active,
+.btn-info.active,
+.btn-info.disabled,
+.btn-info[disabled] {
+    background-color: #2f96b4;
+}
+
+.btn-inverse {
+    // #gradient.vertical(#454545, #262626);
+    border-color: #262626 #262626 $black;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+
+.btn-inverse:hover,
+.btn-inverse:active,
+.btn-inverse.active,
+.btn-inverse.disabled,
+.btn-inverse[disabled] {
+    background-color: #262626;
+}
+
+button.btn::-moz-focus-inner,
+input[type='submit'].btn::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+.btn-group {
+    position: relative;
+}
+
+.btn-group:before,
+.btn-group:after {
+    display: table;
+    content: '';
+}
+
+.btn-group:after {
+    clear: both;
+}
+
+.btn-group + .btn-group {
+    margin-left: 5px;
+}
+
+.btn-toolbar {
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+.btn-toolbar .btn-group {
+    display: inline-block;
+}
+
+.btn-group .btn {
+    position: relative;
+    float: left;
+    margin-left: -1px;
+    border-radius: 0;
+}
+
+.btn-group .btn:first-child {
+    margin-left: 0;
+    border-top-left-radius: $baseBorderRadius;
+    border-bottom-left-radius: $baseBorderRadius;
+}
+
+.btn-group .btn:last-child,
+.btn-group .dropdown-toggle {
+    border-top-right-radius: $baseBorderRadius;
+    border-bottom-right-radius: $baseBorderRadius;
+}
+
+/* stylelint-disable no-duplicate-selectors */
+.input-prepend {
+/* stylelint-enable */
+    .btn-group .btn:last-child,
+    .btn-group .dropdown-toggle {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+
+.btn-group .btn.large:first-child {
+    margin-left: 0;
+    border-top-left-radius: $borderRadiusLarge;
+    border-bottom-left-radius: $borderRadiusLarge;
+}
+
+.btn-group .btn.large:last-child,
+.btn-group .large.dropdown-toggle {
+    border-top-right-radius: $borderRadiusLarge;
+    border-bottom-right-radius: $borderRadiusLarge;
+}
+
+.btn-group .btn:hover,
+.btn-group .btn:focus,
+.btn-group .btn:active,
+.btn-group .btn.active {
+    z-index: 2;
+}
+
+.btn-group .dropdown-toggle:active,
+.btn-group.open .dropdown-toggle {
+    outline: 0;
+}
+
+.btn-group .dropdown-toggle {
+    padding-left: 8px;
+    padding-right: 8px;
+    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+
+    &.btn-mini {
+        padding: 2px 6px;
+
+        &.btn-icon {
+            padding-left: 21px;
+        }
+    }
+}
+
+.btn-group.open .dropdown-menu {
+    margin-top: 1px;
+    border-radius: 5px;
+}
+
+.btn-group.open .dropdown-toggle {
+    background-image: none;
+    box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn .caret {
+    margin-top: 7px;
+    margin-left: 0;
+}
+
+.btn.plus {
+    padding: 4px 6px;
+
+    .caret {
+        border: 0;
+        margin-top: -2px;
+        width: auto;
+        color: $grass;
+        font-size: 20px;
+        font-weight: bold;
+        text-shadow: 0 1px 0 $white;
+        text-indent: 0;
+        opacity: 0.7;
+    }
+
+    &:hover .caret {
+        opacity: 0.99;
+    }
+}
+
+.btn:hover .caret,
+.open.btn-group .caret {
+    opacity: 1;
+}
+
+.btn-primary .caret,
+.btn-danger .caret,
+.btn-info .caret,
+.btn-success .caret,
+.btn-inverse .caret {
+    border-top-color: $white;
+    opacity: 0.75;
+}
+
+.btn-small .caret {
+    margin-top: 4px;
+}
+
+.btn.withIcon {
+    // Use for 7g buttons with an icon, it will automatically position it.
+    padding-left: 30px;
+    position: relative;
+
+    .icon {
+        position: absolute;
+        top: 5px;
+        left: 7px;
+    }
+
+    &.btn-mini {
+        padding-left: 21px;
+
+        .icon {
+            top: 4px;
+            left: 6px;
+        }
+    }
+}
+/* Dropdowns */
+
+.dropup,
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle:active,
+.open .dropdown-toggle {
+    outline: 0;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: top;
+    border-top: 4px solid #000;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    content: '';
+}
+
+.dropdown .caret {
+    margin-top: 8px;
+    margin-left: 2px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: $zIndexDropdown;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    background-color: $primaryBackground;
+    @include depth-high;
+    border-radius: $borderRadiusLarge;
+    background-clip: padding-box;
+    text-align: left;
+}
+
+.dropdown-menu.pull-right {
+    right: 0;
+    left: auto;
+}
+
+.dropdown-menu .divider {
+    height: 1px;
+    margin: 9px 1px;
+    overflow: hidden;
+    background-color: $primaryBorder;
+    border-bottom: 1px solid $white;
+}
+
+.dropdown-menu li > a {
+    @include open-sans;
+
+    display: block;
+    padding: 4px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 20px;
+    color: $textColor;
+    white-space: nowrap;
+    text-align: left;
+    cursor: pointer;
+}
+
+.dropdown-menu li > a:hover,
+.dropdown-menu li > a:focus,
+.dropdown-submenu:hover > a {
+    text-decoration: none;
+    color: $textColor;
+    background-color: $blue10;
+}
+
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
+    color: $white;
+    text-decoration: none;
+    outline: 0;
+    background-color: $denim;
+}
+
+.dropdown-menu .disabled > a,
+.dropdown-menu .disabled > a:hover {
+    color: $grey40Flat;
+}
+
+.dropdown-menu .disabled > a:hover {
+    text-decoration: none;
+    background-color: transparent;
+    background-image: none;
+    cursor: default;
+}
+
+.open > .dropdown-menu {
+    display: block;
+}
+
+.pull-right > .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.dropup .caret,
+.navbar-fixed-bottom .dropdown .caret {
+    border-top: 0;
+    border-bottom: 4px solid $black;
+    content: '';
+}
+
+.dropup .dropdown-menu,
+.navbar-fixed-bottom .dropdown .dropdown-menu {
+    top: auto;
+    bottom: 100%;
+    margin-bottom: 1px;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    border-radius: 0 $borderRadiusLarge $borderRadiusLarge;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropup .dropdown-submenu > .dropdown-menu {
+    top: auto;
+    bottom: 0;
+    margin-top: 0;
+    margin-bottom: -2px;
+    border-radius: 5px 5px 5px 0;
+}
+
+.dropdown-submenu > a,
+.dropdown-submenu > button {
+    &:after {
+        display: block;
+        content: ' ';
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #cccccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+}
+
+.dropdown-submenu:hover > a:after {
+    border-left-color: $white;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    border-radius: $borderRadiusLarge 0 $borderRadiusLarge $borderRadiusLarge;
+}
+
+.dropdown .dropdown-menu .nav-header {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.typeahead {
+    z-index: 1051;
+    margin-top: 2px;
+    border-radius: $baseBorderRadius;
+}
+/* End dropdowns */
+
+// For placeholders in IE.
+.placeholder {
+    color: #999;
+}
+
+.form-actions {
+    padding: 19px 20px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #e5e5e5;
+}
+
+.form-actions:before,
+.form-actions:after {
+    display: table;
+    line-height: 0;
+    content: '';
+}
+
+.form-actions:after {
+    clear: both;
+}
+
+/* stylelint-disable no-duplicate-selectors */
+.help-block {
+/* stylelint-enable */
+    color: #595959;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* stylelint-disable no-duplicate-selectors */
+.help-inline {
+/* stylelint-enable */
+    color: #595959;
+    display: inline-block;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+legend + .control-group {
+    margin-top: 20px;
+    -webkit-margin-top-collapse: separate;
+}
+
+.form-horizontal .control-group {
+    margin-bottom: 20px;
+}
+
+.form-horizontal .control-group:before,
+.form-horizontal .control-group:after {
+    display: table;
+    line-height: 0;
+    content: '';
+}
+
+.form-horizontal .control-group:after {
+    clear: both;
+}
+
+.form-horizontal .control-label {
+    float: left;
+    width: 120px;
+    padding-top: 5px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.form-horizontal .controls {
+    margin-left: 120px;
+}
+
+.form-horizontal .help-block {
+    margin-bottom: 0;
+}
+
+.form-horizontal input + .help-block,
+.form-horizontal select + .help-block,
+.form-horizontal textarea + .help-block,
+.form-horizontal .uneditable-input + .help-block,
+.form-horizontal .input-prepend + .help-block,
+.form-horizontal .input-append + .help-block {
+    margin-top: 10px;
+}
+
+.form-horizontal .form-actions {
+    padding-left: 180px;
+}
+
+/* stylelint-disable no-duplicate-selectors, declaration-no-important */
+//  we get rid of the ugly stupid grey box and make it look embedded in the actual field
+.input-append,
+.input-prepend {
+    .add-on {
+        background: transparent;
+        transition: border linear 0.2s;
+    }
+}
+
+.input-append {
+    input {
+        border-right-width: 0;
+
+        &:focus ~ .add-on {
+            border-color: $skyBlue;
+
+            svg:not(.ignore-focus-color) {
+                fill: $denim !important;
+            }
+            //Firefox fix to ignore focus color
+            .ignore-focus-color use > svg {
+                fill: inherit !important;
+            }
+        }
+    }
+
+    .add-on {
+        float: right;
+        border-left-width: 0;
+    }
+}
+
+.input-prepend {
+    input {
+        border-left-width: 0;
+
+        &:focus ~ .add-on {
+            border-color: $skyBlue;
+
+            svg:not(.ignore-focus-color) {
+                fill: $denim !important;
+            }
+            //Firefox fix to ignore focus color
+            .ignore-focus-color use > svg {
+                fill: inherit !important;
+            }
+        }
+    }
+
+    .add-on {
+        float: left;
+        border-right-width: 0;
+    }
+}
+/* stylelint-enable */
+
+// 2015 7G forms and inputs
+.form-hint {
+    color: $secondaryTextColor;
+    @include text-small;
+    margin-top: 4px;
+    margin-right: 5px;
+
+    ul svg {
+        margin-right: 4px;
+    }
+}
+
+/* stylelint-disable no-duplicate-selectors */
+form .input {
+/* stylelint enable */
+    margin-left: 240px;
+
+    ul.checkboxes {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        margin-top: 6px;
+
+        > li {
+            margin-bottom: 6px;
+
+            .input-checkbox {
+                margin-bottom: 12px;
+            }
+
+            input {
+                margin-right: 6px;
+                margin-top: -1px;
+            }
+
+            label {
+                float: none;
+                text-align: left;
+                color: #333;
+                display: inline-block;
+                @include open-sans;
+                font-size: 13px;
+                padding-top: 0;
+            }
+        }
+    }
+}
+
+form.sg-form-1 {
+    label {
+        width: auto;
+    }
+}
+
+/* stylelint-disable selector-max-specificity */
+form.sg-form-2 {
+    .fieldset-container {
+        margin-bottom: 25px;
+        display: table;
+
+        &.full-width-form {
+            width: 100%;
+        }
+
+        .row,
+        .row-fluid {
+            position: relative;
+            display: table-row;
+
+            &:first-child > div {
+                padding-top: 15px;
+            }
+
+            &:last-child > div {
+                padding-bottom: 15px;
+            }
+
+            [class*='span'] {
+                display: table-cell;
+                float: none;
+            }
+        }
+
+        .form-labels {
+            @include text-small;
+            text-align: right;
+            color: $textColor;
+            padding-top: 4px;
+            padding-right: 16px;
+            margin-bottom: 0;
+            min-width: 233px;
+
+            label,
+            .field-label {
+                width: auto;
+                padding: 0;
+                float: none;
+                @include text-normal;
+                color: $textColor;
+                font-weight: 600;
+
+                &.adjust-label-up {
+                    display: block;
+                    transform: translate(0, -9px);
+                }
+            }
+        }
+
+        .fields {
+            padding-left: 16px;
+            padding-right: 16px;
+            padding-bottom: 24px;
+            margin-bottom: 0;
+            display: table-cell;
+            max-width: 535px;
+            @include text-normal;
+
+            .form-action-button {
+                margin-top: 20px;
+            }
+
+            ul.inputs-list {
+                padding: 0;
+
+                li {
+                    margin-bottom: 4px;
+
+                    input:not([type='text']) {
+                        margin-right: 4px;
+                        margin-top: -6px;
+                    }
+
+                    label {
+                        @include text-normal;
+                        color: $textColor;
+                        padding-top: 0;
+                        &.form__checkbox {
+                            padding-top: 3px;
+                        }
+                    }
+
+                    .input-checkbox {
+                        margin-bottom: 12px;
+                    }
+                }
+            }
+
+            ul.errorlist {
+                margin: 2px 2px 2px 0;
+            }
+
+            textarea {
+                width: 440px;
+                height: 100px;
+
+                &.full-width-textarea {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+/* stylelint-enable */
+
+label,
+label.sg-label {
+    color: $textColor;
+}
+
+/* NEW CHECKBOX STYLE */
+
+.input-checkbox,
+ .input-radio {
+    $checkbox-big: 18px;
+    $checkbox-color: $skyBlue;
+    $checkbox-active-color: $skyBlue;
+    $checkbox-disabled-color: $graphite10;
+
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 6px;
+
+    .input-checkbox-text,
+     .input-radio-text {
+        @include text-normal;
+        display: inline-block;
+        color: $textColor;
+        float: none;
+        text-align: left;
+        padding-top: 0;
+        width: auto;
+    }
+
+    input[type='checkbox'] {
+        display: none;
+
+        &:checked {
+            + label {
+                background: $checkbox-color;
+                border-color: $checkbox-color;
+
+                &:after {
+                    transform: scale(0.9);
+                }
+
+                &:hover {
+                    background: darken($checkbox-color, 7.5%);
+                    border: 2px solid darken($checkbox-color, 7.5%);
+                }
+
+                &:active {
+                    background: $checkbox-color;
+                    border: 2px solid $checkbox-active-color;
+                }
+            }
+        }
+
+        &:disabled {
+            + label {
+                background: $checkbox-disabled-color;
+
+                &:hover {
+                    background: $checkbox-disabled-color;
+                    border: 2px solid $graphite40;
+                }
+
+                &:active {
+                    border: 2px solid $graphite25;
+                }
+            }
+        }
+
+        &:disabled:checked {
+            + label {
+                background-color: $graphite25;
+                border-color: $graphite25;
+            }
+        }
+    }
+
+    .input-checkbox-box {
+        display: inline-block;
+        box-sizing: border-box;
+        width: $checkbox-big;
+        height: $checkbox-big;
+        background: $primaryBackground;
+        border: 2px solid $slate30;
+        border-radius: $baseBorderRadius;
+        position: absolute;
+        top: 3px;
+        left: 0;
+        cursor: pointer;
+        transition: 0.2s;
+
+        &:disabled {
+            cursor: default;
+        }
+
+        &:after {
+            position: absolute;
+            top: 0;
+            content: '';
+            display: block;
+            height: 100%;
+            width: 100%;
+            // TODO: fix this
+            // background: url('../../img/checkbox-checkmark.svg') center center no-repeat;
+            background-size: contain;
+            transform: scale(0);
+            transition: 0.2s;
+        }
+
+        &:hover {
+            border: 2px solid $slate60;
+        }
+
+        &:active {
+            border: 2px solid $checkbox-active-color;
+        }
+    }
+}
+
+// Textareas with labels "inline" at the top
+.textarea-top-label__container {
+    border: 1px solid #ccc;
+    border-radius: $baseBorderRadius;
+    overflow: hidden;
+
+    .textarea-top-label__header {
+        background: #f4f4f4;
+        color: $grey75;
+        padding: 4px 6px;
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+        border-bottom: 1px solid #e8e8e8;
+
+        svg {
+            margin-right: 2px;
+        }
+    }
+
+    .textarea-top-label__input {
+        position: relative;
+
+        textarea {
+            border: 0;
+            padding: 8px;
+        }
+    }
+}

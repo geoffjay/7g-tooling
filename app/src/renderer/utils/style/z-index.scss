@@ -1,0 +1,35 @@
+// Z-Index Scale (private vars)
+// --------------------------------------------------
+
+$zIndex-0:      1000;
+$zIndex-1:      1010;
+$zIndex-2:      1020;
+$zIndex-3:      1030;
+$zIndex-4:      1040;
+$zIndex-5:      1050;
+$zIndex-6:      1060;
+$zIndex-7:      1070;
+$zIndex-8:      1080;
+$zIndex-9:      1090;
+$zIndex-10:     10000;
+$zIndex-100:    100000;
+$zIndex-hammer: 100020;
+
+
+// z-index values from Twitter Bootstrap 2.3.2
+
+$zIndexQuestionEditButton:  $zIndex-0;
+$zIndexStreamItem:          $zIndex-0;
+$zIndexOverlay:             $zIndex-0;  // base layer for sidebar overlay
+$zIndexDropdown:            $zIndex-1;
+$zIndexPopover:             $zIndex-1;
+$zIndexFixedNavbar:         $zIndex-3;
+$zIndexModalBackdrop:       $zIndex-4;
+$zIndexModal:               $zIndex-5;
+$zIndexModalBackdropCover:  $zIndex-6;
+$zIndexModalCover:          $zIndex-7;
+$zIndexHeader:              $zIndex-9;
+$zIndexHovercard:           $zIndex-10 + 10;
+$zIndexTooltip:             $zIndex-hammer; // needs to be higher than dialog
+$zIndexSoftEdges:           10;
+$zIndexFilepicker:          $zIndex-hammer; // needs to be higher than dialog

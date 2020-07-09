@@ -1,0 +1,217 @@
+@import '~7g-utils//style/';
+
+.button-component {
+    @include open-sans;
+    -webkit-appearance: none;
+    align-items: center;
+    appearance: none;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1.43;
+    font-weight: 600;
+    padding: 8px 16px;
+    user-select: none;
+    white-space: nowrap;
+    transition: background-color 0.1s;
+
+    &--type-outline {
+        box-shadow: inset 0 0 0 1px $blue;
+        color: $blue;
+        background-color: transparent;
+        &:hover:not(:active):not(.button-component--disabled) {
+            background-color: $blueFade5;
+        }
+        &.button-component--color-red {
+            box-shadow: inset 0 0 0 1px $red;
+            color: $red;
+            .button-component__dropdown {
+                border-color: $red30;
+            }
+            /* stylelint-disable-next-line selector-max-specificity */
+            &:hover:not(:active):not(.button-component--disabled) {
+                background-color: $redFade5;
+            }
+        }
+    }
+
+    &--type-filled {
+        background-color: $blue;
+        color: $white;
+        .button-component__dropdown {
+            border-color: $dropdownButtonDivider;
+        }
+        &:hover:not(:active):not(.button-component--disabled) {
+            background-color: $blueDarken10;
+        }
+        &.button-component--color-red {
+            background-color: $red;
+            .button-component__dropdown {
+                border-color: $red30;
+            }
+            /* stylelint-disable-next-line selector-max-specificity */
+            &:hover:not(:active):not(.button-component--disabled) {
+                background-color: $redDarken10;
+            }
+        }
+    }
+
+    &--type-minimal {
+        background-color: transparent;
+        color: $blue;
+        &:hover:not(:active):not(.button-component--disabled) {
+            background-color: $blueFade5;
+        }
+        &.button-component--color-red {
+            color: $red;
+            .button-component__dropdown {
+                border-color: $red30;
+            }
+            /* stylelint-disable-next-line selector-max-specificity */
+            &:hover:not(:active):not(.button-component--disabled) {
+                background-color: $redFade5;
+            }
+        }
+    }
+
+    &--type-inline {
+        background-color: transparent;
+        color: $blue;
+        display: inline;
+        padding: 0;
+        height: auto;
+
+        &:hover:not(:active):not(.button-component--disabled) {
+            text-decoration: underline;
+        }
+        &.button-component--color-red {
+            color: $red;
+            .button-component__dropdown {
+                border-color: $red30;
+            }
+            /* stylelint-disable-next-line selector-max-specificity */
+            &:hover:not(:active):not(.button-component--disabled) {
+                text-decoration: underline;
+            }
+        }
+        &.button-component {
+            &--size {
+                &-small {
+                    height: auto;
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    &--disabled {
+        box-shadow: none;
+        color: $slate60;
+        cursor: not-allowed;
+        background: transparent;
+        &.button-component--type-outline,
+        &.button-component--type-filled {
+            background-color: $slateDisabledBackground;
+        }
+        &.button-component__dropdown {
+            border-color: $slate30;
+        }
+        &:hover,
+        &.button-component--color-red {
+            background: transparent;
+            color: $slate60;
+            box-shadow: none;
+            &.button-component--type-outline,
+            &.button-component--type-filled {
+                background-color: $slateDisabledBackground;
+            }
+            &.button-component__dropdown {
+                border-color: $slate30;
+            }
+        }
+    }
+    &--size {
+        &-small {
+            font-size: 12px;
+            height: 28px;
+            line-height: 16px;
+            padding: 6px 12px;
+        }
+    }
+    &__icon {
+        margin: 0 -4px;
+        &--left {
+            margin-right: 8px;
+        }
+    }
+
+    //  Dropdown button
+    &__dropdown {
+        @include flex-centered(row);
+        margin-left: 12px;
+        margin-right: -4px;
+        padding-left: 9px;
+        height: 16px;
+        border-left: 1px solid $blue30;
+    }
+
+    //  Focus state
+    @include sg-focus();
+}
+
+// Toggle button
+.button-component--type-toggle {
+    color: $secondaryTextColor;
+    background-color: transparent;
+    position: relative;
+    &:hover {
+        background: $blueFade5;
+    }
+    &.button-component--active {
+        background-color: $blueFade10;
+        color: $textColor;
+    }
+    @include sg-focus();
+}
+
+// Button as a link
+a.button-component {
+    &:hover {
+        text-decoration: none;
+    }
+    &--type-outline:hover {
+        color: $blue;
+        &.button-component--color-red {
+            color: $red;
+        }
+    }
+    &--type-filled:hover {
+        color: $white;
+    }
+    &--type-minimal:hover {
+        color: $blue;
+        &.button-component--color-red {
+            color: $red;
+        }
+    }
+    &--type-inline:hover {
+        color: $blue;
+        text-decoration: underline;
+
+        &.button-component--color-red {
+            color: $red;
+        }
+    }
+    &--disabled:hover {
+        color: $slate60;
+    }
+}
+
+a[disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+}

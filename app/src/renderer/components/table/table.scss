@@ -1,0 +1,133 @@
+@import '~7g-utils//style/';
+
+table {
+    border-collapse: collapse;
+}
+
+.sg-table {
+    @include open-sans;
+
+    display: table;
+    min-width: 100%;
+    color: $slateText;
+    font-size: 14px;
+    border-spacing: 0;
+
+    &__thead {
+        display: table-header-group;
+    }
+
+    &__tbody {
+        display: table-row-group;
+    }
+
+    &__thead,
+    &__tbody {
+        &--with-outer-padding > tr {
+            // :not([colspan]) - Don't add outer padding to rows containing nested table
+            > .sg-table__header:first-child:not([colspan]),
+            > .sg-table__cell:first-child:not([colspan]) {
+                padding-left: 24px;
+            }
+            > .sg-table__header:last-child:not([colspan]),
+            > .sg-table__cell:last-child:not([colspan]) {
+                padding-right: 24px;
+            }
+        }
+    }
+
+    &__row {
+       display: table-row;
+       min-width: 100%;
+    }
+
+    &__cell,
+    &__header {
+        display: table-cell;
+        border-bottom: 1px solid $slate10;
+        padding: 16px 8px;
+        vertical-align: middle;
+    }
+
+    &__header {
+        text-align: left;
+        &--default {
+            text-transform: uppercase;
+            line-height: 24px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        button.sg_table__sort-button {
+            @include sg-focus;
+            @include open-sans;
+            -webkit-appearance: none;
+            align-items: center;
+            appearance: none;
+            box-sizing: border-box;
+            border: 0;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: space-between;
+            font-size: 12px;
+            line-height: 24px;
+            font-weight: 600;
+            padding: 0;
+            user-select: none;
+            transition: background-color 0.1s;
+            color: $slateText;
+            background-color: transparent;
+            text-transform: uppercase;
+            width: 100%;
+
+            svg {
+                margin-left: 4px;
+            }
+        }
+    }
+
+    &__row--summary {
+        .sg-table__cell {
+            font-weight: 600;
+            border-color: $skyBlue;
+            border-width: 2px;
+        }
+    }
+}
+
+.sg-table--scrollable {
+    overflow-y: auto;
+
+    .sg-table {
+        width: auto;
+    }
+}
+
+.sg-table--nested {
+    background: $blue7;
+    padding: 8px;
+
+    .sg-table__cell,
+    .sg-table__header {
+        border: none;
+        padding: 8px;
+    }
+}
+
+.sg-table--compact {
+    .sg-table {
+        &,
+        .text {
+            @include text-small;
+        }
+    }
+    .sg-table__cell,
+    .sg-table__header {
+        border: none;
+        padding: 4px;
+    }
+    .sg-table__header--default {
+        font-size: 11px;
+    }
+}

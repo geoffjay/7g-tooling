@@ -1,0 +1,39 @@
+@import '~7g-utils//style/';
+
+.title {
+    &,
+    &--page-title,
+    &--title,
+    &--small-title,
+    &--section-title,
+    &--x-large-title {
+        text-transform: none;
+        margin: 0;
+        @include open-sans;
+        color: $textColor;
+        padding: 0;
+    }
+
+    &--x-large-title {
+        font-size: 50px;
+        line-height: 72px;
+        font-weight: lighter;
+    }
+
+    &--page-title {
+        @include h1;
+        @media print {
+            // font-weight 300 seems not to render when printing in chrome
+            font-weight: 400;
+        }
+    }
+    &--title {
+        @include h2;
+    }
+    &--small-title {
+        @include h3;
+    }
+    &--section-title {
+        @include h4;
+    }
+}

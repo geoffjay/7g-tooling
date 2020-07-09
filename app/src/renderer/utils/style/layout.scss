@@ -1,0 +1,57 @@
+// Clearfix for clearing floats like a boss h5bp.com/q
+@mixin clearfixMixin() {
+    zoom: 1;
+
+    &:before,
+    &:after {
+        display: table;
+        content: '';
+        zoom: 1;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin visuallyhidden() {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+//  Mixin for doing nice neat rows, where all the content is neatly centered on the horizontal axis
+@mixin flex-inline() {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+//  Mixin for perfectly centering content of an element
+@mixin flex-centered($direction: column) {
+    align-items: center;
+    display: flex;
+    flex-direction: $direction;
+    justify-content: center;
+}
+
+// Box shadow definitions for different UI depths
+$shadowLayer1: 0 1px 3px rgba(0,0,0,0.08);
+$shadowLayer2: 0 0px 6px rgba(0,0,0,0.04);
+$shadowLayer3: 0 2px 12px rgba(0,0,0,0.06);
+$shadowLayer4: 0 2px 24px rgba(0,0,0,0.06);
+@mixin depth-flat() {
+    box-shadow: none;
+}
+@mixin depth-low() {
+    box-shadow: $shadowLayer1, $shadowLayer2;
+}
+@mixin depth-high() {
+    box-shadow: $shadowLayer1, $shadowLayer2, $shadowLayer3, $shadowLayer4;
+}
