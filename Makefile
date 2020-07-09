@@ -27,6 +27,12 @@ build-static: ; $(info $(M) Building static binary...)
 		-a -tags netgo -ldflags '-w -extldflags "-static"' \
 		-o target/7g-static
 
+ui: ; $(info $(M) Building electron user interface distribution...)
+	pushd app; \
+	yarn install; \
+	yarn dist; \
+	popd;
+
 server: ; $(info $(M) Run service using hot-reloading...)
 ifndef AIR
 	@go get github.com/cosmtrek/air
@@ -43,4 +49,4 @@ test: bindata; $(info $(M) Running tests...)
 clean: ; $(info $(M) Removing generated files... )
 	@rm -rf target/
 
-.PHONY: all docs build build-static server test clean
+.PHONY: all docs build build-static ui server test clean
