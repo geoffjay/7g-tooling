@@ -14,6 +14,11 @@ var (
 )
 
 func init() {
+	// Create and update mutations
+	Command.AddCommand(createUserProfileCmd)
+	Command.AddCommand(createStaticAPITokenCmd)
+
+	// Read queries
 	Command.AddCommand(getObjectiveCmd)
 }
 
