@@ -24,6 +24,7 @@ func init() {
 }
 
 func enable(cmd *cobra.Command, args []string) {
+	env := fmt.Sprintf("%s/.config/7g/.env.production", os.Getenv("HOME"))
 	data := struct {
 		Label     string
 		Program   string
@@ -33,7 +34,7 @@ func enable(cmd *cobra.Command, args []string) {
 	}{
 		Label:     "com.7geese.tooling",
 		Program:   "/usr/local/bin/7g",
-		Args:      []string{"daemon"},
+		Args:      []string{"--env", env, "daemon"},
 		KeepAlive: true,
 		RunAtLoad: true,
 	}
