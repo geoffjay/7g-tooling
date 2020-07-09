@@ -22,7 +22,7 @@ var (
 )
 
 func init() {
-	createOrUpdateTeamCmd.PersistentFlags().IntVar(&teamID, "teamID", 2, "team id")
+	createOrUpdateTeamCmd.PersistentFlags().IntVar(&teamID, "teamID", 1, "team id")
 	createOrUpdateTeamCmd.PersistentFlags().StringVar(&teamName, "name", "Engineering", "team name")
 	createOrUpdateTeamCmd.PersistentFlags().IntSliceVar(&teamProfilesToAdd, "profilesToAdd", []int{1, 2}, "profiles to add in team")
 	createOrUpdateTeamCmd.PersistentFlags().IntVar(&teamParent, "type", 1, "objective type")

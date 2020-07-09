@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"os"
 
@@ -14,9 +15,9 @@ import (
 
 type response interface{}
 
-func Query(name string, variables map[string]interface{}, config *gcontext.Config) {
+func Query(name string, variables map[string]interface{}, config *gcontext.Config) error {
 	query := bin.GetQuery(name)
-	logrus.Debugf("Execute query:\n%s", query)
+	logrus.Debugf("Execute query: %s", name)
 
 	var apiKey string
 	var address string
@@ -41,7 +42,15 @@ func Query(name string, variables map[string]interface{}, config *gcontext.Confi
 	ctx := context.Background()
 	var res response
 	if err := client.Run(ctx, req, &res); err != nil {
-		logrus.Fatal(err)
+		return err
 	}
-	logrus.Info(res)
+
+	bytes, err := json.Marshal(res)
+	if err != nil {
+		logrus.Error(err)
+	}
+
+	logrus.Debug(string(bytes))
+
+	return nil
 }

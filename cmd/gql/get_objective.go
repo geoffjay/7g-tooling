@@ -19,12 +19,11 @@ var (
 )
 
 func init() {
-	Command.PersistentFlags().IntVarP(&id, "id", "", 0, "objective ID")
+	Command.PersistentFlags().IntVar(&id, "id", 0, "objective ID")
 }
 
 func getObjective(cmd *cobra.Command, args []string) {
 	logrus.Debug("gql > get-objective")
-	logrus.Debugf("gql > get-objective > %d", id)
 
 	config, err := gcontext.LoadConfig(".")
 	if err != nil {

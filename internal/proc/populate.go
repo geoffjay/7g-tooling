@@ -76,7 +76,11 @@ func (p *populateProcessor) populateLocations(locations []*model.Location) error
 	store := p.stores["locations"].(*model.LocationStore)
 	for _, location := range locations {
 		variables := tf.LocationToGraphQLVars(location)
-		client.Query("create-or-update-location", variables, nil)
+		if err := client.Query("create-or-update-location", variables, nil); err != nil {
+			if err.Error() == "graphql: A location with this name already exists" {
+				continue
+			}
+		}
 		if err := store.Save(location); err != nil {
 			return err
 		}
@@ -88,6 +92,10 @@ func (p *populateProcessor) populateDepartment(departments []*model.Department) 
 	logrus.Debugf("process %d departments", len(departments))
 	store := p.stores["departments"].(*model.DepartmentStore)
 	for _, department := range departments {
+		variables := tf.DepartmentToGraphQLVars(department)
+		if err := client.Query("create-or-update-team", variables, nil); err != nil {
+			return err
+		}
 		if err := store.Save(department); err != nil {
 			return err
 		}
@@ -99,6 +107,10 @@ func (p *populateProcessor) populateUsers(users []*model.User) error {
 	logrus.Debugf("process %d users", len(users))
 	store := p.stores["users"].(*model.UserStore)
 	for _, user := range users {
+		variables := tf.UserToGraphQLVars(user)
+		if err := client.Query("create-user-profile", variables, nil); err != nil {
+			return err
+		}
 		if err := store.Save(user); err != nil {
 			return err
 		}

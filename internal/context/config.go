@@ -13,6 +13,7 @@ import (
 
 type database struct {
 	File        string `mapstructure:"file"`
+	Flush       bool   `mapstructure:"flush"`
 	AutoMigrate bool   `mapstructure:"auto-migrate"`
 }
 
