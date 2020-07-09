@@ -25,3 +25,7 @@ func (store *FeedbackStore) Save(feedback *Feedback) (err error) {
 	}
 	return
 }
+
+func (store *FeedbackStore) Flush() (err error) {
+	return store.db.Model(&Feedback{}).Delete(&Feedback{}).Error
+}

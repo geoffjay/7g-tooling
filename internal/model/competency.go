@@ -40,6 +40,10 @@ func (store *CompetencyStore) Save(competency *Competency) (err error) {
 	return
 }
 
+func (store *CompetencyStore) Flush() (err error) {
+	return store.db.Model(&Competency{}).Delete(&Competency{}).Error
+}
+
 func NewLevelStore(db *gorm.DB) *LevelStore {
 	return &LevelStore{
 		db: db,
@@ -51,4 +55,8 @@ func (store *LevelStore) Save(level *Level) (err error) {
 		logrus.Panic(err)
 	}
 	return
+}
+
+func (store *LevelStore) Flush() (err error) {
+	return store.db.Model(&Level{}).Delete(&Level{}).Error
 }

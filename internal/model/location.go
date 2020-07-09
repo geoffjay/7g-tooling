@@ -26,3 +26,7 @@ func (store *LocationStore) Save(location *Location) (err error) {
 	}
 	return
 }
+
+func (store *LocationStore) Flush() (err error) {
+	return store.db.Model(&Location{}).Delete(&Location{}).Error
+}

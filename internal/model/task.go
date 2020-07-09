@@ -54,3 +54,7 @@ func (store *TaskStore) Save(task *Task) (err error) {
 	}
 	return
 }
+
+func (store *TaskStore) Flush() (err error) {
+	return store.db.Model(&Task{}).Delete(&Task{}).Error
+}

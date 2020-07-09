@@ -24,3 +24,7 @@ func (store *ReviewStore) Save(review *Review) (err error) {
 	}
 	return
 }
+
+func (store *ReviewStore) Flush() (err error) {
+	return store.db.Model(&Review{}).Delete(&Review{}).Error
+}

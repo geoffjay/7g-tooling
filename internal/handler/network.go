@@ -4,6 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/geoffjay/7g-tooling/internal/proc"
+
+	"github.com/geoffjay/7g-tooling/pkg/config"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/mitchellh/go-homedir"
@@ -34,14 +38,30 @@ func PopulateNetwork(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		path := fmt.Sprintf("%s/.config/7g/tmp/network-populate.yml", home)
+		path := fmt.Sprintf("%s/.config/7g/tmp/populate.yml", home)
 		if err := c.SaveUploadedFile(file, path); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
+		populate, err := config.LoadPopulate()
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		processor := proc.NewPopulateProcessor(db)
+		if err = processor.ProcessConfig(populate); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
 		logrus.Debugf("uploaded file %s", file.Filename)
-		c.JSON(http.StatusOK, gin.H{"received": file.Filename})
+		summary := populate.Summary()
+		c.JSON(http.StatusOK, gin.H{
+			"received": file.Filename,
+			"summary":  &summary,
+		})
 	}
 }
 

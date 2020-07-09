@@ -86,7 +86,26 @@ func TestRouter(t *testing.T) {
 
 		t.Log("It should respond with an HTTP status code of 200")
 		assert.Equal(t, 200, w.Code)
-		assert.Equal(t, "{\"received\":\"populate.yml\"}", w.Body.String())
+
+		expected := util.RemoveWhitespace(`{
+			"received":"populate.yml",
+			"summary":{
+				"competencies":0,
+				"competency-levels":0,
+				"departments":0,
+				"locations":0,
+				"objectives":0,
+				"one-on-one-templates":0,
+				"one-on-ones":0,
+				"recognition-badges":0,
+				"recognitions":0,
+				"role-templates":0,
+				"roles":0,
+				"users":0
+			}
+		}`)
+
+		assert.Equal(t, expected, w.Body.String())
 	})
 
 	t.Run("network/automate [POST]", func(t *testing.T) {

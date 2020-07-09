@@ -8,7 +8,7 @@ import (
 type Objective struct {
 	BaseModelSeq
 	Name        *string `gorm:"not null"`
-	Type        int
+	Type        *string
 	Description *string `gorm:"size:1024"`
 	//Due Date
 	//Creation Date
@@ -49,4 +49,8 @@ func (store *ObjectiveStore) Save(objective *Objective) (err error) {
 		logrus.Panic(err)
 	}
 	return
+}
+
+func (store *ObjectiveStore) Flush() (err error) {
+	return store.db.Model(&Objective{}).Delete(&Objective{}).Error
 }

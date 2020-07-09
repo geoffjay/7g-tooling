@@ -40,6 +40,10 @@ func (store *RecognitionStore) Save(recognition *Recognition) (err error) {
 	return
 }
 
+func (store *RecognitionStore) Flush() (err error) {
+	return store.db.Model(&Recognition{}).Delete(&Recognition{}).Error
+}
+
 func NewRecognitionBadgeStore(db *gorm.DB) *RecognitionBadgeStore {
 	return &RecognitionBadgeStore{
 		db: db,
@@ -51,4 +55,8 @@ func (store *RecognitionBadgeStore) Save(badge *RecognitionBadge) (err error) {
 		logrus.Panic(err)
 	}
 	return
+}
+
+func (store *RecognitionBadgeStore) Flush() (err error) {
+	return store.db.Model(&RecognitionBadge{}).Delete(&RecognitionBadge{}).Error
 }

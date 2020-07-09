@@ -7,6 +7,8 @@ import (
 	"path"
 	"path/filepath"
 	"runtime"
+	"strings"
+	"unicode"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mitchellh/go-homedir"
@@ -74,6 +76,17 @@ func RootDir() string {
 	logrus.Debug(a, c, x)
 	d := path.Join(path.Dir(b), "..")
 	return filepath.Dir(d)
+}
+
+// RemoveWhitespace returns a new string after removing any whitespace characters
+// from the input.
+func RemoveWhitespace(str string) string {
+	return strings.Map(func(r rune) rune {
+		if unicode.IsSpace(r) {
+			return -1
+		}
+		return r
+	}, str)
 }
 
 // GinContextFromContext can be used to read the Gin context in a request, use with:
