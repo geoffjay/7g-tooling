@@ -13,9 +13,9 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-type response interface{}
+type Response interface{}
 
-func Query(name string, variables map[string]interface{}, config *gcontext.Config) error {
+func Query(name string, variables map[string]interface{}, config *gcontext.Config) (Response, error) {
 	query := bin.GetQuery(name)
 	logrus.Debugf("Execute query: %s", name)
 
@@ -25,7 +25,6 @@ func Query(name string, variables map[string]interface{}, config *gcontext.Confi
 	if config == nil {
 		apiKey = os.Getenv("SG_API_KEY")
 		address = os.Getenv("SG_REMOTE_ADDRESS")
-		logrus.Info(address)
 		logrus.Debugf("Using secondary configuration from environment")
 	} else {
 		apiKey = config.APIKey
@@ -40,17 +39,18 @@ func Query(name string, variables map[string]interface{}, config *gcontext.Confi
 	bearer := fmt.Sprintf("Bearer %s", apiKey)
 	req.Header.Set("Authorization", bearer)
 	ctx := context.Background()
-	var res response
+	var res Response
 	if err := client.Run(ctx, req, &res); err != nil {
-		return err
+		return res, err
 	}
 
-	bytes, err := json.Marshal(res)
+	return res, nil
+}
+
+func ResponseJSON(response Response) string {
+	bytes, err := json.Marshal(response)
 	if err != nil {
 		logrus.Error(err)
 	}
-
-	logrus.Debug(string(bytes))
-
-	return nil
+	return string(bytes)
 }

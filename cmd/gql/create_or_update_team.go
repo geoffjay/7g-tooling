@@ -1,6 +1,8 @@
 package gql
 
 import (
+	"fmt"
+
 	"github.com/geoffjay/7g-tooling/internal/client"
 	gcontext "github.com/geoffjay/7g-tooling/internal/context"
 
@@ -42,5 +44,10 @@ func createOrUpdateTeam(cmd *cobra.Command, args []string) {
 		"profilesToAdd": teamProfilesToAdd,
 		"parent":        teamParent,
 	}
-	client.Query("create-or-update-team", variables, config)
+	res, err := client.Query("create-or-update-team", variables, config)
+	if err != nil {
+		logrus.Error(err)
+	}
+
+	fmt.Print(client.ResponseJSON(res))
 }

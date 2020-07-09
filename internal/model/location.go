@@ -8,6 +8,7 @@ import (
 type Location struct {
 	BaseModelSeq
 	Name string
+	SgID int
 }
 
 type LocationStore struct {

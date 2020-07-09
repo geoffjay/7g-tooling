@@ -7,6 +7,7 @@ import (
 
 type User struct {
 	BaseModelSeq
+	SgID              int
 	FirstName         *string
 	LastName          *string
 	Email             *string
