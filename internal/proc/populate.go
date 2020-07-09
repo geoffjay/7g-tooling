@@ -80,11 +80,13 @@ func (p *populateProcessor) populateLocations(locations []*model.Location) error
 			if err.Error() == "graphql: A location with this name already exists" {
 				logrus.Debug(res)
 				logrus.Error(err)
-				continue
 			} else {
 				return err
 			}
 		}
+		// TODO: handle error or invalid response
+		pk, _ := client.GetLocationIDByName(location.Name)
+		location.SgID = pk
 		if err := store.Save(location); err != nil {
 			return err
 		}
@@ -101,11 +103,13 @@ func (p *populateProcessor) populateDepartment(departments []*model.Department) 
 			if err.Error() == "graphql: Cannot have two departments with the same name and parent" {
 				logrus.Debug(res)
 				logrus.Error(err)
-				continue
 			} else {
 				return err
 			}
 		}
+		// TODO: handle error or invalid response
+		pk, _ := client.GetDepartmentIDByName(*department.Name)
+		department.SgID = pk
 		if err := store.Save(department); err != nil {
 			return err
 		}

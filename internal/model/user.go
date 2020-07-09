@@ -6,7 +6,7 @@ import (
 )
 
 type User struct {
-	BaseModelSeq
+	gorm.Model
 	SgID              int
 	FirstName         *string
 	LastName          *string

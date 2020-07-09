@@ -6,6 +6,8 @@ import (
 )
 
 type Review struct {
+	gorm.Model
+	SgID int
 }
 
 type ReviewStore struct {

@@ -6,7 +6,8 @@ import (
 )
 
 type Feedback struct {
-	BaseModelSeq
+	gorm.Model
+	SgID int
 }
 
 type FeedbackStore struct {
