@@ -62,3 +62,8 @@ func (store *RecognitionBadgeStore) Save(badge *RecognitionBadge) (err error) {
 func (store *RecognitionBadgeStore) Flush() (err error) {
 	return store.db.Model(&RecognitionBadge{}).Delete(&RecognitionBadge{}).Error
 }
+
+func (store *RecognitionBadgeStore) GetRecognitionBadgeByName(name string) (badge RecognitionBadge, err error) {
+	err = store.db.Model(&RecognitionBadge{}).Where("name = ?", name).First(&badge).Error
+	return
+}

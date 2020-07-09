@@ -36,8 +36,9 @@ objectives:
   -
     name: Be better
     type: Department
-    description:
-    due-date: EOC # special name for end of cycle?
+    description: An objective
+    start-date: 2020-07-01
+    due-date: 2020-12-31 # use EOC as special name for end of cycle?
     status: Open  # Open/Closed
     privacy: Public
     department: Team A
@@ -71,8 +72,6 @@ objectives:
         target-value: 10
         start-value: 1
 
-one-on-ones:
-
 one-on-one-templates:
 
 recognition-badges:
@@ -82,8 +81,6 @@ recognition-badges:
   -
     name: Bar
     description: Helps with all the bar
-
-recognitions:
 
 competency-levels:
 

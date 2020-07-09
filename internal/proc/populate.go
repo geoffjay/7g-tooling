@@ -27,9 +27,9 @@ func NewPopulateProcessor(db *gorm.DB) *populateProcessor {
 			"recognitions":         model.NewRecognitionStore(db),
 			"competency-levels":    model.NewLevelStore(db),
 			"competencies":         model.NewCompetencyStore(db),
-			//"reviews":              model.NewReviewStore(db),
-			"roles":          model.NewRoleStore(db),
-			"role-templates": model.NewRoleTemplateStore(db),
+			"reviews":              model.NewReviewStore(db),
+			"roles":                model.NewRoleStore(db),
+			"role-templates":       model.NewRoleTemplateStore(db),
 		},
 	}
 }
@@ -37,6 +37,7 @@ func NewPopulateProcessor(db *gorm.DB) *populateProcessor {
 func (p *populateProcessor) ProcessConfig(c *config.Populate) (err error) {
 	// TODO: create and return job
 	// TODO: create task for each model
+	// TODO: split the loop into two so that dependent models run afterwards
 	summary := c.Summary()
 	for key, _ := range summary {
 		switch key {
@@ -60,8 +61,8 @@ func (p *populateProcessor) ProcessConfig(c *config.Populate) (err error) {
 			err = p.populateLevels(c.CompetencyLevels)
 		case "competencies":
 			err = p.populateCompetencies(c.Competencies)
-		//case "reviews":
-		//	err = p.populateReviews(c.Reviews)
+		case "reviews":
+			err = p.populateReviews(c.Reviews)
 		case "roles":
 			err = p.populateRoles(c.Roles)
 		case "role-templates":
@@ -121,12 +122,20 @@ func (p *populateProcessor) populateUsers(users []*model.User) error {
 	logrus.Debugf("process %d users", len(users))
 	store := p.stores["users"].(*model.UserStore)
 	for _, user := range users {
+		// does user exist local?
+		// - if local as sgid continue
+		// does user exist remote?
+		// - if yes don't create-user-profile
+		// get sgid
+
 		variables := tf.UserToGraphQLVars(user)
 		if res, err := client.Query("create-user-profile", variables, nil); err != nil {
 			logrus.Debug(res)
 			logrus.Error(err)
-			return err
 		}
+		// TODO: handle error or invalid response
+		pk, _ := client.GetUserIDByEmail(*user.Email)
+		user.SgID = pk
 		if err := store.Save(user); err != nil {
 			return err
 		}
@@ -138,6 +147,15 @@ func (p *populateProcessor) populateObjectives(objectives []*model.Objective) er
 	logrus.Debugf("process %d objectives", len(objectives))
 	store := p.stores["objectives"].(*model.ObjectiveStore)
 	for _, objective := range objectives {
+		variables := tf.ObjectiveToGraphQLVars(objective)
+		if res, err := client.Query("create-objective", variables, nil); err != nil {
+			logrus.Debug(res)
+			logrus.Error(err)
+		}
+		// TODO: handle error or invalid response
+		pk, _ := client.GetObjectiveIDByName(*objective.Name)
+		// TODO: get parent IDs
+		objective.SgID = pk
 		if err := store.Save(objective); err != nil {
 			logrus.Error(err)
 			return err
