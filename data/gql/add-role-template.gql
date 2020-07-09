@@ -1,4 +1,23 @@
-# {"roleTemplate": {"title":"test", "description": "things"}}
+# add:
+# "variables": {
+#   "roleTemplate": {
+#     "description": String,
+#     # "competencies": [ # ExpectationInput not necessary for us
+#     #     {
+#     #       "description": String,
+#     #       "expectationTemplateId": Int!,
+#     #       "expectedLevel": Int,
+#     #       "title": String!,
+#     #     }
+#     # ],
+#     "expectations": [{ # responsibilities: ExpectationInput
+#         "description": String,
+#         "showAssessment": Boolean,
+#         "title": String!
+#       }],
+#     "title": String!
+#   }
+# }
 
 mutation ($roleTemplate: RoleTemplateInput!) {
   addRoleTemplate(roleTemplate: $roleTemplate) {

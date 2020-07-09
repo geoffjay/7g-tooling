@@ -30,9 +30,10 @@ func Query(name string, variables map[string]interface{}, config *gcontext.Confi
 	req.Header.Set("Authorization", bearer)
 	var res Response
 	if err := client.Run(context.Background(), req, &res); err != nil {
+		logrus.Debug(err)
 		return res, err
 	}
-
+	logrus.Debug(res)
 	return res, nil
 }
 

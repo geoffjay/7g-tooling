@@ -18,6 +18,7 @@ type response interface{}
 func init() {
 	// Create and update mutations
 	Command.AddCommand(addOrUpdateCompetencyCmd)
+	Command.AddCommand(addRoleTemplateCmd)
 	Command.AddCommand(createObjectiveCmd)
 	Command.AddCommand(createStaticAPITokenCmd)
 	Command.AddCommand(createOrUpdateOneononeTemplateCmd)
