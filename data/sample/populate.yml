@@ -134,16 +134,16 @@ compentencies:
 role-responsibilities:
   -
     title: Do things
-    description:
+    description: Needs to do things
   -
     title: Do moar things
-    description:
+    description: Needs to do moar of the things
   -
     title: Do all the things
-    description:
+    description: Needs to do all of the things
   -
     title: Tell other people to do things
-    description:
+    description: Needs to tell other people to do the things
 
 role-templates:
   -
