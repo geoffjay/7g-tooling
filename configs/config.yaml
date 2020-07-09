@@ -11,8 +11,6 @@ database:
 
 remote:
   address: "http://localhost:8000/graphql"
-  # this should be the profile corresponding to the API key
-  profile-id: 1
 
 log:
   formatter: "text"

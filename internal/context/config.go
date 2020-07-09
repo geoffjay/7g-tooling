@@ -23,8 +23,7 @@ type logging struct {
 
 // Configuration for the remote application host
 type remote struct {
-	Address   string `mapstructure:"address"`
-	ProfileID int    `mapstructure:"profile-id"`
+	Address string `mapstructure:"address"`
 }
 
 // Config defines the application configuration
@@ -95,6 +94,13 @@ func LoadConfig(path string) (*Config, error) {
 		logrus.SetLevel(level)
 	}
 
+	// FIXME: hack to not have to pass config down as props to processor
+	if err := os.Setenv("SG_API_KEY", c.APIKey); err != nil {
+		logrus.Error(err)
+	}
+	if err := os.Setenv("SG_REMOTE_ADDRESS", c.Remote.Address); err != nil {
+		logrus.Error(err)
+	}
 	logrus.Debug("Configuration Location: ", config.ConfigFileUsed())
 
 	return &c, nil

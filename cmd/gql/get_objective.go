@@ -1,16 +1,11 @@
 package gql
 
 import (
-	"context"
-	"fmt"
-
-	bin "github.com/geoffjay/7g-tooling/data/gql"
+	"github.com/geoffjay/7g-tooling/internal/client"
 	gcontext "github.com/geoffjay/7g-tooling/internal/context"
 
-	"github.com/machinebox/graphql"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 var (
@@ -36,27 +31,6 @@ func getObjective(cmd *cobra.Command, args []string) {
 		logrus.Fatal(err)
 	}
 
-	//sg := client.NewSevenGeese(config)
-
-	if viper.GetBool("verbose") {
-		assets := bin.GetQueryList()
-		for asset := range assets {
-			logrus.Info(asset)
-		}
-	}
-
-	query := bin.GetQuery("get-objective")
-	logrus.Debugf("Execute query:\n%s", query)
-
-	client := graphql.NewClient("http://localhost:8000/graphql")
-	req := graphql.NewRequest(query)
-	req.Var("pk", id)
-	bearer := fmt.Sprintf("Bearer %s", config.APIKey)
-	req.Header.Set("Authorization", bearer)
-	ctx := context.Background()
-	var res response
-	if err := client.Run(ctx, req, &res); err != nil {
-		logrus.Fatal(err)
-	}
-	logrus.Info(res)
+	variables := map[string]interface{}{"pk": id}
+	client.Query("get-objective", variables, config)
 }

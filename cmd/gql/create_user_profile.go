@@ -31,7 +31,7 @@ func init() {
 }
 
 func createUserProfile(cmd *cobra.Command, args []string) {
-	logrus.Debug("gql > get-objective")
+	logrus.Debug("gql > create-user-profile")
 
 	config, err := gcontext.LoadConfig(".")
 	if err != nil {
