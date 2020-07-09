@@ -12,8 +12,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ./target/7g gql create-objective --name="foo" --type=1
-
 var (
 	name          string
 	objectiveType int
@@ -26,7 +24,6 @@ var (
 )
 
 func init() {
-	// --type=1
 	createObjectiveCmd.PersistentFlags().IntVarP(&objectiveType, "type", "t", 1, "objective type")
 	createObjectiveCmd.PersistentFlags().StringVarP(&name, "name", "n", "Goal", "objective name")
 }
@@ -47,17 +44,6 @@ func createObjective(cmd *cobra.Command, args []string) {
 		"objectiveType": objectiveType,
 	}
 
-	// type objectiveInputType struct {
-	// 	name          string
-	// 	objectiveType int
-	// }
-
-	// objectiveInput := objectiveInputType{
-	// 	name:          name,
-	// 	objectiveType: objectiveType,
-	// }
-
-	logrus.Debug(objectiveInput)
 	client := graphql.NewClient("http://localhost:8000/graphql")
 	req := graphql.NewRequest(query)
 	req.Var("objective", objectiveInput)

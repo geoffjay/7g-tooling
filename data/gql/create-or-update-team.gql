@@ -1,0 +1,30 @@
+# add
+# variables: {
+#
+#     "name": String,
+#     "profilesToAdd": [Int],
+#     "parent": Int
+# }
+# update:
+# variables: {
+#     "id": Int,
+#     "profilesToAdd": [Int],
+#     "parent": Int,
+# }
+mutation createOrUpdateTeamMutation(
+  $id: Int
+  $name: String
+  $profilesToAdd: [Int]
+  $parent: Int
+) {
+  createOrUpdateTeam(
+    name: $name
+    pk: $id
+    profilesToAdd: $profilesToAdd
+    parent: $parent
+  ) {
+    team {
+      pk
+    }
+  }
+}
