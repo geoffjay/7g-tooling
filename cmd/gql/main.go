@@ -20,6 +20,7 @@ func init() {
 	Command.AddCommand(createObjectiveCmd)
 	Command.AddCommand(createStaticAPITokenCmd)
 	Command.AddCommand(createOrUpdateOneononeTemplateCmd)
+	Command.AddCommand(createOrUpdateBadgeCmd)
 	Command.AddCommand(createOrUpdateTeamCmd)
 	Command.AddCommand(createUserProfileCmd)
 

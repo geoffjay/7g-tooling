@@ -1,0 +1,23 @@
+# create
+# variables {
+#     "badge" {
+#         "name": String!,
+#         "description: String,
+#         # "teams" later on...
+#     }
+# }
+# update
+# variables {
+#     "pk": Int,
+#     "badge" {
+#         "name": String,
+#         "description: String,
+#     }
+# }
+mutation createOrUpdateBadgeMutation($pk: Int, $badge: BadgeInput!) {
+    createOrUpdateBadge(pk: $pk, badge: $badge) {
+        badge {
+            pk
+        }
+    }
+}
