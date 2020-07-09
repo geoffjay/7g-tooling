@@ -17,6 +17,7 @@ endif
 
 bindata: setup; $(info $(M) Generating binary data to package...)
 	@go generate ./data/gql
+	@go generate ./data/init
 
 build: bindata; $(info $(M) Building $(PROJECT)...)
 	@go build -o target/7g

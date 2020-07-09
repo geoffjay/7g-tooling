@@ -1,0 +1,9 @@
+# {"roleTemplate": {"title":"test", "description": "things"}}
+
+mutation ($roleTemplate: RoleTemplateInput!) {
+  addRoleTemplate(roleTemplate: $roleTemplate) {
+    roleTemplate {
+      pk
+    }
+  }
+}

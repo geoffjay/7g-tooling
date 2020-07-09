@@ -1,0 +1,9 @@
+# add: {"name": "Foo"}
+
+mutation ($name: String) {
+  createOrUpdateLocation(name: $name) {
+    location {
+      pk
+    }
+  }
+}

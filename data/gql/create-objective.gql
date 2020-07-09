@@ -1,0 +1,36 @@
+
+# variables: {
+#     "objective": {
+#         "name": String,
+#         "objectiveType": Int,
+#         "draft": Boolean
+#         "description": String,
+#         "dueDate": String,
+#         "startDate": String,
+#         "closed": Boolean,
+#         "private": Boolean,
+#         "departmentVisibility": Int,
+#         "departments": [Int],
+#         "labels": [String],
+#         # parent/child objectives omitted
+#         weights,
+#         owners: [Int],
+#         stakeholders: [Int],
+#         followers: [Int],
+#         keyResults: [{
+#             name
+#             measurement_type
+#             weight
+#             target_value
+#             starting_value
+#         }]
+
+#     }
+# }
+mutation createObjectiveMutation($objective: NewObjectiveInput!) {
+    createObjective(objective: $objective) {
+        objective {
+            pk
+        }
+    }
+}

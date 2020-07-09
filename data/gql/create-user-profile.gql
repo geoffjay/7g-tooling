@@ -1,0 +1,15 @@
+# {"userProfile": {
+#  "email": "newtesteee@7geese.com",
+#  "firstName": "new",
+#  "lastName": "testeee",
+#  "position": "devloper",
+#  "username": "newtesteee"
+#}}
+
+mutation ($userProfile: UserProfileInput!) {
+  createUserprofile(userProfile: $userProfile) {
+    profile {
+      pk
+    }
+  }
+}

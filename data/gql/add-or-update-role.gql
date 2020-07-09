@@ -1,0 +1,10 @@
+# add: {"profile": 1, "role": {"title": "new role", "status": 1}}
+# update: {"profile": 1, "role": {"pk": 1, "status": 2}}
+
+mutation ($profile: Int!, $role: RoleInput!) {
+  addOrUpdateRole(profile: $profile, role: $role) {
+    role {
+      pk
+    }
+  }
+}

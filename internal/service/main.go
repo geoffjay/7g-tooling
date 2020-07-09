@@ -3,6 +3,8 @@ package service
 import (
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/geoffjay/7g-tooling/internal/model"
@@ -40,11 +42,22 @@ func Run(config *gcontext.Config) {
 		maxHeaderBytes    = http.DefaultMaxHeaderBytes
 	)
 
+	// Catch shutdown signals
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+
+	go func() {
+		<-sigs
+		os.Exit(0)
+	}()
+
+	// Setup database connection
 	db, err := gcontext.Connect(config)
 	if err != nil {
 		logrus.Fatal("Failed to connect to database:", err)
 	}
 
+	// Flush the database tables if requested
 	if viper.GetBool("flush") {
 		logrus.Debug("Flushing all database tables")
 		stores := map[string]interface{}{

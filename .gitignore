@@ -9,9 +9,11 @@ data.db
 # front-end
 app/dist/
 app/node_modules/
+app/.yarnclean
 
 # generated static resources
 data/gql/bindata.go
+data/init/bindata.go
 
 # generated documentation files
 docs/docs.go

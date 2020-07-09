@@ -1,7 +1,9 @@
 package proc
 
 import (
+	"github.com/geoffjay/7g-tooling/internal/client"
 	"github.com/geoffjay/7g-tooling/internal/model"
+	tf "github.com/geoffjay/7g-tooling/internal/model/transformer"
 	"github.com/geoffjay/7g-tooling/pkg/config"
 
 	"github.com/jinzhu/gorm"
@@ -73,6 +75,8 @@ func (p *populateProcessor) populateLocations(locations []*model.Location) error
 	logrus.Debugf("process %d locations", len(locations))
 	store := p.stores["locations"].(*model.LocationStore)
 	for _, location := range locations {
+		variables := tf.LocationToGraphQLVars(location)
+		client.Query("create-or-update-location", variables, nil)
 		if err := store.Save(location); err != nil {
 			return err
 		}

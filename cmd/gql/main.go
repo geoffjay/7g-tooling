@@ -13,7 +13,16 @@ var (
 	}
 )
 
+type response interface{}
+
 func init() {
+	// Create and update mutations
+	Command.AddCommand(createObjectiveCmd)
+	Command.AddCommand(createStaticAPITokenCmd)
+	Command.AddCommand(createOrUpdateTeamCmd)
+	Command.AddCommand(createUserProfileCmd)
+
+	// Read queries
 	Command.AddCommand(getObjectiveCmd)
 }
 
