@@ -25,7 +25,7 @@ func disable(cmd *cobra.Command, args []string) {
 	plistPath := fmt.Sprintf("%s/Library/LaunchAgents/%s.plist", os.Getenv("HOME"), label)
 	logrus.Infof("Unloading %s", label)
 	output, err := exec.Command("/bin/launchctl", "unload", plistPath).CombinedOutput()
-	logrus.Debug("Output (launchctl unload): %s", string(output))
+	logrus.Debugf("Output (launchctl unload): %s", string(output))
 	if err != nil {
 		logrus.Fatalf("Failed to unload service: %s", err)
 	}

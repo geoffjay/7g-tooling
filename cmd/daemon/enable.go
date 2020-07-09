@@ -54,7 +54,7 @@ func enable(cmd *cobra.Command, args []string) {
 	logrus.Infof("Loading %s", data.Label)
 	// We start using load -w on plist file
 	output, err := exec.Command("/bin/launchctl", "load", "-w", plistPath).CombinedOutput()
-	logrus.Debug("Output (launchctl load): %s", string(output))
+	logrus.Debugf("Output (launchctl load): %s", string(output))
 	if err != nil {
 		logrus.Fatalf("Failed to load service: %s", err)
 	}
