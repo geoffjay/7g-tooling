@@ -1,0 +1,80 @@
+@import '~7g-utils//style/';
+
+.input-component {
+    @include placeholder($slate60, 14px);
+    box-sizing: border-box;
+    background-color: $white;
+    border-radius: $baseBorderRadius;
+    color: $slateText;
+    display: inline-block;
+    font-size: $baseFontSize;
+    font-weight: normal;
+    line-height: 36px;
+    padding: 0 12px;
+    height: 36px;
+    width: 100%;
+    border: none;
+    transition:
+        border-color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out;
+    &:focus {
+        box-shadow: 0 0 2px $skyBlue;
+        outline: none;
+    }
+}
+
+.input-component--number {
+    padding: 0 0 0 12px;
+}
+
+.input-component--disabled {
+    background-color: $grey10Flat;
+    color: $graphite50;
+}
+
+.input-component--error {
+    background-color: $errorBackground;
+    border-color: $red;
+    &:focus {
+        background-color: $white;
+    }
+}
+
+.clearable-input {
+    position: relative;
+    .input-component {
+        padding: 0 36px 0 12px;
+    }
+    &__button {
+        -webkit-appearance: none;
+        appearance: none;
+        border: 0;
+        background: transparent;
+        color: $slate7;
+        margin: 0;
+        padding: 4px;
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: color 0.15s ease-in;
+        &:hover {
+            color: $linkColorHover;
+        }
+    }
+}
+
+.key-result-input {
+    position: relative;
+    .input-component {
+        padding: 0 12px 0 36px;
+        text-align: right;
+    }
+    .objective-integration-icon {
+        padding: 0 4px;
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}

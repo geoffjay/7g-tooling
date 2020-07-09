@@ -1,0 +1,98 @@
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "es2020": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "globals": {
+        "__static": true
+    },
+    "overrides": [
+        {
+            "files": ["**/*.js", "**/*.jsx"],
+            "rules": {
+                "@typescript-eslint/explicit-module-boundary-types": "off"
+            }
+        }
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "plugins": ["babel", "react", "@typescript-eslint", "import", "promise"],
+    "rules": {
+        "indent": ["error", 4],
+        "linebreak-style": ["error", "unix"],
+        "jsx-quotes": ["error", "prefer-double"],
+        "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+        "semi": ["error", "always"],
+
+        //  rules/eslint/es6/
+        "arrow-parens": "off",
+        "no-confusing-arrow": "off",
+
+        //  rules/eslint/best-practices/
+        "complexity": "off",
+        "no-param-reassign": "off",
+        "max-classes-per-file": "off",
+
+        //  rules/eslint/style/
+        "func-style": "off",
+        "implicit-arrow-linebreak": "off",
+        "max-len": "off",
+        "no-else-return": "off",
+        "no-unneeded-ternary": "off",
+        "no-restricted-syntax": "off",
+        "no-plusplus": "off",
+        "operator-linebreak": "off",
+        "operator-assignment": "off",
+        "object-curly-newline": "off",
+        "space-infix-ops": "off",
+        "no-nested-ternary": "off",
+        "no-spaced-func": "off",
+        "no-whitespace-before-property": "off",
+        "space-unary-ops": "off",
+
+        //  rules/import/
+        "import/named": "off",
+        "import/dynamic-import-chunkname": "off",
+        "import/exports-last": "off",
+        "import/no-useless-path-segments": "off",
+        "import/no-named-as-default": "off",
+        "import/no-cycle": "off",
+        "import/no-unused-modules": ["error"],
+
+        //  rules/jest/
+        "jest/prefer-called-with": "off",
+
+        //  rules/promise/
+        "promise/catch-or-return": "off",
+        "promise/no-return-wrap": ["error", { "allowReject": true }],
+
+        //  rules/react/
+        "react/no-deprecated": "off",
+        "react/sort-prop-types": "off",
+        "react/jsx-sort-default-props": "off",
+        "react/jsx-props-no-multi-spaces": "off",
+        "react/jsx-max-props-per-line": "off",
+
+        //  rules/jsx-a11y
+        "jsx-a11y/label-has-for": "off",
+        "jsx-a11y/no-noninteractive-element-to-interactive-role": "off",
+        "jsx-a11y/control-has-associated-label": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "999.999.999"
+        }
+    }
+}

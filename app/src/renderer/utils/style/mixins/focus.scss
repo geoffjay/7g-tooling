@@ -1,0 +1,37 @@
+$focusBoxGapSize: 2px;
+$focusedBoxShadow: 0 0 0 4px $focusedOutlineColor;
+
+// Prefix with sg- to avoid collisions
+@mixin sg-focus($focusBorderRadius: 5px) {
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: -$focusBoxGapSize;
+        right: -$focusBoxGapSize;
+        bottom: -$focusBoxGapSize;
+        left: -$focusBoxGapSize;
+        border-radius: $focusBorderRadius;
+        transition: box-shadow 200ms cubic-bezier(0.175, 0.885, 0.32, 1.75);
+    }
+
+    // Using https://github.com/WICG/focus-visible#backwards-compatibility
+    // Defines a fallback, in case js-focus-visible does not work
+    &:focus {
+        outline: none;
+        &:before {
+            box-shadow: $focusedBoxShadow;
+        }
+    }
+
+    // Removes the box-shadow defined above, in case the focus was received not via keyboard
+    .js-focus-visible &:focus:not(.focus-visible):before {
+        box-shadow: none;
+    }
+
+    // Adds the focus state when focus was received from the keyboard
+    .js-focus-visible &.focus-visible:before {
+        box-shadow: $focusedBoxShadow;
+    }
+}

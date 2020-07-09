@@ -1,0 +1,181 @@
+/* Variables.less
+ * These variables are mainly used to customize bootstrap,
+ * however, some are used throughout the app to standarize
+ * the look and feel of 7Geese.
+ * A list of Bootstrap variables can be found here:
+ * static/components/bootstrap/docs/customize.html
+ * -------------------------------------------------- */
+
+// Typography
+// -------------------------
+$baseLineHeight:        18px;
+
+// Site width and columns
+$desktopWidth: 980px;
+$columnPadding: 10px;
+$leftColumnWidth: 345px;
+$rightColumnWidth: $desktopWidth - $leftColumnWidth - $columnPadding * 4;
+
+// Breakpoints
+$mobileBreak: 320px;
+$mobileLandscapeBreak: 480px;
+$tabletBreak: 768px;
+$tabletLandscapeBreak: 1024px;
+
+// Baseline grid
+$basefont: 13px;
+$baseline: 18px;
+
+$headerHeight: 40px;
+
+// Colours
+// -------------------------
+$backgroundLightBlue: $blizzard;
+
+// Scaffolding
+// -------------------------
+$bodyBackground:        $white;
+$textColor: $grey75;
+
+// Tables
+// -------------------------
+$tableBackground:                   transparent; // overall background-color
+$tableBackgroundAccent:             $grey3Flat; // for striping
+$tableBackgroundHover:              #f5f5f5; // for hover
+$tableBorder:                       #ddd; // table and cell border
+
+// COMPONENT VARIABLES
+// --------------------------------------------------
+
+// Typography
+// -------------------------
+
+$fontSizeExtraLarge:    24px;
+$fontSizeLarge:         16px;
+$fontSizeMedium:        14px;
+$fontSizeSmall:         12px;
+$fontSizeMicro:         10px;
+$lineHeightLarge:       24px;
+$lineHeightMedium:      $lineHeightLarge;
+$lineHeightSmall:       16px;
+$lineHeightMicro:       $lineHeightSmall;
+
+$lineHeightBase:        $lineHeightMedium;
+$fontSizeBase:          $fontSizeMedium;
+
+$headingsFontFamily:    inherit; // empty to use BS default, $baseFontFamily
+$headingsFontWeight:    bold;    // instead of browser default, bold
+$headingsColor:         inherit; // empty to use BS default, $textColor
+
+// Bootstrap-only Typography
+// -------------------------
+
+$baseFontSize:          14px; // Use $$fontSizeBase in app
+$baseLineHeight:        20px; // Use $lineHeightBase in app
+
+// Component sizing
+// -------------------------
+
+$paddingLarge:          11px 19px; // 44px
+$paddingSmall:          2px 10px;  // 26px
+$paddingMini:           0 6px;   // 22px
+
+$baseBorderRadius:      4px;
+$borderRadiusLarge:     6px;
+$borderRadiusSmall:     2px;
+
+// Select2
+$select2GroupBackground: #eee;
+
+// Default 940px grid
+// -------------------------
+$gridColumns:             12;
+$gridColumnWidth:         60px;
+$gridGutterWidth:         20px;
+$gridRowWidth:            ($gridColumns * $gridColumnWidth) + ($gridGutterWidth * ($gridColumns - 1));
+
+// 1200px min
+$gridColumnWidth1200:     70px;
+$gridGutterWidth1200:     30px;
+$gridRowWidth1200:        ($gridColumns * $gridColumnWidth1200) + ($gridGutterWidth1200 * ($gridColumns - 1));
+
+// 768px-979px
+$gridColumnWidth768:      42px;
+$gridGutterWidth768:      20px;
+$gridRowWidth768:         ($gridColumns * $gridColumnWidth768) + ($gridGutterWidth768 * ($gridColumns - 1));
+
+// Fluid grid
+// -------------------------
+$fluidGridColumnWidth:    percentage($gridColumnWidth/$gridRowWidth);
+$fluidGridGutterWidth:    percentage($gridGutterWidth/$gridRowWidth);
+
+// 1200px min
+$fluidGridColumnWidth1200:     percentage($gridColumnWidth1200/$gridRowWidth1200);
+$fluidGridGutterWidth1200:     percentage($gridGutterWidth1200/$gridRowWidth1200);
+
+// 768px-979px
+$fluidGridColumnWidth768:      percentage($gridColumnWidth768/$gridRowWidth768);
+$fluidGridGutterWidth768:      percentage($gridGutterWidth768/$gridRowWidth768);
+
+// Mixins req. to compile some bootstrap stuff
+
+// .border-radius($radius) {
+//     border-radius: $radius;
+// }
+
+// .border-top-left-radius($radius) {
+//     border-top-left-radius: $radius;
+// }
+// .border-top-right-radius($radius) {
+//     border-top-right-radius: $radius;
+// }
+// .border-bottom-right-radius($radius) {
+//     border-bottom-right-radius: $radius;
+// }
+// .border-bottom-left-radius($radius) {
+//     border-bottom-left-radius: $radius;
+// }
+
+// // Single Side Border Radius
+// .border-top-radius($radius) {
+//     .border-top-right-radius($radius);
+//     .border-top-left-radius($radius);
+// }
+// .border-right-radius($radius) {
+//     .border-top-right-radius($radius);
+//     .border-bottom-right-radius($radius);
+// }
+// .border-bottom-radius($radius) {
+//     .border-bottom-right-radius($radius);
+//     .border-bottom-left-radius($radius);
+// }
+// .border-left-radius($radius) {
+//     .border-top-left-radius($radius);
+//     .border-bottom-left-radius($radius);
+// }
+
+// // Table columns
+// .tableColumns($columnSpan: 1) {
+//     float: none; // undo default grid column styles
+//     width: (($gridColumnWidth) * $columnSpan) + ($gridGutterWidth * ($columnSpan - 1)) - 16; // 16 is total padding on left and right of table cells
+//     margin-left: 0; // undo default grid column styles
+// }
+
+// // Webkit-style focus
+// // ------------------
+// .tab-focus() {
+//     // Default
+//     outline: thin dotted #333;
+//     // Webkit
+//     outline: 5px auto -webkit-focus-ring-color;
+//     outline-offset: -2px;
+// }
+
+// Navigation
+// -------------------------
+$navigationHeight: 97px;
+
+// Sidebars
+// -------------------------
+$sidebarTransitionTiming: 200ms;
+$sidebarTransitionTimingFunction: linear;
