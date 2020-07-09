@@ -66,7 +66,7 @@ func setup() {
 	}
 
 	// Load environment
-	logrus.Debug("Loading environment from %s", env)
+	logrus.Debugf("Loading environment from %s", env)
 	err := godotenv.Load(env)
 	if err != nil {
 		log.Fatal("Error loading .env file")

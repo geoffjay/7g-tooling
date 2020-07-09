@@ -8,17 +8,17 @@ import (
 type User struct {
 	gorm.Model
 	SgID              int
-	FirstName         *string
-	LastName          *string
-	Email             *string
-	Phone             *string
+	FirstName         string
+	LastName          string
+	Email             *string `gorm:"unique;not null"`
+	Phone             string
 	ManagerID         int
-	ManagerName       *string
-	State             *string
-	Title             *string
-	DepartmentsJoined *string
-	LocationsJoined   *string
-	RolesJoined       *string
+	ManagerName       string
+	State             string
+	Title             string
+	DepartmentsJoined string
+	LocationsJoined   string
+	RolesJoined       string
 
 	Departments []Department `gorm:"many2many:user_departments;association_autoupdate:false;association_autocreate:false"`
 	Locations   []Location   `gorm:"many2many:user_locations;association_autoupdate:false;association_autocreate:false"`
