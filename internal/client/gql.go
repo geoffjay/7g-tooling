@@ -3,6 +3,7 @@ package client
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 
@@ -134,6 +135,10 @@ func GetUserIDByEmail(email string) (int, error) {
 	err := client.Run(context.Background(), req, &res)
 	if err != nil {
 		return -1, err
+	}
+	if len(res.Profiles.Edges) == 0 {
+		msg := fmt.Sprintf("No users found with the email %s", email)
+		return -1, errors.New(msg)
 	}
 	return res.Profiles.Edges[0].Node.Pk, nil
 }

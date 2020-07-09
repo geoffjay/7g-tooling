@@ -10,7 +10,9 @@ import (
 )
 
 var (
-	key string
+	sValue string
+	iValue int
+	bValue bool
 
 	setCmd = &cobra.Command{
 		Use:   "set",
@@ -20,7 +22,9 @@ var (
 )
 
 func init() {
-	setCmd.PersistentFlags().StringVar(&key, "key", "version", "configuration setting key")
+	Command.PersistentFlags().StringVar(&sValue, "string-value", "", "configuration setting string value")
+	Command.PersistentFlags().IntVar(&iValue, "int-value", 0, "configuration setting int value")
+	Command.PersistentFlags().BoolVar(&bValue, "bool-value", false, "configuration setting boolean value")
 }
 
 func set(cmd *cobra.Command, args []string) {
@@ -31,6 +35,8 @@ func set(cmd *cobra.Command, args []string) {
 
 	switch key {
 	case "host":
+		config.Host = sValue
+		//gcontext.WriteConfig(config)
 		fmt.Print(config.Host)
 	}
 }

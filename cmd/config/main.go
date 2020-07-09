@@ -6,6 +6,8 @@ import (
 )
 
 var (
+	key string
+
 	Command = &cobra.Command{
 		Use:   "config",
 		Short: "Config commands",
@@ -14,6 +16,8 @@ var (
 )
 
 func init() {
+	Command.PersistentFlags().StringVar(&key, "key", "version", "configuration setting key")
+
 	Command.AddCommand(getCmd)
 	Command.AddCommand(setCmd)
 }
