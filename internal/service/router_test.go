@@ -99,6 +99,7 @@ func TestRouter(t *testing.T) {
 				"one-on-ones":0,
 				"recognition-badges":0,
 				"recognitions":0,
+				"reviews":0,
 				"role-templates":0,
 				"roles":0,
 				"users":0
