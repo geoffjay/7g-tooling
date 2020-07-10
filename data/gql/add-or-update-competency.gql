@@ -1,0 +1,34 @@
+#add:
+# variables: {
+#     "expectationTemplate": {
+#         "title": String!,
+#         "description": String,
+#         "expectationType": Int!,
+#         "levels": [{ # CompetencyLevelInput
+#             "pk": Int,
+#             "title": String!,
+#             "description": String,
+#         }]
+#     }
+# }
+#update:
+# variables: {
+#     "expectationTemplate": {
+#         "pk": Int!,
+#         "title": String!,
+#         "description": String,
+#         "expectationType": Int!,
+#         "levels": [{ # CompetencyLevelInput
+#             "pk": Int,
+#             "title": String!,
+#             "description": String,
+#         }]
+#     }
+# }
+mutation addOrUpdateCompetencyMutation($expectationTemplate: ExpectationTemplateInput!) {
+    addOrUpdateExpectationTemplate(expectationTemplate: $expectationTemplate) {
+        expectationTemplate {
+            pk
+        }
+    }
+}
