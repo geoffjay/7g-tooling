@@ -3,6 +3,8 @@ package cmd
 import (
 	"log"
 
+	"github.com/geoffjay/7g-tooling/cmd/config"
+
 	"github.com/geoffjay/7g-tooling/cmd/db"
 
 	"github.com/joho/godotenv"
@@ -57,6 +59,7 @@ func init() {
 func addCommands() {
 	rootCmd.AddCommand(completionCmd)
 	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(config.Command)
 	rootCmd.AddCommand(daemon.Command)
 	rootCmd.AddCommand(db.Command)
 	rootCmd.AddCommand(deploy.Command)
