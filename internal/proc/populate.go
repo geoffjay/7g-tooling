@@ -41,30 +41,30 @@ func (p *populateProcessor) ProcessConfig(c *config.Populate) (err error) {
 	summary := c.Summary()
 	for key, _ := range summary {
 		switch key {
-		case "locations":
-			err = p.populateLocations(c.Locations)
-		case "departments":
-			err = p.populateDepartment(c.Departments)
-		case "users":
-			err = p.populateUsers(c.Users)
-		case "objectives":
-			err = p.populateObjectives(c.Objectives)
-		case "one-on-ones":
-			err = p.populateOneOnOnes(c.OneOnOnes)
-		case "one-on-one-templates":
-			err = p.populateOneOnOneTemplates(c.OneOnOneTemplates)
-		case "recognition-badges":
-			err = p.populateRecognitionBadges(c.RecognitionBadges)
-		case "recognitions":
-			err = p.populateRecognitions(c.Recognitions)
-		case "competency-levels":
-			err = p.populateLevels(c.CompetencyLevels)
-		case "competencies":
-			err = p.populateCompetencies(c.Competencies)
-		case "reviews":
-			err = p.populateReviews(c.Reviews)
-		case "roles":
-			err = p.populateRoles(c.Roles)
+		//case "locations":
+		//	err = p.populateLocations(c.Locations)
+		//case "departments":
+		//	err = p.populateDepartment(c.Departments)
+		//case "users":
+		//	err = p.populateUsers(c.Users)
+		//case "objectives":
+		//	err = p.populateObjectives(c.Objectives)
+		//case "one-on-ones":
+		//	err = p.populateOneOnOnes(c.OneOnOnes)
+		//case "one-on-one-templates":
+		//	err = p.populateOneOnOneTemplates(c.OneOnOneTemplates)
+		//case "recognition-badges":
+		//	err = p.populateRecognitionBadges(c.RecognitionBadges)
+		//case "recognitions":
+		//	err = p.populateRecognitions(c.Recognitions)
+		//case "competency-levels":
+		//	err = p.populateLevels(c.CompetencyLevels)
+		//case "competencies":
+		//	err = p.populateCompetencies(c.Competencies)
+		//case "reviews":
+		//	err = p.populateReviews(c.Reviews)
+		//case "roles":
+		//	err = p.populateRoles(c.Roles)
 		case "role-templates":
 			err = p.populateRoleTemplates(c.RoleTemplates)
 		}
@@ -239,7 +239,6 @@ func (p *populateProcessor) populateCompetencies(competencies []*model.Competenc
 	logrus.Debugf("process %d competencies", len(competencies))
 	store := p.stores["competencies"].(*model.CompetencyStore)
 	for _, competency := range competencies {
-		// logrus.Debugf(competency.Levels)
 		variables := tf.CompetencyToGraphQLVars(competency)
 		if res, err := client.Query("add-or-update-competency", variables, nil); res != nil {
 			if err != nil {
@@ -283,13 +282,44 @@ func (p *populateProcessor) populateRoles(roles []*model.Role) error {
 	return nil
 }
 
+type roleTemplateResponse struct {
+	AddRoleTemplate struct {
+		RoleTemplate struct {
+			Pk           int
+			Expectations struct {
+				Edges []struct {
+					Node struct {
+						Pk    int
+						Title string
+					}
+				}
+			}
+		}
+	}
+}
+
 func (p *populateProcessor) populateRoleTemplates(templates []*model.RoleTemplate) error {
 	logrus.Debugf("process %d role templates", len(templates))
 	store := p.stores["role-templates"].(*model.RoleTemplateStore)
 	for _, template := range templates {
-		if err := store.Save(template); err != nil {
-			logrus.Error(err)
-			return nil
+		variables := tf.RoleTemplateToGraphQLVars(template)
+		var res roleTemplateResponse
+		err := client.QueryWithResponse("add-role-template", variables, &res, nil)
+		if &res != nil {
+			if err != nil {
+				logrus.Debug(err)
+				return err
+			}
+			roleTemplate := res.AddRoleTemplate.RoleTemplate
+			template.SgID = roleTemplate.Pk
+			for i, expectation := range roleTemplate.Expectations.Edges {
+				expectationPk := expectation.Node.Pk
+				template.Responsibilities[i].SgID = expectationPk
+			}
+			if err := store.Save(template); err != nil {
+				logrus.Error(err)
+				return err
+			}
 		}
 	}
 	return nil

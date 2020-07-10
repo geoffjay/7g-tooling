@@ -7,11 +7,10 @@ import (
 
 type Role struct {
 	gorm.Model
-	SgID                 int
-	Title                string
-	Description          string
-	ResponsibilityTitles []string             `gorm:"-" mapstructure:"role-responsibilities"`
-	Responsibilities     []RoleResponsibility `gorm:"foreignkey:RoleID"`
+	SgID             int
+	Title            string
+	Description      string
+	Responsibilities []RoleResponsibility `gorm:"foreignkey:RoleID"`
 }
 
 type RoleStore struct {
@@ -20,23 +19,19 @@ type RoleStore struct {
 
 type RoleResponsibility struct {
 	gorm.Model
+	SgID           int
 	Title          string
 	Description    string
 	RoleID         int
 	RoleTemplateID int
 }
 
-type RoleResponsibilityStore struct {
-	db *gorm.DB
-}
-
 type RoleTemplate struct {
 	gorm.Model
-	SgID                 int
-	Title                string
-	Description          string
-	ResponsibilityTitles []string             `gorm:"-" mapstructure:"role-responsibilities"`
-	Responsibilities     []RoleResponsibility `gorm:"foreignkey:RoleTemplateID"`
+	SgID             int
+	Title            string
+	Description      string
+	Responsibilities []RoleResponsibility `gorm:"foreignkey:RoleTemplateID"`
 }
 
 type RoleTemplateStore struct {
@@ -70,9 +65,13 @@ func (store *RoleTemplateStore) Save(template *RoleTemplate) (err error) {
 	if err = store.db.Create(template).Error; err != nil {
 		logrus.Panic(err)
 	}
+	for _, responsibility := range template.Responsibilities {
+		store.db.Save(&responsibility)
+	}
 	return
 }
 
 func (store *RoleTemplateStore) Flush() (err error) {
+	// TODO: flush responsibilities as well
 	return store.db.Model(&RoleTemplate{}).Delete(&RoleTemplate{}).Error
 }

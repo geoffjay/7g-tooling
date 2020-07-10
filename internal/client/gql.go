@@ -37,6 +37,26 @@ func Query(name string, variables map[string]interface{}, config *gcontext.Confi
 	return res, nil
 }
 
+func QueryWithResponse(name string, variables map[string]interface{}, res interface{}, config *gcontext.Config) error {
+	query := bin.GetQuery(name)
+	logrus.Debugf("Execute query: %s", name)
+
+	apiKey, address := getEnv(config)
+
+	client := graphql.NewClient(address)
+	req := graphql.NewRequest(query)
+	for key, value := range variables {
+		req.Var(key, value)
+	}
+	bearer := fmt.Sprintf("Bearer %s", apiKey)
+	req.Header.Set("Authorization", bearer)
+	if err := client.Run(context.Background(), req, &res); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func ResponseJSON(response Response) string {
 	bytes, err := json.Marshal(response)
 	if err != nil {

@@ -51,6 +51,7 @@ func Connect(config *Config) (*gorm.DB, error) {
 		err = db.AutoMigrate(&model.RecognitionBadge{}).Error
 		err = db.AutoMigrate(&model.Review{}).Error
 		err = db.AutoMigrate(&model.Role{}).Error
+		err = db.AutoMigrate(&model.RoleResponsibility{}).Error
 		err = db.AutoMigrate(&model.RoleTemplate{}).Error
 		// Job related
 		err = db.AutoMigrate(&model.Job{}).Error

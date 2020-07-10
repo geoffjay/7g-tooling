@@ -139,20 +139,6 @@ competencies:
         name: Accountability Strategic
         description: Wow guy
 
-role-responsibilities:
-  -
-    title: Do things
-    description: Needs to do things
-  -
-    title: Do moar things
-    description: Needs to do moar of the things
-  -
-    title: Do all the things
-    description: Needs to do all of the things
-  -
-    title: Tell other people to do things
-    description: Needs to tell other people to do the things
-
 role-templates:
   -
     name: Software Devloper

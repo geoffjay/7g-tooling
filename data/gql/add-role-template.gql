@@ -23,6 +23,14 @@ mutation ($roleTemplate: RoleTemplateInput!) {
   addRoleTemplate(roleTemplate: $roleTemplate) {
     roleTemplate {
       pk
+      expectations {
+        edges {
+          node {
+            pk
+            title
+          }
+        }
+      }
     }
   }
 }
