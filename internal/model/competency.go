@@ -11,7 +11,7 @@ type Competency struct {
 	Title       *string
 	Description *string `gorm:"size:1024"`
 	//Core Competency
-	Levels []Level `gorm:"many2many:competency_levels;association_autoupdate:false;association_autocreate:false"`
+	Levels []Level `gorm:"foreignkey:CompetencyID"`
 }
 
 type CompetencyStore struct {
@@ -21,7 +21,7 @@ type CompetencyStore struct {
 type Level struct {
 	gorm.Model
 	SgID        int
-	Name        *string
+	Title       *string
 	Description *string `gorm:"size:1024"`
 }
 
@@ -38,6 +38,9 @@ func NewCompetencyStore(db *gorm.DB) *CompetencyStore {
 func (store *CompetencyStore) Save(competency *Competency) (err error) {
 	if err = store.db.Create(competency).Error; err != nil {
 		logrus.Panic(err)
+	}
+	for _, level := range competency.Levels {
+		store.db.Save(&level)
 	}
 	return
 }

@@ -146,16 +146,16 @@ competencies:
     core-competency: Yes
     levels:
       -
-        name: Accountability General
+        title: Accountability General
         description: Sick guy
       -
-        name: Accountability Operational
+        title: Accountability Operational
         description: Cool guy
       -
-        name: Accountability Tactical
+        title: Accountability Tactical
         description: Alright guy
       -
-        name: Accountability Strategic
+        title: Accountability Strategic
         description: Wow guy
 
 role-templates:

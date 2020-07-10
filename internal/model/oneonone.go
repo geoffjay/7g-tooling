@@ -39,15 +39,20 @@ type OneOnOneStore struct {
 type OneOnOneTemplate struct {
 	gorm.Model
 	SgID        int
-	Name        *string `gorm:"not null"`
-	Description *string `gorm:"size:1024"`
-	//1on1 Frequency
-	//Question Name
-	//Question Description `gorm:"size:1024"`
+	Name        *string    `gorm:"not null"`
+	Description *string    `gorm:"size:1024"`
+	Questions   []Question `gorm:"foreignkey:OneOnOneTemplateID"`
 }
 
 type OneOnOneTemplateStore struct {
 	db *gorm.DB
+}
+
+type Question struct {
+	gorm.Model
+	SgID        int
+	Name        *string
+	Description *string `gorm:"size:1024"`
 }
 
 func NewOneOnOneStore(db *gorm.DB) *OneOnOneStore {

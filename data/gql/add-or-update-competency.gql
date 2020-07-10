@@ -25,10 +25,20 @@
 #         }]
 #     }
 # }
-mutation addOrUpdateCompetencyMutation($expectationTemplate: ExpectationTemplateInput!) {
-    addOrUpdateExpectationTemplate(expectationTemplate: $expectationTemplate) {
-        expectationTemplate {
+mutation addOrUpdateCompetencyMutation(
+  $expectationTemplate: ExpectationTemplateInput!
+) {
+  addOrUpdateExpectationTemplate(expectationTemplate: $expectationTemplate) {
+    expectationTemplate {
+      pk
+      levels {
+        edges {
+          node {
             pk
+            title
+          }
         }
+      }
     }
+  }
 }

@@ -5,12 +5,19 @@ import (
 )
 
 func CompetencyToGraphQLVars(competency *model.Competency) map[string]interface{} {
+	levels := make([]map[string]interface{}, len(competency.Levels))
+	for i, level := range competency.Levels {
+		levels[i] = map[string]interface{}{
+			"title":       level.Title,
+			"description": level.Description,
+		}
+	}
 	return map[string]interface{}{
 		"expectationTemplate": map[string]interface{}{
-			"title":           competency.Title,
 			"description":     competency.Description,
+			"title":           competency.Title,
 			"expectationType": competency.GetExpectationType(),
-			"levels":          competency.Levels,
+			"levels":          levels,
 		},
 	}
 }
