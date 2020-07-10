@@ -284,23 +284,43 @@ func (p *populateProcessor) populateLevels(levels []*model.Level) error {
 	return nil
 }
 
+type competencyResponse struct {
+	AddOrUpdateExpectationTemplate struct {
+		ExpectationTemplate struct {
+			Pk     int
+			Levels struct {
+				Edges []struct {
+					Node struct {
+						Pk    int
+						Title string
+					}
+				}
+			}
+		}
+	}
+}
+
 func (p *populateProcessor) populateCompetencies(competencies []*model.Competency) error {
 	logrus.Debugf("process %d competencies", len(competencies))
 	store := p.stores["competencies"].(*model.CompetencyStore)
 	for _, competency := range competencies {
 		variables := tf.CompetencyToGraphQLVars(competency)
-		if res, err := client.Query("add-or-update-competency", variables, nil); res != nil {
+		var res competencyResponse
+		err := client.QueryWithResponse("add-or-update-competency", variables, &res, nil)
+		if &res != nil {
 			if err != nil {
 				logrus.Debug(err)
 				return err
 			}
-			if res.(map[string]interface{})["addOrUpdateCompetency"] != nil {
-				type resMap = map[string]interface{}
-				competency.SgID = int(res.(resMap)["addOrUpdateCompetency"].(resMap)["competency"].(resMap)["pk"].(float64))
-				if err := store.Save(competency); err != nil {
-					logrus.Error(err)
-					return err
-				}
+			competencyRes := res.AddOrUpdateExpectationTemplate.ExpectationTemplate
+			competency.SgID = competencyRes.Pk
+			for i, level := range competencyRes.Levels.Edges {
+				levelPk := level.Node.Pk
+				competency.Levels[i].SgID = levelPk
+			}
+			if err := store.Save(competency); err != nil {
+				logrus.Error(err)
+				return err
 			}
 		}
 	}
