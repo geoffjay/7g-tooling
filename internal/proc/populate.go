@@ -39,36 +39,79 @@ func NewPopulateProcessor(db *gorm.DB) *populateProcessor {
 func (p *populateProcessor) ProcessConfig(c *config.Populate) (err error) {
 	// TODO: create and return job
 	// TODO: create task for each model
-	// TODO: split the loop into two so that dependent models run afterwards
+
+	// gocyclo forced me to do this
+	err = p.processIndependant(c)
+	err = p.processDependant(c)
+	return err
+}
+
+func (p *populateProcessor) processIndependant(c *config.Populate) (err error) {
 	summary := c.Summary()
 	for key, _ := range summary {
 		switch key {
 		case "locations":
-			err = p.populateLocations(c.Locations)
+			if c.Process.Locations {
+				err = p.populateLocations(c.Locations)
+			}
 		case "departments":
-			err = p.populateDepartment(c.Departments)
-		case "users":
-			err = p.populateUsers(c.Users)
-		case "objectives":
-			err = p.populateObjectives(c.Objectives)
-		case "one-on-ones":
-			err = p.populateOneOnOnes(c.OneOnOnes)
+			if c.Process.Departments {
+				err = p.populateDepartment(c.Departments)
+			}
 		case "one-on-one-templates":
-			err = p.populateOneOnOneTemplates(c.OneOnOneTemplates)
+			if c.Process.OneOnOneTemplates {
+				err = p.populateOneOnOneTemplates(c.OneOnOneTemplates)
+			}
 		case "recognition-badges":
-			err = p.populateRecognitionBadges(c.RecognitionBadges)
-		case "recognitions":
-			err = p.populateRecognitions(c.Recognitions)
-		case "competency-levels":
-			err = p.populateLevels(c.CompetencyLevels)
+			if c.Process.RecognitionBadges {
+				err = p.populateRecognitionBadges(c.RecognitionBadges)
+			}
+		// This is part of competencies now, but still needs to be tested
+		//case "competency-levels":
+		//	if c.Process.CompetencyLevels {
+		//		err = p.populateLevels(c.CompetencyLevels)
+		//	}
 		case "competencies":
-			err = p.populateCompetencies(c.Competencies)
-		case "reviews":
-			err = p.populateReviews(c.Reviews)
-		case "roles":
-			err = p.populateRoles(c.Roles)
+			if c.Process.Competencies {
+				err = p.populateCompetencies(c.Competencies)
+			}
 		case "role-templates":
-			err = p.populateRoleTemplates(c.RoleTemplates)
+			if c.Process.RoleTemplates {
+				err = p.populateRoleTemplates(c.RoleTemplates)
+			}
+		}
+	}
+	return nil
+}
+
+func (p *populateProcessor) processDependant(c *config.Populate) (err error) {
+	summary := c.Summary()
+	for key, _ := range summary {
+		switch key {
+		case "users":
+			if c.Process.Users {
+				err = p.populateUsers(c.Users)
+			}
+		case "objectives":
+			if c.Process.Objectives {
+				err = p.populateObjectives(c.Objectives)
+			}
+		case "one-on-ones":
+			if c.Process.OneOnOnes {
+				err = p.populateOneOnOnes(c.OneOnOnes)
+			}
+		case "recognitions":
+			if c.Process.Recognitions {
+				err = p.populateRecognitions(c.Recognitions)
+			}
+		case "reviews":
+			if c.Process.Reviews {
+				err = p.populateReviews(c.Reviews)
+			}
+		case "roles":
+			if c.Process.Roles {
+				err = p.populateRoles(c.Roles)
+			}
 		}
 	}
 	return nil
@@ -125,19 +168,22 @@ func (p *populateProcessor) populateUsers(users []*model.User) error {
 	store := p.stores["users"].(*model.UserStore)
 	for _, user := range users {
 		variables := tf.UserToGraphQLVars(user)
-		var res client.UserResponse
+		var res client.CreateUserResponse
 		err := client.QueryWithResponse("create-user-profile", variables, res, nil)
 		if &res != nil {
 			if err != nil {
 				logrus.Error(err)
-				return err
+				if err.Error() == "graphql: An error occurred while resolving field Mutation.createUserprofile" {
+					logrus.Debug("Probably caused by a user already existing for the given username")
+				}
+				//return err
 			}
-			if len(res.Profiles.Edges) == 0 {
+			if &res.CreateUserProfile == nil {
 				createErr := errors.New("Failed while creating a new user profile")
 				logrus.Error(createErr)
-				return createErr
+				//return createErr
 			}
-			user.SgID = res.Profiles.Edges[0].Node.Pk
+			user.SgID = res.CreateUserProfile.Profile.Pk
 			if err := store.Save(user); err != nil {
 				logrus.Error(err)
 			}
