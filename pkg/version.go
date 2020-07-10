@@ -1,3 +1,3 @@
 package pkg
 
-var VERSION = "0.1.6-beta"
+var VERSION = "0.2.0"
