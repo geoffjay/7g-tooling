@@ -137,7 +137,7 @@ func (p *populateProcessor) populateUsers(users []*model.User) error {
 		pk, _ := client.GetUserIDByEmail(*user.Email)
 		user.SgID = pk
 		if err := store.Save(user); err != nil {
-			return err
+			logrus.Error(err)
 		}
 	}
 	return nil

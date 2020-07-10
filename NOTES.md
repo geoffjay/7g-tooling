@@ -16,3 +16,18 @@
 - [ ] fix goreleaser build
   - [ ] prevent go mod from changing on tags
   - [ ] currently can only push to brew repo using `GITHUB_TOKEN=... gorelease --rm-dist`
+
+## Populating Data
+
+- [x] Locations
+- [x] Departments
+- [ ] Users
+- [ ] Objectives
+- [ ] One-on-one templates
+- [ ] Recognition badges
+- [ ] Competencies
+  - [ ] Competency levels
+- [ ] Role templates
+  - [ ] Responsibilities
+
+## Automating Data

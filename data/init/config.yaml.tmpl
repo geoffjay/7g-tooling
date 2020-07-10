@@ -1,0 +1,18 @@
+---
+host: {{.Host}}
+port: {{.Port}}
+uri-schema: {{.URISchema}}
+version: {{.Version}}
+api-key: {{.APIKey}}
+
+database:
+  file: {{.Database.File}}
+  flush: {{.Database.Flush}}
+  auto-migrate: {{.Database.AutoMigrate}}
+
+remote:
+  address: {{.Remote.Address}}
+
+log:
+  formatter: {{.Log.Formatter}}
+  level: {{.Log.Level}}

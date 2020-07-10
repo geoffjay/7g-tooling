@@ -55,7 +55,7 @@ objectives:
     creator: Bob Ross
     # TODO: move set owners/stakeholders/followers to different job
     owners:
-      - Bob Ross
+      - bob@7geese.com
     stakeholders:
       -
     followers:
@@ -120,7 +120,7 @@ competency-levels:
     name: Accountability Strategic
     description: Thinks gud
 
-compentencies:
+competencies:
   -
     title: Accountability
     description: Is accountable
@@ -150,7 +150,7 @@ role-templates:
     name: Software Devloper
     description: Makes things
     responsibilities:
-      - title: Do things
-      - title: Do moar things
-      - title: Do all the things
-      - title: Tell other people to do things
+      - Do things
+      - Do moar things
+      - Do all the things
+      - Tell other people to do things
