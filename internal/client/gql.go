@@ -133,7 +133,7 @@ func GetDepartmentIDByName(name string) (int, error) {
 	return res.Teams.Edges[0].Node.Pk, nil
 }
 
-type userResponse struct {
+type UserResponse struct {
 	Profiles struct {
 		Edges []struct {
 			Node struct {
@@ -151,7 +151,7 @@ func GetUserIDByEmail(email string) (int, error) {
 	req := graphql.NewRequest(query)
 	bearer := fmt.Sprintf("Bearer %s", apiKey)
 	req.Header.Set("Authorization", bearer)
-	var res userResponse
+	var res UserResponse
 	err := client.Run(context.Background(), req, &res)
 	if err != nil {
 		return -1, err

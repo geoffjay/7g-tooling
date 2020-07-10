@@ -12,13 +12,12 @@ type User struct {
 	LastName          string  `mapstructure:"last-name"`
 	Email             *string `gorm:"unique;not null"`
 	Phone             string
-	ManagerID         int
-	ManagerName       string
+	Manager           *User `gorm:"foreignkey:Email"`
 	State             string
 	Title             string
-	DepartmentsJoined string
-	LocationsJoined   string
-	RolesJoined       string
+	DepartmentsJoined string `gorm:"-"`
+	LocationsJoined   string `gorm:"-"`
+	RolesJoined       string `gorm:"-"`
 
 	Departments []Department `gorm:"many2many:user_departments;association_autoupdate:false;association_autocreate:false"`
 	Locations   []Location   `gorm:"many2many:user_locations;association_autoupdate:false;association_autocreate:false"`

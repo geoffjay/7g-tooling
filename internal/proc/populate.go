@@ -1,6 +1,8 @@
 package proc
 
 import (
+	"errors"
+
 	"github.com/geoffjay/7g-tooling/internal/client"
 	"github.com/geoffjay/7g-tooling/internal/model"
 	tf "github.com/geoffjay/7g-tooling/internal/model/transformer"
@@ -41,30 +43,30 @@ func (p *populateProcessor) ProcessConfig(c *config.Populate) (err error) {
 	summary := c.Summary()
 	for key, _ := range summary {
 		switch key {
-		//case "locations":
-		//	err = p.populateLocations(c.Locations)
-		//case "departments":
-		//	err = p.populateDepartment(c.Departments)
-		//case "users":
-		//	err = p.populateUsers(c.Users)
-		//case "objectives":
-		//	err = p.populateObjectives(c.Objectives)
-		//case "one-on-ones":
-		//	err = p.populateOneOnOnes(c.OneOnOnes)
-		//case "one-on-one-templates":
-		//	err = p.populateOneOnOneTemplates(c.OneOnOneTemplates)
-		//case "recognition-badges":
-		//	err = p.populateRecognitionBadges(c.RecognitionBadges)
-		//case "recognitions":
-		//	err = p.populateRecognitions(c.Recognitions)
-		//case "competency-levels":
-		//	err = p.populateLevels(c.CompetencyLevels)
-		//case "competencies":
-		//	err = p.populateCompetencies(c.Competencies)
-		//case "reviews":
-		//	err = p.populateReviews(c.Reviews)
-		//case "roles":
-		//	err = p.populateRoles(c.Roles)
+		case "locations":
+			err = p.populateLocations(c.Locations)
+		case "departments":
+			err = p.populateDepartment(c.Departments)
+		case "users":
+			err = p.populateUsers(c.Users)
+		case "objectives":
+			err = p.populateObjectives(c.Objectives)
+		case "one-on-ones":
+			err = p.populateOneOnOnes(c.OneOnOnes)
+		case "one-on-one-templates":
+			err = p.populateOneOnOneTemplates(c.OneOnOneTemplates)
+		case "recognition-badges":
+			err = p.populateRecognitionBadges(c.RecognitionBadges)
+		case "recognitions":
+			err = p.populateRecognitions(c.Recognitions)
+		case "competency-levels":
+			err = p.populateLevels(c.CompetencyLevels)
+		case "competencies":
+			err = p.populateCompetencies(c.Competencies)
+		case "reviews":
+			err = p.populateReviews(c.Reviews)
+		case "roles":
+			err = p.populateRoles(c.Roles)
 		case "role-templates":
 			err = p.populateRoleTemplates(c.RoleTemplates)
 		}
@@ -122,22 +124,23 @@ func (p *populateProcessor) populateUsers(users []*model.User) error {
 	logrus.Debugf("process %d users", len(users))
 	store := p.stores["users"].(*model.UserStore)
 	for _, user := range users {
-		// does user exist local?
-		// - if local as sgid continue
-		// does user exist remote?
-		// - if yes don't create-user-profile
-		// get sgid
-
 		variables := tf.UserToGraphQLVars(user)
-		if res, err := client.Query("create-user-profile", variables, nil); err != nil {
-			logrus.Debug(res)
-			logrus.Error(err)
-		}
-		// TODO: handle error or invalid response
-		pk, _ := client.GetUserIDByEmail(*user.Email)
-		user.SgID = pk
-		if err := store.Save(user); err != nil {
-			logrus.Error(err)
+		var res client.UserResponse
+		err := client.QueryWithResponse("create-user-profile", variables, res, nil)
+		if &res != nil {
+			if err != nil {
+				logrus.Error(err)
+				return err
+			}
+			if len(res.Profiles.Edges) == 0 {
+				createErr := errors.New("Failed while creating a new user profile")
+				logrus.Error(createErr)
+				return createErr
+			}
+			user.SgID = res.Profiles.Edges[0].Node.Pk
+			if err := store.Save(user); err != nil {
+				logrus.Error(err)
+			}
 		}
 	}
 	return nil
