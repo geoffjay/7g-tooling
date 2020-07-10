@@ -120,7 +120,7 @@ competency-levels:
     name: Accountability Strategic
     description: Thinks gud
 
-compentencies:
+competencies:
   -
     title: Accountability
     description: Is accountable
@@ -149,7 +149,7 @@ role-templates:
   -
     name: Software Devloper
     description: Makes things
-    role-responsibilities:
+    responsibilities:
       - Do things
       - Do moar things
       - Do all the things

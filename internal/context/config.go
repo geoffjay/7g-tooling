@@ -2,9 +2,12 @@ package context
 
 import (
 	"fmt"
+	"html/template"
 	"os"
 	"path/filepath"
 	"strings"
+
+	bin "github.com/geoffjay/7g-tooling/data/init"
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/sirupsen/logrus"
@@ -105,6 +108,19 @@ func LoadConfig(path string) (*Config, error) {
 	logrus.Debug("Configuration Location: ", config.ConfigFileUsed())
 
 	return &c, nil
+}
+
+func (c *Config) Write() {
+	configPath := os.Getenv("SG_CONFIG")
+	f, err := os.Create(configPath)
+	if err != nil {
+		logrus.Fatalf("Failed to open output file: %s", err)
+	}
+	t := template.Must(template.New("config").Parse(bin.GetAsset("config.yaml.tmpl")))
+	err = t.Execute(f, c)
+	if err != nil {
+		logrus.Fatalf("Template generation failed: %s", err)
+	}
 }
 
 // ListenEndpoint builds the endpoint string (host + port)
