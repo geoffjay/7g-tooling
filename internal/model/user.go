@@ -13,16 +13,16 @@ type User struct {
 	Email     *string `gorm:"unique;not null"`
 	Phone     string
 	// Creates empty record
-	//Manager           *User `gorm:"foreignkey:Email"`
+	//Managers          []*User `gorm:"many2many:user_managers;association_jointable_foreignkey:manager_email"`
 	State             string
 	Title             string
 	DepartmentsJoined string `gorm:"-"`
 	LocationsJoined   string `gorm:"-"`
 	RolesJoined       string `gorm:"-"`
 
-	Departments []Department `gorm:"many2many:user_departments;association_autoupdate:false;association_autocreate:false"`
-	Locations   []Location   `gorm:"many2many:user_locations;association_autoupdate:false;association_autocreate:false"`
-	Roles       []Role       `gorm:"many2many:user_roles;association_autoupdate:false;association_autocreate:false"`
+	Departments []*Department `gorm:"many2many:user_departments;association_autoupdate:false;association_autocreate:false"`
+	Locations   []*Location   `gorm:"many2many:user_locations;association_autoupdate:false;association_autocreate:false"`
+	Roles       []*Role       `gorm:"many2many:user_roles;association_autoupdate:false;association_autocreate:false"`
 }
 
 type UserStore struct {
