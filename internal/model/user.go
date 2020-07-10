@@ -7,12 +7,13 @@ import (
 
 type User struct {
 	gorm.Model
-	SgID              int
-	FirstName         string  `mapstructure:"first-name"`
-	LastName          string  `mapstructure:"last-name"`
-	Email             *string `gorm:"unique;not null"`
-	Phone             string
-	Manager           *User `gorm:"foreignkey:Email"`
+	SgID      int
+	FirstName string  `mapstructure:"first-name"`
+	LastName  string  `mapstructure:"last-name"`
+	Email     *string `gorm:"unique;not null"`
+	Phone     string
+	// Creates empty record
+	//Manager           *User `gorm:"foreignkey:Email"`
 	State             string
 	Title             string
 	DepartmentsJoined string `gorm:"-"`
@@ -36,7 +37,7 @@ func NewUserStore(db *gorm.DB) *UserStore {
 
 func (store *UserStore) Save(user *User) (err error) {
 	if store.HasUserWithEmail(*user.Email) {
-		err = store.db.Save(user).Error
+		err = store.db.Update(user).Error
 	} else {
 		if err = store.db.Create(user).Error; err != nil {
 			logrus.Panic(err)

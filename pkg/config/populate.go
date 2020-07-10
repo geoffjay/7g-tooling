@@ -3,15 +3,31 @@ package config
 import (
 	"fmt"
 
-	"github.com/sirupsen/logrus"
-
 	"github.com/geoffjay/7g-tooling/internal/model"
 
 	"github.com/mitchellh/go-homedir"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
+type process struct {
+	Locations         bool `mapstructure:"locations"`
+	Departments       bool `mapstructure:"departments"`
+	Users             bool `mapstructure:"users"`
+	Objectives        bool `mapstructure:"objectives"`
+	OneOnOnes         bool `mapstructure:"one-on-ones"`
+	OneOnOneTemplates bool `mapstructure:"one-on-one-templates"`
+	RecognitionBadges bool `mapstructure:"recognition-badges"`
+	Recognitions      bool `mapstructure:"recognitions"`
+	Reviews           bool `mapstructure:"reviews"`
+	CompetencyLevels  bool `mapstructure:"competency-levels"`
+	Competencies      bool `mapstructure:"competencies"`
+	Roles             bool `mapstructure:"roles"`
+	RoleTemplates     bool `mapstructure:"role-templates"`
+}
+
 type Populate struct {
+	Process           *process                  `mapstructure:"process"`
 	Locations         []*model.Location         `mapstructure:"locations"`
 	Departments       []*model.Department       `mapstructure:"departments"`
 	Users             []*model.User             `mapstructure:"users"`
