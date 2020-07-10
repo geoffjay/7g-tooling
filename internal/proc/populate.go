@@ -192,9 +192,19 @@ func (p *populateProcessor) populateRecognitionBadges(badges []*model.Recognitio
 	logrus.Debugf("process %d badges", len(badges))
 	store := p.stores["recognition-badges"].(*model.RecognitionBadgeStore)
 	for _, badge := range badges {
-		if err := store.Save(badge); err != nil {
-			logrus.Error(err)
-			return err
+		variables := tf.BadgeToGraphQLVars(badge)
+		if res, err := client.Query("create-or-update-badge", variables, nil); res != nil {
+			if err != nil {
+				logrus.Error(err)
+			}
+			if res.(map[string]interface{})["createOrUpdateBadge"] != nil {
+				type resMap = map[string]interface{}
+				badge.SgID = int(res.(resMap)["createOrUpdateBadge"].(resMap)["badge"].(resMap)["pk"].(float64))
+				if err := store.Save(badge); err != nil {
+					logrus.Error(err)
+					return err
+				}
+			}
 		}
 	}
 	return nil
