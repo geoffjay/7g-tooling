@@ -21,7 +21,7 @@ var (
 )
 
 func init() {
-	addRoleTemplateCmd.PersistentFlags().StringVar(&roleTemplateTitle, "title", "Coook", "role title")
+	addRoleTemplateCmd.PersistentFlags().StringVar(&roleTemplateTitle, "title", "Cook", "role title")
 	addRoleTemplateCmd.PersistentFlags().StringVar(&roleTemplateDescription, "description", "At the Mickey Mouse Clubhouse", "role description")
 }
 
