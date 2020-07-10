@@ -196,6 +196,7 @@ func (p *populateProcessor) populateRecognitionBadges(badges []*model.Recognitio
 		if res, err := client.Query("create-or-update-badge", variables, nil); res != nil {
 			if err != nil {
 				logrus.Error(err)
+				return err
 			}
 			if res.(map[string]interface{})["createOrUpdateBadge"] != nil {
 				type resMap = map[string]interface{}
@@ -238,9 +239,21 @@ func (p *populateProcessor) populateCompetencies(competencies []*model.Competenc
 	logrus.Debugf("process %d competencies", len(competencies))
 	store := p.stores["competencies"].(*model.CompetencyStore)
 	for _, competency := range competencies {
-		if err := store.Save(competency); err != nil {
-			logrus.Error(err)
-			return err
+		// logrus.Debugf(competency.Levels)
+		variables := tf.CompetencyToGraphQLVars(competency)
+		if res, err := client.Query("add-or-update-competency", variables, nil); res != nil {
+			if err != nil {
+				logrus.Debug(err)
+				return err
+			}
+			if res.(map[string]interface{})["addOrUpdateCompetency"] != nil {
+				type resMap = map[string]interface{}
+				competency.SgID = int(res.(resMap)["addOrUpdateCompetency"].(resMap)["competency"].(resMap)["pk"].(float64))
+				if err := store.Save(competency); err != nil {
+					logrus.Error(err)
+					return err
+				}
+			}
 		}
 	}
 	return nil

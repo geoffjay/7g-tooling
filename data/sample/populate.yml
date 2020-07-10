@@ -126,10 +126,18 @@ competencies:
     description: Is accountable
     core-competency: Yes
     levels:
-      - name: Accountability General
-      - name: Accountability Operational
-      - name: Accountability Tactical
-      - name: Accountability Strategic
+      -
+        name: Accountability General
+        description: Sick guy
+      -
+        name: Accountability Operational
+        description: Cool guy
+      -
+        name: Accountability Tactical
+        description: Alright guy
+      -
+        name: Accountability Strategic
+        description: Wow guy
 
 role-responsibilities:
   -
@@ -150,7 +158,15 @@ role-templates:
     name: Software Devloper
     description: Makes things
     responsibilities:
-      - Do things
-      - Do moar things
-      - Do all the things
-      - Tell other people to do things
+      -
+        title: Do things
+        description: Needs to do things
+      -
+        title: Do moar things
+        description: Needs to do moar of the things
+      -
+        title: Do all the things
+        description: Needs to do all of the things
+      -
+        title: Tell other people to do things
+        description: Needs to tell other people to do the things

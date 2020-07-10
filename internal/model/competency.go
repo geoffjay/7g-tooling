@@ -62,3 +62,7 @@ func (store *LevelStore) Save(level *Level) (err error) {
 func (store *LevelStore) Flush() (err error) {
 	return store.db.Model(&Level{}).Delete(&Level{}).Error
 }
+
+func (c *Competency) GetExpectationType() int {
+	return 1
+}
