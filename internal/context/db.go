@@ -47,6 +47,7 @@ func Connect(config *Config) (*gorm.DB, error) {
 		err = db.AutoMigrate(&model.KeyResult{}).Error
 		err = db.AutoMigrate(&model.OneOnOne{}).Error
 		err = db.AutoMigrate(&model.OneOnOneTemplate{}).Error
+		err = db.AutoMigrate(&model.Question{}).Error
 		err = db.AutoMigrate(&model.Recognition{}).Error
 		err = db.AutoMigrate(&model.RecognitionBadge{}).Error
 		err = db.AutoMigrate(&model.Review{}).Error

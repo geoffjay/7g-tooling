@@ -179,13 +179,45 @@ func (p *populateProcessor) populateOneOnOnes(oneOnOnes []*model.OneOnOne) error
 	return nil
 }
 
+type oneononeTemplateResponse struct {
+	CreateOrUpdateOneononeTemplate struct {
+		Template struct {
+			Pk          int
+			QuestionSet struct {
+				Questions struct {
+					Edges []struct {
+						Node struct {
+							Pk int
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 func (p *populateProcessor) populateOneOnOneTemplates(templates []*model.OneOnOneTemplate) error {
 	logrus.Debugf("process %d one on one templates", len(templates))
 	store := p.stores["one-on-one-templates"].(*model.OneOnOneTemplateStore)
 	for _, template := range templates {
-		if err := store.Save(template); err != nil {
-			logrus.Error(err)
-			return err
+		variables := tf.OneOnOneTemplateGraphQLToVars(template)
+		var res oneononeTemplateResponse
+		err := client.QueryWithResponse("create-or-update-oneonone-template", variables, &res, nil)
+		if &res != nil {
+			if err != nil {
+				logrus.Debug(err)
+				return err
+			}
+			templateRes := res.CreateOrUpdateOneononeTemplate.Template
+			template.SgID = templateRes.Pk
+			for i, question := range templateRes.QuestionSet.Questions.Edges {
+				questionPk := question.Node.Pk
+				template.Questions[i].SgID = questionPk
+			}
+			if err := store.Save(template); err != nil {
+				logrus.Error(err)
+				return err
+			}
 		}
 	}
 	return nil

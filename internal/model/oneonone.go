@@ -51,7 +51,7 @@ type OneOnOneTemplateStore struct {
 type Question struct {
 	gorm.Model
 	SgID        int
-	Name        *string
+	Content     *string
 	Description *string `gorm:"size:1024"`
 }
 
@@ -81,6 +81,9 @@ func NewOneOnOneTemplateStore(db *gorm.DB) *OneOnOneTemplateStore {
 func (store *OneOnOneTemplateStore) Save(template *OneOnOneTemplate) (err error) {
 	if err = store.db.Create(template).Error; err != nil {
 		logrus.Panic(err)
+	}
+	for _, question := range template.Questions {
+		store.db.Save(&question)
 	}
 	return
 }

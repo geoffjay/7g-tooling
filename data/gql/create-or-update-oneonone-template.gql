@@ -31,7 +31,13 @@ mutation createOrUpdateOneononeTemplateMutation($pk: Int, $oneononeTemplate: One
         template {
             pk
             questionSet {
-                pk
+                questions {
+                    edges {
+                        node {
+                            pk
+                        }
+                    }
+                }
             }
         }
     }

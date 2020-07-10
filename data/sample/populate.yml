@@ -98,15 +98,18 @@ one-on-one-templates:
     frequency: weekly
     questions:
       -
-        name: A weekly question
+        content: A weekly question
         description: Something to ask every week
+      -
+        content: Another weekly question
+        description: Something to also ask every week
   -
     name: Monthly
     description: Monthly template
     frequency: monthly
     questions:
       -
-        name: A monthly question
+        content: A monthly question
         description: Something to ask every month
   -
     name: Yearly
@@ -114,7 +117,7 @@ one-on-one-templates:
     frequency: yearly
     questions:
       -
-        name: A yearly question
+        content: A yearly question
         description: Something to ask every year
 
 recognition-badges:
