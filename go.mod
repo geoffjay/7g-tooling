@@ -20,7 +20,7 @@ require (
 	github.com/gofrs/uuid v3.3.0+incompatible
 	github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect
 	github.com/jhoonb/archivex v0.0.0-20180718040744-0488e4ce1681
-	github.com/jinzhu/gorm v1.9.14
+	github.com/jinzhu/gorm v1.9.15
 	github.com/joho/godotenv v1.3.0
 	github.com/machinebox/graphql v0.2.2
 	github.com/mailru/easyjson v0.7.1 // indirect
